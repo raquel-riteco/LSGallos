@@ -1,4 +1,4 @@
-public abstract class Batalla {
+public class Batalla {
 
     private String idiomaNatiu;
     private String idiomaAngles;
