@@ -2,6 +2,8 @@ public class Batalla {
 
     private String idiomaNatiu;
     private String idiomaAngles;
+
+    /*
     protected String batallesEnCurs[];
     protected Tema temes[];
 
@@ -35,4 +37,6 @@ public class Batalla {
 
 
     }
+
+     */
 }

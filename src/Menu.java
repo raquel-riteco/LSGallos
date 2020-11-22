@@ -1,5 +1,7 @@
 public class Menu {
 
+
+    /*
     public void mostrarDades(Competicio competicio){
 
         //Funcio
@@ -17,5 +19,7 @@ public class Menu {
         //Funcio
 
     }
+
+     */
 
 }

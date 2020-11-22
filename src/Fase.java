@@ -6,6 +6,7 @@ public class Fase {
     private String pais;
     private int numFase;
     private LinkedList<String> llistaPaisos;
+    /*
     private Batalla batalles[2];
     private Rapero raperos[];
 
@@ -20,5 +21,5 @@ public class Fase {
         //Funcio
 
     }
-
+    */
 }

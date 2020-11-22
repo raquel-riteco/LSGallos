@@ -6,7 +6,7 @@ public class CompeticioController {
     private Competicio competicio;
 
 
-
+    /*
     public Boolean comprovarData(){
 
         //Funcio
@@ -19,4 +19,6 @@ public class CompeticioController {
         //Funcio
 
     }
+
+     */
 }

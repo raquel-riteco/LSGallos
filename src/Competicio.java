@@ -8,6 +8,29 @@ public class Competicio {
     private Date dataInici;
     private Date dataFinal;
     private int numFases;
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setDataInici(Date dataInici) {
+        this.dataInici = dataInici;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public void setNumFases(int numFases) {
+        this.numFases = numFases;
+    }
+
+
+    /*
     private Fase fases[numFases];
     private SortedSet<String> ranking;
 
@@ -28,5 +51,7 @@ public class Competicio {
         //Funcio
 
     }
+
+     */
 
 }
