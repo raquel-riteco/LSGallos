@@ -1,37 +1,52 @@
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.SortedSet;
 
 public class Competicio {
 
-    private String nom;
-    private Date dataInici;
-    private Date dataFinal;
+    private String name;
+    private Date startDate;
+    private Date endDate;
     private int numFases;
+    private ArrayList<Fase> phases;
+
 
     public String getNom() {
-        return nom;
+        return name;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.name = nom;
     }
 
     public void setDataInici(Date dataInici) {
-        this.dataInici = dataInici;
+        this.startDate = dataInici;
     }
 
     public void setDataFinal(Date dataFinal) {
-        this.dataFinal = dataFinal;
+        this.endDate = dataFinal;
     }
 
     public void setNumFases(int numFases) {
         this.numFases = numFases;
     }
 
+    public void setFases(float pressupost, String pais) {
+        Fase fase = new Fase(pressupost, pais);
+        phases.add(fase);
+    }
+
+    public void setTemas (String nomTema, int nivel, String barra, Fase fase){
+        //Hi ha dues batalles per fase
+        fase.setTemasBatalla(nomTema, nivel, barra, fase.getBatalla(0));
+        fase.setTemasBatalla(nomTema, nivel, barra, fase.getBatalla(1));
+    }
+
+
+
+
 
     /*
-    private Fase fases[numFases];
+
     private SortedSet<String> ranking;
 
     public Rapero registrar(Rapero rapero){

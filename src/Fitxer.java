@@ -1,40 +1,52 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.time.Instant;
+import java.io.*;
 import java.util.Date;
 
 public class Fitxer {
 
-
-    public void llegirCompeticio(String nomCompeticio, Competicio competicio){
+    public void llegirCompeticio (String nomCompeticio, Competicio competicio){
         try{
-            FileReader fr = new FileReader(nomCompeticio);
-            BufferedReader br = new BufferedReader(fr);
+            FileInputStream fileIn = new FileInputStream(nomCompeticio);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
-            competicio.setNom(br.readLine());
-            //no se que estoy haciendo aqui
-            competicio.setDataInici(DateFormat.getDateInstance().parse(br.readLine()));
-            //competicio.setDataFinal();
+            competicio.setNom((String) objectIn.readObject());
+            competicio.setDataInici((Date) objectIn.readObject());
+            competicio.setDataFinal((Date) objectIn.readObject());
+            for (int i = 0; i < 3; i++) {
+                competicio.setFases(objectIn.readFloat(), (String) objectIn.readObject());
+            }
+
+            System.out.println(competicio.getClass());
+            objectIn.close();
 
 
-        }catch (FileNotFoundException e){
-            System.out.println("File not found: " + e.getMessage());
         }catch (IOException e){
-            System.out.println("IO Exception: " + e.getMessage());
-        } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("IO Exeption: " + e.getMessage());
+
+        }catch (ClassNotFoundException e) {
+            System.out.println("Class not found: " + e.getMessage());
+
         }
-
-
     }
 
-    public void llegirBatalles(){
+    public void llegirBatalles(String nomBatalles, Batalla batalla) {
+        try{
+            FileInputStream fileIn = new FileInputStream(nomBatalles);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
-        //Funcio
+            batalla.setTemas((String) objectIn.readObject(), objectIn.readInt(), (String) objectIn.readObject());
+
+
+            objectIn.close();
+
+
+        }catch (IOException e){
+            System.out.println("IO Exeption: " + e.getMessage());
+
+        }catch (ClassNotFoundException e) {
+            System.out.println("Class not found: " + e.getMessage());
+
+        }
+
 
     }
 
