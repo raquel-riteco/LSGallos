@@ -7,12 +7,26 @@ public class Competicio {
     private Date startDate;
     private Date endDate;
     private int numFases;
+    private int numParticipants;
     private ArrayList<Fase> phases;
 
 
     public String getNom() {
         return name;
     }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public int getNumFases() {
+        return numFases;
+    }
+
 
     public void setNom(String nom) {
         this.name = nom;
@@ -40,11 +54,9 @@ public class Competicio {
         fase.setTemasBatalla(nomTema, nivel, barra, fase.getBatalla(0));
         fase.setTemasBatalla(nomTema, nivel, barra, fase.getBatalla(1));
     }
-
-
-
-
-
+    public int getNumParticipants(){
+        return numParticipants;
+    }
     /*
 
     private SortedSet<String> ranking;
