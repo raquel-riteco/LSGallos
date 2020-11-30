@@ -3,50 +3,59 @@ import java.util.Date;
 
 public class Competicio {
 
-    private String name;
-    private Date startDate;
-    private Date endDate;
+    private String nom;
+    private Date dataInici;
+    private Date dataFinal;
     private int numFases;
     private int numParticipants;
-    private ArrayList<Fase> phases;
+    private ArrayList<Fase> fases;
 
+    public Competicio(){
+        this.fases = new ArrayList<>();
+    }
 
     public String getNom() {
-        return name;
+        return nom;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getDataInici() {
+        return dataInici;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getDataFinal() {
+        return dataFinal;
     }
 
     public int getNumFases() {
         return numFases;
     }
 
+    public int getNumParticipants(){
+        return numParticipants;
+    }
+
+    public ArrayList<Fase> getFases() {
+        return fases;
+    }
 
     public void setNom(String nom) {
-        this.name = nom;
+        this.nom = nom;
     }
 
     public void setDataInici(Date dataInici) {
-        this.startDate = dataInici;
+        this.dataInici = dataInici;
     }
 
     public void setDataFinal(Date dataFinal) {
-        this.endDate = dataFinal;
+        this.dataFinal = dataFinal;
     }
 
     public void setNumFases(int numFases) {
         this.numFases = numFases;
     }
 
-    public void setFases(float pressupost, String pais) {
-        Fase fase = new Fase(pressupost, pais);
-        phases.add(fase);
+    public void setFases(ArrayList<Fase> fases) {
+        this.fases = fases;
     }
 
     public void setTemas (String nomTema, int nivel, String barra, Fase fase){
@@ -54,8 +63,17 @@ public class Competicio {
         fase.setTemasBatalla(nomTema, nivel, barra, fase.getBatalla(0));
         fase.setTemasBatalla(nomTema, nivel, barra, fase.getBatalla(1));
     }
-    public int getNumParticipants(){
-        return numParticipants;
+
+    @Override
+    public String toString() {
+        return "Competicio{" +
+                "nom='" + nom + '\'' +
+                ", dataInici=" + dataInici +
+                ", dataFinal=" + dataFinal +
+                ", numFases=" + numFases +
+                ", numParticipants=" + numParticipants +
+                ", fases=" + fases +
+                '}';
     }
     /*
 

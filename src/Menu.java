@@ -10,8 +10,8 @@ public class Menu {
 
     public void mostrarDades (Competicio competicio) {
         System.out.println("Bienvenido/a a la competición: " + competicio.getNom());
-        System.out.println("Comienza el " + competicio.getStartDate());
-        System.out.println("Acaba el " + competicio.getEndDate());
+        System.out.println("Comienza el " + competicio.getDataInici());
+        System.out.println("Acaba el " + competicio.getDataFinal());
         System.out.println("Fases: " + competicio.getNumFases());
         System.out.println("Actualmente: " + competicio.getNumParticipants() + " " + "participantes");
         System.out.println(" ");
