@@ -9,9 +9,12 @@ public class Competicio {
     private int numFases;
     private int numParticipants;
     private ArrayList<Fase> fases;
+    private ArrayList<String> llistaPaisos;
+    private ArrayList<Rapero> raperos;
+
 
     public Competicio(){
-        this.fases = new ArrayList<>();
+        fases = new ArrayList<>();
     }
 
     public String getNom() {
@@ -38,6 +41,18 @@ public class Competicio {
         return fases;
     }
 
+    public Fase getFase (int num) {
+        return fases.get(num);
+    }
+
+    public ArrayList<String> getLlistaPaisos() {
+        return llistaPaisos;
+    }
+
+    public ArrayList<Rapero> getRaperos() {
+        return raperos;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -58,10 +73,22 @@ public class Competicio {
         this.fases = fases;
     }
 
-    public void setTemas (String nomTema, int nivel, String barra, Fase fase){
+    public void setNumParticipants(int numParticipants) {
+        this.numParticipants = numParticipants;
+    }
+
+    public void setTemas (Tema tema, Fase fase){
         //Hi ha dues batalles per fase
-        fase.setTemasBatalla(nomTema, nivel, barra, fase.getBatalla(0));
-        fase.setTemasBatalla(nomTema, nivel, barra, fase.getBatalla(1));
+        fase.setTemasBatalla(tema, fase.getBatalla(0));
+        fase.setTemasBatalla(tema, fase.getBatalla(1));
+    }
+
+    public void setLlistaPaisos(ArrayList<String> llistaPaisos) {
+        this.llistaPaisos = llistaPaisos;
+    }
+
+    public void setRaperos(ArrayList<Rapero> raperos) {
+        this.raperos = raperos;
     }
 
     @Override

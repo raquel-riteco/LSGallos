@@ -8,6 +8,7 @@ public class Rapero {
     private int nivell;
     private String foto;
     private float puntuacio;
+    private String paisString;
     private Pais pais;
 
     public void setNomComplet (String nomComplet) {
@@ -30,6 +31,24 @@ public class Rapero {
     }
 
     public void setPaisRapero(String nomPais) {
-        //pais = setPais(nomPais);
+
+    }
+
+    public void setPaisString(String paisString) {
+        this.paisString = paisString;
+    }
+
+    @Override
+    public String toString() {
+        return "Rapero{" +
+                "nomComplet='" + nomComplet + '\'' +
+                ", nomArtistic='" + nomArtistic + '\'' +
+                ", dataNaixement=" + dataNaixement +
+                ", nivell=" + nivell +
+                ", foto='" + foto + '\'' +
+                ", puntuacio=" + puntuacio +
+                ", pais=" + pais +
+                ", paisString=" + paisString +
+                '}';
     }
 }
