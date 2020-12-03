@@ -15,6 +15,8 @@ public class Competicio {
 
     public Competicio(){
         fases = new ArrayList<>();
+        llistaPaisos = new ArrayList<>();
+        raperos = new ArrayList<>();
     }
 
     public String getNom() {
@@ -69,8 +71,8 @@ public class Competicio {
         this.numFases = numFases;
     }
 
-    public void setFases(ArrayList<Fase> fases) {
-        this.fases = fases;
+    public void setFases(double pressupost, String pais) {
+        fases.add(new Fase(pressupost, pais));
     }
 
     public void setNumParticipants(int numParticipants) {
@@ -83,23 +85,42 @@ public class Competicio {
         fase.setTemasBatalla(tema, fase.getBatalla(1));
     }
 
-    public void setLlistaPaisos(ArrayList<String> llistaPaisos) {
-        this.llistaPaisos = llistaPaisos;
+    public void setLlistaPaisos(String pais) {
+        llistaPaisos.add(pais);
     }
 
-    public void setRaperos(ArrayList<Rapero> raperos) {
-        this.raperos = raperos;
+    public void setRaperos(Rapero rapero) {
+        raperos.add(rapero);
+    }
+
+    public String fasesToString () {
+        String toString = "";
+        for (Fase o : fases){
+            toString = toString.concat(o.toString());
+            toString = toString.concat("\n");
+        }
+        return toString;
+    }
+
+    public String raperosToString () {
+        String toString = "";
+        for (Rapero o : raperos){
+            toString = toString.concat(o.toString());
+            toString = toString.concat("\n");
+        }
+        return toString;
     }
 
     @Override
     public String toString() {
         return "Competicio{" +
-                "nom='" + nom + '\'' +
-                ", dataInici=" + dataInici +
-                ", dataFinal=" + dataFinal +
-                ", numFases=" + numFases +
-                ", numParticipants=" + numParticipants +
-                ", fases=" + fases +
+                "\nnom='" + nom + '\'' +
+                "\ndataInici=" + dataInici +
+                "\ndataFinal=" + dataFinal +
+                "\nnumFases=" + numFases +
+                "\nnumParticipants=" + numParticipants +
+                "\nfases=" + fasesToString() +
+                "\nraperos=" + raperosToString() +
                 '}';
     }
     /*

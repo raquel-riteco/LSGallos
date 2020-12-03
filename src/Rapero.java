@@ -5,11 +5,23 @@ public class Rapero {
     private String nomComplet;
     private String nomArtistic;
     private Date dataNaixement;
-    private int nivell;
+    private Long nivell;
     private String foto;
     private float puntuacio;
     private String paisString;
     private Pais pais;
+
+    public Rapero (){
+
+    }
+    public Rapero(String nomComplet, String nomArtistic, Date dataNaixement, String paisString, Long nivell, String foto) {
+        this.nomComplet = nomComplet;
+        this.nomArtistic = nomArtistic;
+        this.dataNaixement = dataNaixement;
+        this.nivell = nivell;
+        this.foto = foto;
+        this.paisString = paisString;
+    }
 
     public void setNomComplet (String nomComplet) {
         this.nomComplet = nomComplet;
@@ -20,7 +32,7 @@ public class Rapero {
     public void setDataNaixement (Date dataNaixement) {
         this.dataNaixement = dataNaixement;
     }
-    public void setNivell (int nivell) {
+    public void setNivell (Long nivell) {
         this.nivell = nivell;
     }
     public void setFoto (String foto) {
@@ -41,14 +53,14 @@ public class Rapero {
     @Override
     public String toString() {
         return "Rapero{" +
-                "nomComplet='" + nomComplet + '\'' +
-                ", nomArtistic='" + nomArtistic + '\'' +
-                ", dataNaixement=" + dataNaixement +
-                ", nivell=" + nivell +
-                ", foto='" + foto + '\'' +
-                ", puntuacio=" + puntuacio +
-                ", pais=" + pais +
-                ", paisString=" + paisString +
+                "\nnomComplet='" + nomComplet + '\'' +
+                "\nnomArtistic='" + nomArtistic + '\'' +
+                "\ndataNaixement=" + dataNaixement +
+                "\nnivell=" + nivell +
+                "\nfoto='" + foto + '\'' +
+                "\npuntuacio=" + puntuacio +
+                "\npais=" + pais +
+                "\npaisString=" + paisString +
                 '}';
     }
 }

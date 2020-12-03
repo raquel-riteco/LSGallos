@@ -82,7 +82,7 @@ public class Menu {
         rapero.setPaisRapero(sc.nextLine());
         System.out.println("- Nivel: ");
 
-        rapero.setNivell(sc.nextInt());
+        rapero.setNivell(sc.nextLong());
         System.out.println("- Foto: ");
 
         rapero.setFoto(sc.nextLine());

@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Fase {
 
-    private float pressupost;
+    private double pressupost;
     private String pais;
     private ArrayList<Batalla> batallas;
 
-    public Fase(float pressupost, String pais){
+    public Fase(double pressupost, String pais){
         this.pressupost = pressupost;
         this.pais = pais;
     }
@@ -15,13 +15,22 @@ public class Fase {
         batalla.setTemas(tema);
     }
 
-    public void setPressupost(float pressupost) {
+    public void setPressupost(double pressupost) {
         this.pressupost = pressupost;
     }
 
 
     public Batalla getBatalla(int num){
         return batallas.get(num);
+    }
+
+    @Override
+    public String toString() {
+        return "Fase{" +
+                "pressupost=" + pressupost +
+                ", pais='" + pais + '\'' +
+                ", batallas=" + batallas +
+                '}';
     }
 
     /*

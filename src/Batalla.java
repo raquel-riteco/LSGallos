@@ -20,12 +20,16 @@ public class Batalla {
         temas.add(tema);
     }
 
+    public ArrayList<Tema> getTemas() {
+        return temas;
+    }
+
     @Override
     public String toString() {
         return "Batalla{" +
-                "idiomaNatiu='" + idiomaNatiu + '\'' +
-                ", idiomaAngles='" + idiomaAngles + '\'' +
-                ", temas=" + temas +
+                "\nidiomaNatiu='" + idiomaNatiu + '\'' +
+                "\nidiomaAngles='" + idiomaAngles + '\'' +
+                "\ntemas=" + temas +
                 '}';
     }
 

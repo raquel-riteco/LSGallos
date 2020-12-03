@@ -28,7 +28,22 @@ public class Tema {
            this.barra1 = barra1;
            this.barra2 = barra2;
        }
+
+        @Override
+        public String toString() {
+            return "Estrofa{" +
+                    "\nnivel=" + nivel +
+                    "\nbarra1='" + barra1 + '\'' +
+                    "\nbarra2='" + barra2 + '\'' +
+                    '}';
+        }
     }
 
-
+    @Override
+    public String toString() {
+        return "Tema{" +
+                "\nnomTema='" + nomTema + '\'' +
+                "\nestrofas=" + estrofas.toString() +
+                '}';
+    }
 }

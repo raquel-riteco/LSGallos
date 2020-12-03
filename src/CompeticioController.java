@@ -1,7 +1,7 @@
 public class CompeticioController {
 
     private Menu menu;
-    private Fitxer fitxers;
+
 
     private Competicio competicio;
 
