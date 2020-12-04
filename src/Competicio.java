@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.Date;
+import javafx.collections.transformation.SortedList;
+
+import java.util.*;
 
 public class Competicio {
 
@@ -11,13 +12,16 @@ public class Competicio {
     private ArrayList<Fase> fases;
     private ArrayList<String> llistaPaisos;
     private ArrayList<Rapero> raperos;
-
+    private ArrayList<Rapero> ranking;
 
     public Competicio(){
         fases = new ArrayList<>();
         llistaPaisos = new ArrayList<>();
         raperos = new ArrayList<>();
+        ranking = new ArrayList<>();
     }
+
+
 
     public String getNom() {
         return nom;
@@ -55,6 +59,11 @@ public class Competicio {
         return raperos;
     }
 
+    public ArrayList<Rapero> getRanking() {
+        setRanking();
+        return ranking;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -86,6 +95,11 @@ public class Competicio {
     public void setRaperos(Rapero rapero) {
         raperos.add(rapero);
         numParticipants = raperos.size();
+    }
+
+    public void setRanking() {
+        ranking = raperos;
+        ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
 
     public String fasesToString () {
@@ -120,7 +134,6 @@ public class Competicio {
     }
     /*
 
-    private SortedSet<String> ranking;
 
     public Rapero registrar(Rapero rapero){
 

@@ -48,7 +48,7 @@ public class CompeticioController {
             case -1:
                 opcio = menu.noComencada();
                 if (opcio == 1){
-                    Rapero rapero = menu.entradaInformacio();
+                    fitxers.registrarRapero(menu.entradaInformacio(), nomCompeticio);
                     mostrarMenu(posMiRapero);
                 }else {
                     System.out.println("Ens veiem aviat!");
@@ -71,28 +71,33 @@ public class CompeticioController {
 
 
     public void executar(){
-        int faseActual = 0;
-        int opcioLobby = 0;
-        //generar aparellaments
-        //simular batalles
-        //info estat competicio
-        //opcioLobby = menu.mostraLobby(faseActual, competicio, posMiRapero, numBatalla, tipusBatalla, nomRival);
-        switch (opcioLobby){
-            case 1:
-                //batallar
-                break;
-            case 2:
-                //mostrar ranquing
-                break;
-            case 3:
-                //crear perfil
-                break;
-            case 4:
-                System.out.println("Ens veiem aviat");
-                break;
+        int faseActual = 1;
+        while (faseActual <= competicio.getFases().size()){
+            int opcioLobby = 0;
+            //generar aparellaments
+            //simular batalles
+            while (opcioLobby != 5){
+                //info estat competicio
+                //opcioLobby = menu.mostraLobby(faseActual, competicio, posMiRapero, numBatalla, tipusBatalla, nomRival);
+                switch (opcioLobby){
+                    case 1:
+                        //batallar
+                        opcioLobby = 5;
+                        break;
+                    case 2:
+                        menu.mostrarRanking(posMiRapero, competicio.getRanking());
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+                        //leave competition
+                        //simulate competition
+                        opcioLobby = 5;
+                        break;
+                }
+            }
         }
-
     }
-
 
 }

@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -70,7 +71,7 @@ public class Menu {
         System.out.println("- Nombre artístico: ");
 
         rapero.setNomArtistic(sc.nextLine());
-        System.out.println("- Bith date (dd/MM/YYY): ");
+        System.out.println("- Fecha de nacimiento (dd/MM/YYY): ");
 
         String fechaComoTexto = sc.nextLine();
         try {
@@ -153,5 +154,16 @@ public class Menu {
 
         return opcio;
     }
-
+    public String mostrarRanking (int posMiRapero, ArrayList<Rapero> ranking) {
+        String toString = "-------------------------------\n" +
+                          "  Pos.   |   Name   |   Score  \n" +
+                          "-------------------------------\n";
+        for (Rapero o : ranking){
+            toString = toString.concat("\n" + ranking.indexOf(o) + "  " + o.getNomArtistic() + " - " + o.getPuntuacio());
+            if (ranking.indexOf(o) == posMiRapero){
+                toString = toString.concat(" <-- Tu");
+            }
+        }
+        return toString;
+    }
 }
