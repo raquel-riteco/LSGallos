@@ -3,18 +3,16 @@ import java.text.SimpleDateFormat;
 
 public class Main {
     public static void main(String[] args) {
-        Fitxers f = new Fitxers();
-        Competicio competicio = new Competicio();
+        CompeticioController controller = new CompeticioController("src/competicio.json", "src/batalles.json");
         Batalla batallaModel = new Batalla();
-        f.llegirCompeticio("src/competicio.json", competicio);
-        f.llegirBatalles("src/batalles.json", batallaModel);
-        System.out.println(competicio.toString());
+
+        System.out.println(controller.getCompeticio().toString());
         System.out.println(batallaModel.getTemas().toString());
 
         try {
 
             Rapero rapero = new Rapero("Raquel Riteco", "Reich", new SimpleDateFormat("yyyy-MM-dd").parse("2001-10-01"), "Spain", (long) 2, "photo");
-            f.registrarRapero(rapero, "src/competicio_modificat.json");
+            //f.registrarRapero(rapero, "src/competicio_modificat.json");
         } catch (ParseException e) {
             e.printStackTrace();
         }

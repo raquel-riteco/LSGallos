@@ -11,7 +11,8 @@ import java.text.SimpleDateFormat;
 
 public class Fitxers {
 
-    public void llegirCompeticio (String nomCompeticio, Competicio competicio){
+    public Competicio llegirCompeticio (String nomCompeticio){
+        Competicio competicio = new Competicio();
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(nomCompeticio)){
             JSONObject obj = (JSONObject) jsonParser.parse(reader);
@@ -26,6 +27,7 @@ public class Fitxers {
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
+        return competicio;
     }
     public void parseCompeticio (Competicio competicio, JSONObject object) throws java.text.ParseException {
 

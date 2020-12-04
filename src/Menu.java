@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public void mostraMenu () {
 
-    }
 
     public void mostrarDades (Competicio competicio) {
         System.out.println("Bienvenido/a a la competición: " + competicio.getNom());
@@ -56,8 +54,12 @@ public class Menu {
 
         return opcio;
     }
+    public void acabada (){
+        System.out.println("ganador");
+    }
 
-    public void entradaInformacio (Rapero rapero) {
+    public Rapero entradaInformacio () {
+        Rapero rapero = new Rapero();
         char aux;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------");
@@ -92,14 +94,15 @@ public class Menu {
         System.out.println(" ");
         System.out.println("----------------------------------------------------");
 
+        return rapero;
     }
-    public int mostraLobby (int numFase, int maxFases, int puntuacion, int batalla, String tipusBatalla, String nomRival){
+    public int mostraLobby (int numFase, Competicio competicio, int posMiRapero, int numBatalla, String tipusBatalla, String nomRival){
         int opcio = 0;
         String entrada;
         char aux;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Fase: " + numFase + " / " + maxFases + " | Puntuación: " + puntuacion + " | Batalla " + batalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
+        System.out.println("Fase: " + numFase + " / " + competicio.getNumFases() + " | Puntuación: " + competicio.getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
         System.out.println("----------------------------------------------------------------------------------------");
 
         System.out.println(" ");
@@ -120,13 +123,13 @@ public class Menu {
 
         return opcio;
     }
-    public int faseFinal (int maxFases, int puntuacion) {
+    public int faseFinal (int maxFases, float puntuacion) {
         int opcio = 0;
         String entrada;
         char aux;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Fase: " + maxFases + " / " + maxFases + " | Puntuación: " + puntuacion + " | Lo siento tio, has perdido, seguro que lo hacer mejor a la próxima...");
+        System.out.println("Fase: " + maxFases + " / " + maxFases + " | Puntuación: " + puntuacion );
         System.out.println("----------------------------------------------------------------------------------------");
 
         System.out.println(" ");

@@ -85,6 +85,7 @@ public class Competicio {
 
     public void setRaperos(Rapero rapero) {
         raperos.add(rapero);
+        numParticipants = raperos.size();
     }
 
     public String fasesToString () {
