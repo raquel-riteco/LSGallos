@@ -5,9 +5,9 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.function.BiConsumer;
 
 public class Fitxers {
 
@@ -55,11 +55,16 @@ public class Fitxers {
             competicio.setRaperos(rapero);
         }
     }
-    public void llegirBatalles (String nomBatalles, Competicio competicio) {
+    public void llegirBatalles (String nomBatalles, Batalla batalla) {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(nomBatalles)) {
             JSONObject obj = (JSONObject) jsonParser.parse(reader);
-            //parseBatalles(competicio, obj);
+            JSONArray array = (JSONArray) obj.get("themes");
+            for (Object o : array) {
+                JSONObject object = (JSONObject) o;
+                parseBatalla(batalla, object);
+            }
+
         } catch (FileNotFoundException e) {
             System.out.println("File Not Found a llegirBatalles: " + e.getMessage());
         } catch (IOException e) {
@@ -67,6 +72,46 @@ public class Fitxers {
         } catch (ParseException e) {
             System.out.println("Parse Exception a llegirBatalles: " + e.getMessage());
         }
+    }
+    public void parseBatalla (Batalla batalla, JSONObject object) {
+        Tema tema = new Tema((String) object.get("name"));
+        JSONObject rimas = (JSONObject) ((JSONArray) object.get("rhymes")).get(0);
+        for (int nivel = 1; nivel <= 2; nivel++) {
+            JSONArray arrayRimas = (JSONArray) rimas.get(String.valueOf(nivel));
+            Tema.Estrofa estrofa = new Tema.Estrofa(nivel);
+            for (Object o : arrayRimas) {
+                estrofa.setBarra((String) o);
+            }
+            tema.setEstrofas(estrofa);
+        }
+        batalla.setTemas(tema);
+    }
+    public void registrarRapero (Rapero rapero, String nomCometicio) {
+        JSONParser parser = new JSONParser();
+        try (FileReader reader = new FileReader(nomCometicio)){
+            JSONObject rapper = new JSONObject();
+            rapper.put("realName", rapero.getNomComplet());
+            rapper.put("stageName", rapero.getNomArtistic());
+            rapper.put("birth", String.valueOf(rapero.getDataNaixement()));
+            rapper.put("nationality", rapero.getPaisString());
+            rapper.put("level", rapero.getNivell());
+            rapper.put("photo", rapero.getFoto());
+            JSONObject competitionFile = (JSONObject) parser.parse(reader);
+            JSONArray arrayRappers = (JSONArray) competitionFile.get("rappers");
+            arrayRappers.add(rapper);
+            competitionFile.replace("rappers", arrayRappers);
+            try (FileWriter writer = new FileWriter(nomCometicio)){
+                writer.write(competitionFile.toJSONString());
+                writer.flush();
+
+            }catch (IOException e){
+                System.out.println("IO Exeption a al registrar rapero al fitcher: " + e.getMessage());
+            }
+        } catch (IOException | ParseException e){
+            System.out.println(e.getMessage());
+        }
+
+
     }
 
 }

@@ -79,12 +79,6 @@ public class Competicio {
         this.numParticipants = numParticipants;
     }
 
-    public void setTemas (Tema tema, Fase fase){
-        //Hi ha dues batalles per fase
-        fase.setTemasBatalla(tema, fase.getBatalla(0));
-        fase.setTemasBatalla(tema, fase.getBatalla(1));
-    }
-
     public void setLlistaPaisos(String pais) {
         llistaPaisos.add(pais);
     }

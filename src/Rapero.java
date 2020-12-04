@@ -41,14 +41,41 @@ public class Rapero {
     public void setPuntuacio(float puntuacio) {
         this.puntuacio = puntuacio;
     }
-
     public void setPaisRapero(String nomPais) {
 
     }
-
     public void setPaisString(String paisString) {
         this.paisString = paisString;
     }
+
+    public Date getDataNaixement() {
+        return dataNaixement;
+    }
+
+    public float getPuntuacio() {
+        return puntuacio;
+    }
+
+    public Long getNivell() {
+        return nivell;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public String getNomArtistic() {
+        return nomArtistic;
+    }
+
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    public String getPaisString() {
+        return paisString;
+    }
+
 
     @Override
     public String toString() {
