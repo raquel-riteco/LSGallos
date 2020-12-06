@@ -60,6 +60,40 @@ public class CompeticioController {
         return found;
     }
 
+    public boolean comprovarEntradaInformacio(Rapero rapero){
+
+        for(Rapero o: competicio.getRaperos()){
+            if(o.getNomComplet().equals(rapero.getNomComplet())) {
+
+                return false;
+
+            }else if(o.getNomArtistic().equals(rapero.getNomArtistic())){
+
+                return false;
+
+            }else if(o.getFoto().equals(rapero.getFoto())){
+
+                return false;
+
+            }
+
+        }
+
+        if(!competicio.getLlistaPaisos().contains(rapero.getPaisString())){
+
+            return false;
+
+        }
+
+        if(rapero.getNivell()!=1 || rapero.getNivell()!= 2){
+
+            return false;
+
+        }
+
+    }
+
+
     public void mostrarMenu (){
         int opcio = 0;
         menu.mostrarDades(competicio);
