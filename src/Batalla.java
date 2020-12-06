@@ -1,10 +1,15 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Batalla {
 
     private String idiomaNatiu;
     private String idiomaAngles;
     private ArrayList<Tema> temas;
+
+    protected ArrayList<String> aparellaments;
+    //protected String batallesEnCurs[];
+    //protected Tema temes[];
 
     public Batalla () {
         temas = new ArrayList<>();
@@ -14,6 +19,7 @@ public class Batalla {
         this.idiomaNatiu = idiomaNatiu;
         this.idiomaAngles = idiomaAngles;
         temas = new ArrayList<>();
+
     }
 
     public void setTemas(Tema tema) {
@@ -33,17 +39,30 @@ public class Batalla {
                 '}';
     }
 
-    /*
-    protected String batallesEnCurs[];
-    protected Tema temes[];
 
 
-    public String generarAparellaments(Rapero raperos[]){
 
+
+
+    public String generarAparellaments(ArrayList<Rapero> raperos){
+
+        ArrayList<String> aparellaments = new ArrayList<>();
+
+            raperos.remove(rapero_out);
+
+            Random rand = new Random();
+
+        if((raperos.size()%2)!=0){
+
+            int rapero_out = rand.nextInt(raperos.length-1);
+
+        }
+
+        for(i=)
 
 
     }
-
+/*
     public void simular(){
 
 
