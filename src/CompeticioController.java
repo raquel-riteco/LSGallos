@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CompeticioController {
@@ -49,7 +50,17 @@ public class CompeticioController {
         return -1;
     }
 
-    public void mostrarMenu (int posMiRapero){
+    public boolean comprovarLogin (String nomArtistic) {
+        boolean found = false;
+        for (int i = 0; i < competicio.getRaperos().size() && !found; i++) {
+            if (competicio.getRaperos().get(i).getNomArtistic().equals(nomArtistic)){
+                found = true;
+            }
+        }
+        return found;
+    }
+
+    public void mostrarMenu (){
         int opcio = 0;
         menu.mostrarDades(competicio);
         switch (comprovarData()){
@@ -57,7 +68,7 @@ public class CompeticioController {
                 opcio = menu.noComencada();
                 if (opcio == 1){
                     fitxers.registrarRapero(menu.entradaInformacio(), nomCompeticio);
-                    mostrarMenu(posMiRapero);
+                    mostrarMenu();
                 }else {
                     System.out.println("Ens veiem aviat!");
                 }
@@ -65,8 +76,13 @@ public class CompeticioController {
             case 0:
                 opcio = menu.comencada();
                 if (opcio == 1){
-                    //login rapero
-                    String nomArtistic = "";
+                    String nomArtistic;
+                    do {
+                        nomArtistic = menu.login();
+                        if (!comprovarLogin(nomArtistic)){
+                            System.out.println("Heeeey! Este rapero no esta registrado!");
+                        }
+                    }while(!comprovarLogin(nomArtistic));
                     executar(nomArtistic);
                 }else {
                     System.out.println("Ens veiem aviat!");
@@ -78,20 +94,38 @@ public class CompeticioController {
         }
     }
 
+    public String tipusBatalla (){
+        ArrayList<String> tipusBatalles = new ArrayList<>();
+        tipusBatalles.add("BatallaAcapella");
+        tipusBatalles.add("BatallaSangre");
+        tipusBatalles.add("BatallaEscrita");
+        int num = (int)Math.floor(Math.random()*3);
+        return tipusBatalles.get(num);
+    }
+
 
     public void executar(String nomArtistic){
         int faseActual = 1;
+        int numBatalla = 1;
         while (faseActual <= competicio.getFases().size()){
             int opcioLobby = 0;
+
             //generar aparellaments
+            String nomRival = ""; //a generar aparellaments
             //simular batalles
+
             while (opcioLobby != 5){
-                //info estat competicio
-                //opcioLobby = menu.mostraLobby(faseActual, competicio, posMiRapero, numBatalla, tipusBatalla, nomRival);
+                String tipusBatalla = tipusBatalla();
+                opcioLobby = menu.mostraLobby(faseActual, competicio, getPosMiRapero(nomArtistic), numBatalla, tipusBatalla, nomRival);
                 switch (opcioLobby){
                     case 1:
                         //batallar
-                        opcioLobby = 5;
+                        numBatalla++;
+                        if (numBatalla == 2) {
+                            faseActual++;
+                            numBatalla = 1;
+                            opcioLobby = 5;
+                        }
                         break;
                     case 2:
                         menu.mostrarRanking(getPosMiRapero(nomArtistic), competicio.getRanking());
@@ -102,6 +136,7 @@ public class CompeticioController {
                     case 4:
                         //leave competition
                         //simulate competition
+                        faseActual = 2;
                         opcioLobby = 5;
                         break;
                 }
