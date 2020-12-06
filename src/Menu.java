@@ -59,6 +59,13 @@ public class Menu {
         System.out.println("ganador");
     }
 
+    public String login () {
+        Scanner sc = new Scanner(System.in);
+        String entrada;
+        System.out.print("Entra tu nombre artistico: ");
+        return sc.nextLine();
+    }
+
     public Rapero entradaInformacio () {
         Rapero rapero = new Rapero();
         char aux;
