@@ -62,10 +62,10 @@ public class Batalla {
 
             int rand1 = rand.nextInt((raperos.size()/2)-1);
 
-            aparellaments.add(i,raperos.get(0));
+            aparellaments.add(i,raperos.get(raperos.size()-1));
             aparellaments.add(i,raperos.get(rand1));
 
-            raperos.remove(0);
+            raperos.remove(raperos.size()-1);
             raperos.remove(rand1);
 
         }
