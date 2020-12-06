@@ -7,7 +7,6 @@ public class CompeticioController {
     private Competicio competicio;
     private String nomCompeticio;
     private String nomBatalles;
-    private int posMiRapero;
 
 
     public CompeticioController (String nomCompeticio, String nomBatalles) {
@@ -41,6 +40,15 @@ public class CompeticioController {
              return 0;
          }
     }
+    public int getPosMiRapero (String nomArtistic) {
+        for (Rapero o : competicio.getRaperos()){
+            if (o.getNomArtistic().equals(nomArtistic)){
+                return competicio.getRaperos().indexOf(o);
+            }
+        }
+        return -1;
+    }
+
     public void mostrarMenu (int posMiRapero){
         int opcio = 0;
         menu.mostrarDades(competicio);
@@ -58,7 +66,8 @@ public class CompeticioController {
                 opcio = menu.comencada();
                 if (opcio == 1){
                     //login rapero
-                    executar();
+                    String nomArtistic = "";
+                    executar(nomArtistic);
                 }else {
                     System.out.println("Ens veiem aviat!");
                 }
@@ -70,7 +79,7 @@ public class CompeticioController {
     }
 
 
-    public void executar(){
+    public void executar(String nomArtistic){
         int faseActual = 1;
         while (faseActual <= competicio.getFases().size()){
             int opcioLobby = 0;
@@ -85,7 +94,7 @@ public class CompeticioController {
                         opcioLobby = 5;
                         break;
                     case 2:
-                        menu.mostrarRanking(posMiRapero, competicio.getRanking());
+                        menu.mostrarRanking(getPosMiRapero(nomArtistic), competicio.getRanking());
                         break;
                     case 3:
 

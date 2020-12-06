@@ -12,7 +12,7 @@ public class Main {
         try {
 
             Rapero rapero = new Rapero("Raquel Riteco", "Reich", new SimpleDateFormat("yyyy-MM-dd").parse("2001-10-01"), "Spain", (long) 2, "photo");
-            //f.registrarRapero(rapero, "src/competicio_modificat.json");
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

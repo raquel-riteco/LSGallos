@@ -48,14 +48,14 @@ public class Batalla {
 
         ArrayList<String> aparellaments = new ArrayList<>();
 
-            raperos.remove(rapero_out);
+
 
             Random rand = new Random();
 
         if((raperos.size()%2)!=0){
 
-            int rapero_out = rand.nextInt(raperos.length-1);
-
+            int rapero_out = rand.nextInt(raperos.size() - 1);
+            raperos.remove(rapero_out);
         }
 
         for(i=)
