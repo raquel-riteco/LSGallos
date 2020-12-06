@@ -42,11 +42,9 @@ public class Batalla {
 
 
 
+    public ArrayList<Rapero> generarAparellaments(ArrayList<Rapero> raperos){
 
-
-    public String generarAparellaments(ArrayList<Rapero> raperos){
-
-        ArrayList<String> aparellaments = new ArrayList<>();
+        ArrayList<Rapero> aparellaments = new ArrayList<>();
 
 
 
@@ -58,8 +56,21 @@ public class Batalla {
             raperos.remove(rapero_out);
         }
 
-        for(i=)
+        int limit_aparellaments = raperos.size()/2;
 
+        for(int i = 0;i< limit_aparellaments;i++){
+
+            int rand1 = rand.nextInt((raperos.size()/2)-1);
+
+            aparellaments.add(i,raperos.get(0));
+            aparellaments.add(i,raperos.get(rand1));
+
+            raperos.remove(0);
+            raperos.remove(rand1);
+
+        }
+
+        return aparellaments;
 
     }
 /*
