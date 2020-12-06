@@ -23,6 +23,7 @@ public class Rapero {
         this.paisString = paisString;
     }
 
+
     public void setNomComplet (String nomComplet) {
         this.nomComplet = nomComplet;
     }

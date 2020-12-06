@@ -6,5 +6,14 @@ public class Pais {
     private String bandera;
     private String llengues[];
 
+    public Pais(){
+
+    }
+
+    public int getNom(){
+
+        return this.nom;
+
+    }
 
 }
