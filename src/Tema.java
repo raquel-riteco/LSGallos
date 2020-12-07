@@ -25,7 +25,11 @@ public class Tema {
     public String getEstrofaPerNivell (Long nivel, int numBarra){
         for (Estrofa a : estrofas) {
             if (Integer.parseInt(String.valueOf(nivel)) == a.nivel){
-                return a.getBarras().get(numBarra);
+                if (a.getBarras().size() == 1){
+                    return "Oh no, te has quedado en blanco!";
+                }else{
+                    return a.getBarras().get(numBarra);
+                }
             }
         }
         return "Oh no, te has quedado en blanco!";

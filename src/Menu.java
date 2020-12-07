@@ -55,7 +55,7 @@ public class Menu {
         System.out.println("1. Login");
         System.out.println("2. Salir");
         System.out.println(" ");
-        System.out.println("Escoge una opcion: ");
+        System.out.print("Escoge una opcion: ");
         do{
             correct = true;
             entrada = sc.nextLine();

@@ -7,7 +7,7 @@ public class Batalla {
     private ArrayList<Tema> temas;
     private ArrayList<Rapero> raperos;
     private int numParticipants;
-    private ArrayList<ArrayList<String >> estrofas;
+    private ArrayList<ArrayList<String>> estrofas;
 
     private ArrayList<ArrayList<Rapero>> aparellaments;
     //protected String batallesEnCurs[];
@@ -142,7 +142,56 @@ public class Batalla {
         return temas.get((int) Math.floor(Math.random()* temas.size())).getNomTema();
     }
 
+    public int calcularRimes(){
+        int R = 0;
+        ArrayList<ArrayList<Integer>> rima = new ArrayList<>();
+        for (ArrayList<String> estrofa: estrofas) {
+            ArrayList<String> ultimasLetras = new ArrayList<>();
+            for (String o: estrofa) {
+                 ultimasLetras.add(o.substring(o.length() - 2));
+            }
+            rima.add(numRimas(ultimasLetras));
+        }
+        for (ArrayList<Integer> rimasPorEstrofa : rima) {
+            for (Integer rimasPorVerso : rimasPorEstrofa) {
+                R += rimasPorVerso;
+            }
+        }
+        return R;
+    }
 
+    public ArrayList<Integer> numRimas(ArrayList<String> ultimasLetras){
+        ArrayList<Integer> sumaNumRimes = new ArrayList<>();
+
+        for (int i = 0; i < ultimasLetras.size(); i++) {
+            int numRimas = 0;
+            String actual = ultimasLetras.get(i);
+            switch (i){
+                case 0:
+                    if (actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
+                        numRimas++;
+                    }
+                    break;
+                case 1:
+                    if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
+                        numRimas++;
+                    }
+                    break;
+                case 2:
+                    if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(3))){
+                        numRimas++;
+                    }
+                    break;
+                case 3:
+                    if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2))){
+                        numRimas++;
+                    }
+                    break;
+            }
+            sumaNumRimes.add(numRimas);
+        }
+        return sumaNumRimes;
+    }
     /*
 
     public void simular(){
@@ -151,11 +200,7 @@ public class Batalla {
 
     }
 
-    public float calcularPuntuacio(String frase){
 
-
-
-    }
 
      */
 }

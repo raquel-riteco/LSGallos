@@ -42,6 +42,9 @@ public class Rapero {
     public void setPuntuacio(float puntuacio) {
         this.puntuacio = puntuacio;
     }
+    public void actualitzarPuntuacio (float puntuacio){
+        this.puntuacio += puntuacio;
+    }
     public void setPaisRapero(String nomPais) {
 
     }
@@ -56,6 +59,8 @@ public class Rapero {
     public float getPuntuacio() {
         return puntuacio;
     }
+
+
 
     public Long getNivell() {
         return nivell;

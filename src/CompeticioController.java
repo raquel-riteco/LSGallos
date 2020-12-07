@@ -60,8 +60,6 @@ public class CompeticioController {
         return found;
     }
 
-
-
     public void mostrarMenu (){
         int opcio;
         setCompeticio();
@@ -102,11 +100,12 @@ public class CompeticioController {
     }
 
     public void executar(String nomArtistic){
-        int faseActual = 1;
+        fitxers.llegirBatalles(nomBatalles, competicio.getBatallaModel());
+        int faseActual = 0;
         int numBatalla = 1;
-        while (faseActual <= competicio.getFases().size()){
+        while (faseActual < competicio.getFases().size()){
+            competicio.getBatallaModel().getRaperos().get(getPosMiRapero(nomArtistic)).setPuntuacio(0);
             int opcioLobby = 0;
-
             //simular batalles
             String nomRival = "";
             int numAparellament = 0;
@@ -122,25 +121,37 @@ public class CompeticioController {
                     break;
                 }
             }
-
             while (opcioLobby != 5){
                 String tipusBatalla = competicio.getBatallaModel().tipusBatalla();
                 opcioLobby = menu.mostraLobby(faseActual, competicio, getPosMiRapero(nomArtistic), numBatalla, tipusBatalla, nomRival);
                 switch (opcioLobby){
                     case 1:
                         int quienEmpieza = (int) Math.floor(Math.random()*2);
-                        competicio.getBatallaModel().setEstrofas(menu.batalla(tipusBatalla, competicio.getBatallaModel(), quienEmpieza, numAparellament, nomRival));
+                        competicio.getBatallaModel().setEstrofas(menu.batalla(competicio.getBatallaModel().escollirTemaEntrada(competicio.getBatallaModel().getTemas()), competicio.getBatallaModel(), quienEmpieza, numAparellament, nomRival));
                         switch (tipusBatalla){
                             case "BatallaAcapela":
+                                BatallaAcapella acapella = new BatallaAcapella();
+                                competicio.getBatallaModel().getRaperos().get(getPosMiRapero(nomArtistic)).actualitzarPuntuacio((float) acapella.calculoPuntuacion(competicio.getBatallaModel().calcularRimes()));
+                                System.out.println(competicio.getBatallaModel().getRaperos().get(getPosMiRapero(nomArtistic)).getPuntuacio());
 
                                 break;
                             case "BatallaEscrita":
+                                BatallaEscrita escrita = new BatallaEscrita();
+                                competicio.getBatallaModel().getRaperos().get(getPosMiRapero(nomArtistic)).actualitzarPuntuacio((float) escrita.calculoPuntuacion(competicio.getBatallaModel().calcularRimes()));
+                                System.out.println(competicio.getBatallaModel().getRaperos().get(getPosMiRapero(nomArtistic)).getPuntuacio());
+
                                 break;
                             case "BatallaSangre":
+                                BatallaSangre sangre = new BatallaSangre();
+                                competicio.getBatallaModel().getRaperos().get(getPosMiRapero(nomArtistic)).actualitzarPuntuacio((float) sangre.calculoPuntuacion(competicio.getBatallaModel().calcularRimes()));
+                                System.out.println(competicio.getBatallaModel().getRaperos().get(getPosMiRapero(nomArtistic)).getPuntuacio());
+
                                 break;
                         }
                         numBatalla++;
                         if (numBatalla == 2) {
+                            competicio.actualitzarPuntuacio();
+                            //descartar raperos
                             faseActual++;
                             numBatalla = 1;
                             opcioLobby = 5;
