@@ -22,6 +22,15 @@ public class Tema {
         estrofas.add(estrofa);
     }
 
+    public String getEstrofaPerNivell (Long nivel, int numBarra){
+        for (Estrofa a : estrofas) {
+            if (Integer.parseInt(String.valueOf(nivel)) == a.nivel){
+                return a.getBarras().get(numBarra);
+            }
+        }
+        return "Oh no, te has quedado en blanco!";
+    }
+
     public static class Estrofa {
         private int nivel;
         private ArrayList<String> barras;
@@ -33,6 +42,10 @@ public class Tema {
 
         public void setBarra(String barra) {
             barras.add(barra);
+        }
+
+        public ArrayList<String> getBarras() {
+            return barras;
         }
 
         @Override

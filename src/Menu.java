@@ -170,9 +170,9 @@ public class Menu {
         String entrada;
         boolean correct;
         Scanner sc = new Scanner(System.in);
-        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Fase: " + numFase + " / " + competicio.getNumFases() + " | Puntuación: " + competicio.getBatallaModel().getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
-        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         System.out.println(" ");
         System.out.println("1. Empezar la batalla");
@@ -180,7 +180,7 @@ public class Menu {
         System.out.println("3. Crear perfil");
         System.out.println("4. Salir de la competición");
         System.out.println(" ");
-        System.out.println("Escoge una opción: ");
+        System.out.print("Escoge una opción: ");
         do{
             correct = true;
             entrada = sc.nextLine();
@@ -214,7 +214,7 @@ public class Menu {
         System.out.println("3. Crear perfil");
         System.out.println("4. Salir de la competición");
         System.out.println(" ");
-        System.out.println("Escoge una opción: ");
+        System.out.print("Escoge una opción: ");
         do{
             correct = true;
             entrada = sc.nextLine();
@@ -235,6 +235,78 @@ public class Menu {
 
         return opcio;
     }
+    public ArrayList<ArrayList<String>> batalla(String tema, Batalla batalla, int quienEmpieza, int numAparellament, String nomRival){
+        Long nivelRival;
+        ArrayList<ArrayList<String>> estrofas = new ArrayList<>();
+        ArrayList<String> estrofaRapero = null;
+        int numBarra = 0;
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("Tema: " + tema + "\n");
+        System.out.println("Lanzamos la moneda al aire y...");
+        if (batalla.getAparellaments().get(numAparellament).get(quienEmpieza).getNomArtistic().equals(nomRival)){
+            nivelRival = batalla.getAparellaments().get(numAparellament).get(quienEmpieza).getNivell();
+            System.out.println(nomRival + "es tu turno. Se lo damos en 3, 2, 1...\n");
+            System.out.println(nomRival + ":\n");
+            turnoRival(tema, batalla, nivelRival, numBarra);
+            numBarra++;
+            System.out.println("\nVeo que tenemos nivel\nEs tu turno!");
+            for (int i = 0; i < 4; i++) {
+                System.out.println("Introduce tu verso: ");
+                estrofaRapero = new ArrayList<>();
+                estrofaRapero.add(tuTurno());
+            }
+            estrofas.add(estrofaRapero);
+            System.out.println("\nMuy bien! " + nomRival + ", vas de nuevo!\n");
+            System.out.println(nomRival + ":\n");
+            turnoRival(tema, batalla, nivelRival, numBarra);
+            System.out.println("\n\nVuelve a tocarte!");
+            for (int i = 0; i < 4; i++) {
+                System.out.println("Introduce tu verso: ");
+                estrofaRapero = new ArrayList<>();
+                estrofaRapero.add(tuTurno());
+            }
+            estrofas.add(estrofaRapero);
+        }else{
+            if (quienEmpieza == 0){
+                nivelRival = batalla.getAparellaments().get(numAparellament).get(1).getNivell();
+            }else {
+                nivelRival = batalla.getAparellaments().get(numAparellament).get(0).getNivell();
+            }
+            System.out.println("Empiezas tu! Se lo damos en 3, 2, 1...\n\n");
+            for (int i = 0; i < 4; i++) {
+                System.out.println("Introduce tu verso: ");
+                estrofaRapero = new ArrayList<>();
+                estrofaRapero.add(tuTurno());
+            }
+            estrofas.add(estrofaRapero);
+            System.out.println(nomRival + "es tu turno!\n");
+            turnoRival(tema, batalla, nivelRival, numBarra);
+            numBarra++;
+            System.out.println("\nVeo que tenemos nivel\nEs tu turno!");
+            for (int i = 0; i < 4; i++) {
+                System.out.println("Introduce tu verso: ");
+                estrofaRapero = new ArrayList<>();
+                estrofaRapero.add(tuTurno());
+            }
+            estrofas.add(estrofaRapero);
+            System.out.println("\nMuy bien! " + nomRival + ", vas de nuevo!\n");
+            System.out.println(nomRival + ":\n");
+            turnoRival(tema, batalla, nivelRival, numBarra);
+        }
+        return estrofas;
+    }
+    public String tuTurno () {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
+    public void turnoRival (String tema, Batalla batalla, Long nivelRival, int numBarra){
+        for (Tema a : batalla.getTemas()) {
+            if (a.getNomTema().equals(tema)){
+                System.out.println(a.getEstrofaPerNivell(nivelRival, numBarra));
+            }
+        }
+    }
+
     public String mostrarRanking (int posMiRapero, ArrayList<Rapero> ranking) {
         String toString = "-------------------------------\n" +
                           "  Pos.   |   Name   |   Score  \n" +

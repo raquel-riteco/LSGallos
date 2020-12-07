@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Batalla {
 
@@ -8,14 +7,16 @@ public class Batalla {
     private ArrayList<Tema> temas;
     private ArrayList<Rapero> raperos;
     private int numParticipants;
+    private ArrayList<ArrayList<String >> estrofas;
 
-    protected ArrayList<Rapero> aparellaments;
+    private ArrayList<ArrayList<Rapero>> aparellaments;
     //protected String batallesEnCurs[];
 
 
     public Batalla () {
         temas = new ArrayList<>();
         raperos = new ArrayList<>();
+        aparellaments = new ArrayList<>();
     }
 
     public Batalla (String idiomaNatiu, String idiomaAngles) {
@@ -23,6 +24,7 @@ public class Batalla {
         this.idiomaAngles = idiomaAngles;
         temas = new ArrayList<>();
         raperos = new ArrayList<>();
+        aparellaments = new ArrayList<>();
 
     }
 
@@ -30,15 +32,26 @@ public class Batalla {
         temas.add(tema);
     }
 
-    public void setAparellaments() {
-        this.aparellaments = generarAparellaments(raperos);
+    public void setEstrofas(ArrayList<ArrayList<String>> estrofas) {
+        this.estrofas = estrofas;
     }
+
+    public void setAparellaments(int posMiRapero) {
+        this.aparellaments = generarAparellaments(raperos, posMiRapero);
+
+    }
+
+    public ArrayList<ArrayList<Rapero>> getAparellaments() {
+        return aparellaments;
+    }
+
     public int getNumParticipants(){
+        setNumParticipants();
         return numParticipants;
     }
 
-    public void setNumParticipants(int numParticipants) {
-        this.numParticipants = numParticipants;
+    public void setNumParticipants() {
+        numParticipants = raperos.size();
     }
     public ArrayList<Rapero> getRaperos() {
         return raperos;
@@ -71,29 +84,38 @@ public class Batalla {
     }
 
 
-    public ArrayList<Rapero> generarAparellaments(ArrayList<Rapero> raperos){
+    public ArrayList<ArrayList<Rapero>> generarAparellaments(ArrayList<Rapero> raperos, int posMiRapero){
 
-        ArrayList<Rapero> aparellaments = new ArrayList<>();
-
-            Random rand = new Random();
-
-        if((raperos.size()%2)!=0){
-            int rapero_out = rand.nextInt(raperos.size() - 1);
-            raperos.remove(rapero_out);
+        ArrayList<Rapero> aux = new ArrayList<>(raperos);
+        if ((aux.size() % 2) != 0){
+            int rapero_out;
+            do {
+                rapero_out = (int) Math.floor(Math.random()*aux.size());
+            }while(rapero_out == posMiRapero);
+            aux.remove(rapero_out);
         }
 
-        int limit_aparellaments = raperos.size()/2;
+        for(int i = 0; i < raperos.size() / 2 ; i++){
+            ArrayList<Rapero> parella = new ArrayList<>();
+            int num1, num2;
+            do {
+                num1 = (int) Math.floor(Math.random()* aux.size());
+                num2 = (int) Math.floor(Math.random()* aux.size());
+            }while (num1 == num2);
 
-        for(int i = 0;i < limit_aparellaments;i++){
+            Rapero rapero1 = aux.get(num1);
+            Rapero rapero2 = aux.get(num2);
+            parella.add(rapero1);
+            parella.add(rapero2);
 
-            int rand1 = rand.nextInt((raperos.size()/2)-1);
-
-            aparellaments.add(i,raperos.get(raperos.size()-1));
-            aparellaments.add(i,raperos.get(rand1));
-
-            raperos.remove(raperos.size()-1);
-            raperos.remove(rand1);
-
+            aparellaments.add(parella);
+            if (num1 < num2){
+                aux.remove(num1);
+                aux.remove(num2 - 1);
+            }else {
+                aux.remove(num2);
+                aux.remove(num1 - 1);
+            }
         }
 
         return aparellaments;
@@ -115,17 +137,15 @@ public class Batalla {
     public void registrar(Rapero rapero){
         raperos.add(rapero);
     }
-    /*
 
-    public void simular(){
-
-
-
+    public String temaBatalla(){
+        return temas.get((int) Math.floor(Math.random()* temas.size())).getNomTema();
     }
 
 
+    /*
 
-    public Rapero batallar(String batallesEnCurs[]){
+    public void simular(){
 
 
 

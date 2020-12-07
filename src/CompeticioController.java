@@ -1,6 +1,3 @@
-import javax.xml.crypto.Data;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -110,16 +107,38 @@ public class CompeticioController {
         while (faseActual <= competicio.getFases().size()){
             int opcioLobby = 0;
 
-            competicio.getBatallaModel().setAparellaments();
-            String nomRival = ""; //a generar aparellaments
             //simular batalles
+            String nomRival = "";
+            int numAparellament = 0;
+            competicio.getBatallaModel().setAparellaments(getPosMiRapero(nomArtistic));
+            for (ArrayList<Rapero> o: competicio.getBatallaModel().getAparellaments()) {
+                if (o.get(0).getNomArtistic().equals(nomArtistic)){
+                    nomRival = o.get(1).getNomArtistic();
+                    numAparellament = competicio.getBatallaModel().getAparellaments().indexOf(o);
+                    break;
+                }else if(o.get(1).getNomArtistic().equals(nomArtistic)){
+                    nomRival = o.get(0).getNomArtistic();
+                    numAparellament = competicio.getBatallaModel().getAparellaments().indexOf(o);
+                    break;
+                }
+            }
 
             while (opcioLobby != 5){
                 String tipusBatalla = competicio.getBatallaModel().tipusBatalla();
                 opcioLobby = menu.mostraLobby(faseActual, competicio, getPosMiRapero(nomArtistic), numBatalla, tipusBatalla, nomRival);
                 switch (opcioLobby){
                     case 1:
-                        //batallar
+                        int quienEmpieza = (int) Math.floor(Math.random()*2);
+                        competicio.getBatallaModel().setEstrofas(menu.batalla(tipusBatalla, competicio.getBatallaModel(), quienEmpieza, numAparellament, nomRival));
+                        switch (tipusBatalla){
+                            case "BatallaAcapela":
+
+                                break;
+                            case "BatallaEscrita":
+                                break;
+                            case "BatallaSangre":
+                                break;
+                        }
                         numBatalla++;
                         if (numBatalla == 2) {
                             faseActual++;

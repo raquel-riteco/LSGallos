@@ -41,6 +41,7 @@ public class Competicio {
 
 
     public ArrayList<Fase> getFases() {
+        setNumFases();
         return fases;
     }
 
@@ -75,8 +76,8 @@ public class Competicio {
         this.dataFinal = dataFinal;
     }
 
-    public void setNumFases(int numFases) {
-        this.numFases = numFases;
+    public void setNumFases() {
+        numFases = fases.size();
     }
 
     public void setFases(double pressupost, String pais) {
