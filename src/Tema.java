@@ -14,6 +14,10 @@ public class Tema {
         this.nomTema = nomTema;
     }
 
+    public String getNomTema() {
+        return nomTema;
+    }
+
     public void setEstrofas(Estrofa estrofa) {
         estrofas.add(estrofa);
     }

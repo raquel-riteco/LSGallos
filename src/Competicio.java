@@ -1,5 +1,3 @@
-import javafx.collections.transformation.SortedList;
-
 import java.util.*;
 
 public class Competicio {
@@ -7,18 +5,19 @@ public class Competicio {
     private String nom;
     private Date dataInici;
     private Date dataFinal;
+    private Batalla batallaModel;
     private int numFases;
-    private int numParticipants;
+
     private ArrayList<Fase> fases;
     private ArrayList<String> llistaPaisos;
-    private ArrayList<Rapero> raperos;
+
     private ArrayList<Rapero> ranking;
 
     public Competicio(){
         fases = new ArrayList<>();
         llistaPaisos = new ArrayList<>();
-        raperos = new ArrayList<>();
         ranking = new ArrayList<>();
+        batallaModel = new Batalla();
     }
 
 
@@ -39,9 +38,7 @@ public class Competicio {
         return numFases;
     }
 
-    public int getNumParticipants(){
-        return numParticipants;
-    }
+
 
     public ArrayList<Fase> getFases() {
         return fases;
@@ -55,13 +52,15 @@ public class Competicio {
         return llistaPaisos;
     }
 
-    public ArrayList<Rapero> getRaperos() {
-        return raperos;
-    }
+
 
     public ArrayList<Rapero> getRanking() {
-        setRanking();
+        actualitzarPuntuacio();
         return ranking;
+    }
+
+    public Batalla getBatallaModel() {
+        return batallaModel;
     }
 
     public void setNom(String nom) {
@@ -84,21 +83,16 @@ public class Competicio {
         fases.add(new Fase(pressupost, pais));
     }
 
-    public void setNumParticipants(int numParticipants) {
-        this.numParticipants = numParticipants;
-    }
+
 
     public void setLlistaPaisos(String pais) {
         llistaPaisos.add(pais);
     }
 
-    public void setRaperos(Rapero rapero) {
-        raperos.add(rapero);
-        numParticipants = raperos.size();
-    }
 
-    public void setRanking() {
-        ranking = raperos;
+
+    public void actualitzarPuntuacio() {
+        ranking = batallaModel.getRaperos();
         ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
 
@@ -111,14 +105,7 @@ public class Competicio {
         return toString;
     }
 
-    public String raperosToString () {
-        String toString = "";
-        for (Rapero o : raperos){
-            toString = toString.concat(o.toString());
-            toString = toString.concat("\n");
-        }
-        return toString;
-    }
+
 
     @Override
     public String toString() {
@@ -127,32 +114,9 @@ public class Competicio {
                 "\ndataInici=" + dataInici +
                 "\ndataFinal=" + dataFinal +
                 "\nnumFases=" + numFases +
-                "\nnumParticipants=" + numParticipants +
                 "\nfases=" + fasesToString() +
-                "\nraperos=" + raperosToString() +
                 '}';
     }
-    /*
 
-
-    public Rapero registrar(Rapero rapero){
-
-        //Funcio
-
-    }
-
-    public Rapero login(Rapero usuari){
-
-        //Funcio
-
-    }
-
-    public void actualitzarPuntuacio(SortedSet<String> ranking){
-
-        //Funcio
-
-    }
-
-     */
 
 }

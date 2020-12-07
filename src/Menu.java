@@ -1,24 +1,24 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Menu {
-
-
 
     public void mostrarDades (Competicio competicio) {
         System.out.println("Bienvenido/a a la competición: " + competicio.getNom());
         System.out.println("Comienza el " + competicio.getDataInici());
         System.out.println("Acaba el " + competicio.getDataFinal());
         System.out.println("Fases: " + competicio.getNumFases());
-        System.out.println("Actualmente: " + competicio.getNumParticipants() + " " + "participantes");
+        System.out.println("Actualmente: " + competicio.getBatallaModel().getNumParticipants() + " " + "participantes");
         System.out.println(" ");
     }
 
     public int noComencada () {
-        int opcio;
+        int opcio = 0;
         String entrada;
+        boolean correct;
         char aux;
         Scanner sc = new Scanner(System.in);
         System.out.println("La competición no ha empezado todavía. ¿Qué quieres hacer?");
@@ -28,10 +28,20 @@ public class Menu {
         System.out.println(" ");
         System.out.print("Escoge una opción: ");
         do{
+            correct = true;
             entrada = sc.nextLine();
-            opcio = Integer.parseInt(entrada);
+            try {
+                opcio = Integer.parseInt(entrada);
+            }catch (NumberFormatException e){
+                System.out.println("Introduce una opcion correcta.");
+                correct = false;
+            }
+            if (opcio != 1 && opcio != 2){
+                System.out.println("Introduce una opcion correcta.");
+                correct = false;
+            }
 
-        }while (opcio != 1 && opcio != 2);
+        }while (correct);
 
         return opcio;
     }
@@ -66,37 +76,79 @@ public class Menu {
         return sc.nextLine();
     }
 
-    public Rapero entradaInformacio () {
+    public Rapero entradaInformacio (Competicio competicio) {
         Rapero rapero = new Rapero();
-        char aux;
+        boolean correct;
+
+        String valor;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------");
         System.out.println("Por favor, introduzca su información personal:");
+
         System.out.println("- Nombre completo: ");
-
         rapero.setNomComplet(sc.nextLine());
-        System.out.println("- Nombre artístico: ");
 
-        rapero.setNomArtistic(sc.nextLine());
-        System.out.println("- Fecha de nacimiento (dd/MM/YYY): ");
+        do {
+            correct = true;
+            System.out.println("- Nombre artístico: ");
+            valor = sc.nextLine();
+            for (Rapero o: competicio.getBatallaModel().getRaperos()) {
+                if (o.getNomArtistic().equals(valor)){
+                    System.out.println("Este nickname ya exsiste!!");
+                    correct = false;
+                    break;
+                }
+            }
+        }while (!correct);
+        rapero.setNomArtistic(valor);
 
-        String fechaComoTexto = sc.nextLine();
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            rapero.setDataNaixement(sdf.parse(fechaComoTexto));
-        }catch (ParseException e){
-            System.out.println("Parse Exeption: " + e.getMessage());
-        }
-        System.out.println("- Pais: ");
+        Date data = null;
+        do {
+            correct = true;
+            System.out.println("- Fecha de nacimiento (dd/MM/YYYY): ");
+            valor = sc.nextLine();
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf.setLenient(false);
+                data = sdf.parse(valor);
+            } catch (ParseException e) {
+                System.out.println("Introduce una fecha valida!");
+                correct = false;
+            }
+        }while(!correct);
+        rapero.setDataNaixement(data);
 
-        rapero.setPaisRapero(sc.nextLine());
-        System.out.println("- Nivel: ");
 
-        rapero.setNivell(sc.nextLong());
+        do {
+            correct = false;
+            System.out.println("- Pais: ");
+            valor = sc.nextLine();
+            for (String o : competicio.getLlistaPaisos()) {
+                if (o.equals(valor)) {
+                    correct = true;
+                    break;
+                }
+            }
+            if (!correct){
+                System.out.println("Este pais no es valido, introduce otro");
+            }
+        }while(!correct);
+        rapero.setPaisRapero(valor);
+
+        do {
+            correct = true;
+            System.out.println("- Nivel: ");
+            valor = sc.nextLine();
+            if (Integer.parseInt(valor) == 1 || Integer.parseInt(valor) == 2){
+                correct = false;
+                System.out.println("El nivel ha de ser 1 o 2!");
+            }
+        }while (!correct);
+        rapero.setNivell(Long.parseLong(valor));
+
         System.out.println("- Foto: ");
-
         rapero.setFoto(sc.nextLine());
-        //aqui supongo que deberíamos de comprobar que todo sea correcto
+
         System.out.println(" ");
         System.out.println("Registro completo!");
         System.out.println(" ");
@@ -104,13 +156,14 @@ public class Menu {
 
         return rapero;
     }
+
     public int mostraLobby (int numFase, Competicio competicio, int posMiRapero, int numBatalla, String tipusBatalla, String nomRival){
         int opcio = 0;
         String entrada;
         char aux;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Fase: " + numFase + " / " + competicio.getNumFases() + " | Puntuación: " + competicio.getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
+        System.out.println("Fase: " + numFase + " / " + competicio.getNumFases() + " | Puntuación: " + competicio.getBatallaModel().getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
         System.out.println("----------------------------------------------------------------------------------------");
 
         System.out.println(" ");
