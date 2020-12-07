@@ -4,7 +4,7 @@ public class Rapero {
 
     private String nomComplet;
     private String nomArtistic;
-    private Date dataNaixement;
+    private String dataNaixement;
     private Long nivell;
     private String foto;
     private float puntuacio;
@@ -14,7 +14,7 @@ public class Rapero {
     public Rapero (){
 
     }
-    public Rapero(String nomComplet, String nomArtistic, Date dataNaixement, String paisString, Long nivell, String foto) {
+    public Rapero(String nomComplet, String nomArtistic, String dataNaixement, String paisString, Long nivell, String foto) {
         this.nomComplet = nomComplet;
         this.nomArtistic = nomArtistic;
         this.dataNaixement = dataNaixement;
@@ -30,7 +30,7 @@ public class Rapero {
     public void setNomArtistic (String nomArtistic) {
         this.nomArtistic = nomArtistic;
     }
-    public void setDataNaixement (Date dataNaixement) {
+    public void setDataNaixement (String dataNaixement) {
         this.dataNaixement = dataNaixement;
     }
     public void setNivell (Long nivell) {
@@ -49,7 +49,7 @@ public class Rapero {
         this.paisString = paisString;
     }
 
-    public Date getDataNaixement() {
+    public String getDataNaixement() {
         return dataNaixement;
     }
 

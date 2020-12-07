@@ -50,7 +50,7 @@ public class Fitxers {
             Rapero rapero = new Rapero(
                     (String) rapper.get("realName"),
                     (String) rapper.get("stageName"),
-                    new SimpleDateFormat("yyyy-MM-dd").parse((String) rapper.get("birth")),
+                    (String) rapper.get("birth"),
                     (String) rapper.get("nationality"),
                     ((Long) rapper.get("level")),
                     (String) rapper.get("photo"));
@@ -94,7 +94,7 @@ public class Fitxers {
             JSONObject rapper = new JSONObject();
             rapper.put("realName", rapero.getNomComplet());
             rapper.put("stageName", rapero.getNomArtistic());
-            rapper.put("birth", String.valueOf(rapero.getDataNaixement()));
+            rapper.put("birth", rapero.getDataNaixement());
             rapper.put("nationality", rapero.getPaisString());
             rapper.put("level", rapero.getNivell());
             rapper.put("photo", rapero.getFoto());
@@ -102,7 +102,11 @@ public class Fitxers {
             JSONArray arrayRappers = (JSONArray) competitionFile.get("rappers");
             arrayRappers.add(rapper);
             competitionFile.replace("rappers", arrayRappers);
+
             try (FileWriter writer = new FileWriter(nomCometicio)){
+                //ObjectMapper mapper = new ObjectMapper();
+                //Object json = mapper.readValue(competitionFile.toJSONString(), Object.class);
+                //String jsonStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
                 writer.write(competitionFile.toJSONString());
                 writer.flush();
 

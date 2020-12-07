@@ -33,7 +33,6 @@ public class Menu {
             try {
                 opcio = Integer.parseInt(entrada);
             }catch (NumberFormatException e){
-                System.out.println("Introduce una opcion correcta.");
                 correct = false;
             }
             if (opcio != 1 && opcio != 2){
@@ -41,15 +40,15 @@ public class Menu {
                 correct = false;
             }
 
-        }while (correct);
+        }while (!correct);
 
         return opcio;
     }
 
     public int comencada () {
-        int opcio;
+        int opcio = 0;
         String entrada;
-        char aux;
+        boolean correct;
         Scanner sc = new Scanner(System.in);
         System.out.println("Competicion empezada. ¿Qué quieres hacer?");
         System.out.println(" ");
@@ -58,10 +57,20 @@ public class Menu {
         System.out.println(" ");
         System.out.println("Escoge una opcion: ");
         do{
+            correct = true;
             entrada = sc.nextLine();
-            opcio = Integer.parseInt(entrada);
+            try {
+                opcio = Integer.parseInt(entrada);
+            }catch (NumberFormatException e){
 
-        }while (opcio != 1 && opcio != 2);
+                correct = false;
+            }
+            if (opcio != 1 && opcio != 2){
+                System.out.println("Introduce una opcion correcta.");
+                correct = false;
+            }
+
+        }while (!correct);
 
         return opcio;
     }
@@ -102,26 +111,25 @@ public class Menu {
         }while (!correct);
         rapero.setNomArtistic(valor);
 
-        Date data = null;
         do {
             correct = true;
-            System.out.println("- Fecha de nacimiento (dd/MM/YYYY): ");
+            System.out.println("- Fecha de nacimiento (yyyy/MM/dd): ");
             valor = sc.nextLine();
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 sdf.setLenient(false);
-                data = sdf.parse(valor);
+                Date data = sdf.parse(valor);
             } catch (ParseException e) {
                 System.out.println("Introduce una fecha valida!");
                 correct = false;
             }
         }while(!correct);
-        rapero.setDataNaixement(data);
+        rapero.setDataNaixement(valor);
 
 
         do {
             correct = false;
-            System.out.println("- Pais: ");
+            System.out.println("- Pais (en inglés): ");
             valor = sc.nextLine();
             for (String o : competicio.getLlistaPaisos()) {
                 if (o.equals(valor)) {
@@ -139,7 +147,7 @@ public class Menu {
             correct = true;
             System.out.println("- Nivel: ");
             valor = sc.nextLine();
-            if (Integer.parseInt(valor) == 1 || Integer.parseInt(valor) == 2){
+            if (Integer.parseInt(valor) != 1 && Integer.parseInt(valor) != 2){
                 correct = false;
                 System.out.println("El nivel ha de ser 1 o 2!");
             }
@@ -160,7 +168,7 @@ public class Menu {
     public int mostraLobby (int numFase, Competicio competicio, int posMiRapero, int numBatalla, String tipusBatalla, String nomRival){
         int opcio = 0;
         String entrada;
-        char aux;
+        boolean correct;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Fase: " + numFase + " / " + competicio.getNumFases() + " | Puntuación: " + competicio.getBatallaModel().getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
@@ -174,20 +182,27 @@ public class Menu {
         System.out.println(" ");
         System.out.println("Escoge una opción: ");
         do{
-            if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
-                System.out.println("Error, escoge una opcion válida.");
-            }
+            correct = true;
             entrada = sc.nextLine();
-            opcio = Integer.parseInt(entrada);
+            try {
+                opcio = Integer.parseInt(entrada);
+            }catch (NumberFormatException e){
 
-        }while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
+                correct = false;
+            }
+            if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4){
+                System.out.println("Introduce una opcion correcta.");
+                correct = false;
+            }
+
+        }while (!correct);
 
         return opcio;
     }
     public int faseFinal (int maxFases, float puntuacion) {
         int opcio = 0;
         String entrada;
-        char aux;
+        boolean correct;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Fase: " + maxFases + " / " + maxFases + " | Puntuación: " + puntuacion );
@@ -201,16 +216,22 @@ public class Menu {
         System.out.println(" ");
         System.out.println("Escoge una opción: ");
         do{
-            if (opcio == 1) {
+            correct = true;
+            entrada = sc.nextLine();
+            try {
+                opcio = Integer.parseInt(entrada);
+            }catch (NumberFormatException e){
+
+                correct = false;
+            }
+            if (opcio != 2 && opcio != 3 && opcio != 4){
+                System.out.println("Introduce una opcion correcta.");
+                correct = false;
+            }else if (opcio == 1){
                 System.out.println("La competición ha acabado. ¡No puedes competir con nadie más!");
-            }else if(opcio != 2 && opcio != 3 && opcio != 4){
-                System.out.println("Error, escoge una opcion válida.");
             }
 
-            entrada = sc.nextLine();
-            opcio = Integer.parseInt(entrada);
-
-        }while (opcio != 2 && opcio != 3 && opcio != 4);
+        }while (!correct);
 
         return opcio;
     }
