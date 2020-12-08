@@ -149,12 +149,13 @@ public class CompeticioController {
                                 break;
                         }
                         numBatalla++;
-                        if (numBatalla == 2) {
+                        if (numBatalla > 2) {
                             competicio.actualitzarPuntuacio();
                             //descartar raperos
                             faseActual++;
                             numBatalla = 1;
                             opcioLobby = 5;
+
                         }
                         break;
                     case 2:

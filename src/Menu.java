@@ -147,7 +147,12 @@ public class Menu {
             correct = true;
             System.out.println("- Nivel: ");
             valor = sc.nextLine();
-            if (Integer.parseInt(valor) != 1 && Integer.parseInt(valor) != 2){
+            try {
+                if (Integer.parseInt(valor) != 1 && Integer.parseInt(valor) != 2) {
+                    correct = false;
+                    System.out.println("El nivel ha de ser 1 o 2!");
+                }
+            }catch(NumberFormatException e){
                 correct = false;
                 System.out.println("El nivel ha de ser 1 o 2!");
             }
