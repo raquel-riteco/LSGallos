@@ -6,20 +6,23 @@ import java.util.Scanner;
 
 public class Menu {
 
+    /* DATOS INICIALES */
+
     public void mostrarDades (Competicio competicio) {
         System.out.println("Bienvenido/a a la competición: " + competicio.getNom());
         System.out.println("Comienza el " + competicio.getDataInici());
         System.out.println("Acaba el " + competicio.getDataFinal());
         System.out.println("Fases: " + competicio.getNumFases());
-        System.out.println("Actualmente: " + competicio.getBatallaModel().getNumParticipants() + " " + "participantes");
+        System.out.println("Actualmente: " + competicio.getFase(0).getNumParticipants() + " " + "participantes");
         System.out.println(" ");
     }
+
+    /* COMPETICION NO EMPEZADA */
 
     public int noComencada () {
         int opcio = 0;
         String entrada;
         boolean correct;
-        char aux;
         Scanner sc = new Scanner(System.in);
         System.out.println("La competición no ha empezado todavía. ¿Qué quieres hacer?");
         System.out.println(" ");
@@ -45,46 +48,6 @@ public class Menu {
         return opcio;
     }
 
-    public int comencada () {
-        int opcio = 0;
-        String entrada;
-        boolean correct;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Competicion empezada. ¿Qué quieres hacer?");
-        System.out.println(" ");
-        System.out.println("1. Login");
-        System.out.println("2. Salir");
-        System.out.println(" ");
-        System.out.print("Escoge una opcion: ");
-        do{
-            correct = true;
-            entrada = sc.nextLine();
-            try {
-                opcio = Integer.parseInt(entrada);
-            }catch (NumberFormatException e){
-
-                correct = false;
-            }
-            if (opcio != 1 && opcio != 2){
-                System.out.println("Introduce una opcion correcta.");
-                correct = false;
-            }
-
-        }while (!correct);
-
-        return opcio;
-    }
-    public void acabada (){
-        System.out.println("ganador");
-    }
-
-    public String login () {
-        Scanner sc = new Scanner(System.in);
-        String entrada;
-        System.out.print("Entra tu nombre artistico: ");
-        return sc.nextLine();
-    }
-
     public Rapero entradaInformacio (Competicio competicio) {
         Rapero rapero = new Rapero();
         boolean correct;
@@ -101,7 +64,7 @@ public class Menu {
             correct = true;
             System.out.println("- Nombre artístico: ");
             valor = sc.nextLine();
-            for (Rapero o: competicio.getBatallaModel().getRaperos()) {
+            for (Rapero o: competicio.getFase(0).getRaperos()) {
                 if (o.getNomArtistic().equals(valor)){
                     System.out.println("Este nickname ya exsiste!!");
                     correct = false;
@@ -170,13 +133,51 @@ public class Menu {
         return rapero;
     }
 
-    public int mostraLobby (int numFase, Competicio competicio, int posMiRapero, int numBatalla, String tipusBatalla, String nomRival){
+    /* COMPETICION EMPEZADA */
+
+    public int comencada () {
+        int opcio = 0;
+        String entrada;
+        boolean correct;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Competicion empezada. ¿Qué quieres hacer?");
+        System.out.println(" ");
+        System.out.println("1. Login");
+        System.out.println("2. Salir");
+        System.out.println(" ");
+        System.out.print("Escoge una opcion: ");
+        do{
+            correct = true;
+            entrada = sc.nextLine();
+            try {
+                opcio = Integer.parseInt(entrada);
+            }catch (NumberFormatException e){
+
+                correct = false;
+            }
+            if (opcio != 1 && opcio != 2){
+                System.out.println("Introduce una opcion correcta.");
+                correct = false;
+            }
+
+        }while (!correct);
+
+        return opcio;
+    }
+
+    public String login () {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Entra tu nombre artistico: ");
+        return sc.nextLine();
+    }
+
+    public int mostraLobby (int numFases, Fase fase, int posMiRapero, int numBatalla, String tipusBatalla, String nomRival){
         int opcio = 0;
         String entrada;
         boolean correct;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Fase: " + (numFase + 1) + " / " + competicio.getNumFases() + " | Puntuación: " + competicio.getBatallaModel().getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
+        System.out.println("Fase: " + (fase.getNumFase()) + " / " + numFases + " | Puntuación: " + fase.getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         System.out.println(" ");
@@ -252,7 +253,7 @@ public class Menu {
             nivelRival = batalla.getAparellaments().get(numAparellament).get(quienEmpieza).getNivell();
             System.out.println(nomRival + " es tu turno. Se lo damos en 3, 2, 1...\n");
             System.out.println(nomRival + ":\n");
-            turnoRival(tema, batalla, nivelRival, numBarra);
+            //turnoRival(tema, batalla, nivelRival, numBarra);
             numBarra++;
             System.out.println("\nVeo que tenemos nivel\nEs tu turno!");
             estrofaRapero = new ArrayList<>();
@@ -263,7 +264,7 @@ public class Menu {
             estrofas.add(estrofaRapero);
             System.out.println("\nMuy bien! " + nomRival + ", vas de nuevo!\n");
             System.out.println(nomRival + ":\n");
-            turnoRival(tema, batalla, nivelRival, numBarra);
+            //turnoRival(tema, batalla, nivelRival, numBarra);
             System.out.println("\n\nVuelve a tocarte!");
             estrofaRapero = new ArrayList<>();
             for (int i = 0; i < 4; i++) {
@@ -285,7 +286,7 @@ public class Menu {
             }
             estrofas.add(estrofaRapero);
             System.out.println(nomRival + "es tu turno!\n");
-            turnoRival(tema, batalla, nivelRival, numBarra);
+            //turnoRival(tema, batalla, nivelRival, numBarra);
             numBarra++;
             System.out.println("\nVeo que tenemos nivel\nEs tu turno!");
             for (int i = 0; i < 4; i++) {
@@ -296,7 +297,7 @@ public class Menu {
             estrofas.add(estrofaRapero);
             System.out.println("\nMuy bien! " + nomRival + ", vas de nuevo!\n");
             System.out.println(nomRival + ":\n");
-            turnoRival(tema, batalla, nivelRival, numBarra);
+            //turnoRival(tema, batalla, nivelRival, numBarra);
         }
         return estrofas;
     }
@@ -304,13 +305,16 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
-    public void turnoRival (String tema, Batalla batalla, Long nivelRival, int numBarra){
-        for (Tema a : batalla.getTemas()) {
-            if (a.getNomTema().equals(tema)){
+    /*
+    public void turnoRival (Fase fase, Long nivelRival, int numBarra, int numBatalla){
+        for (Tema a : fase.getTemas()) {
+            if (a.getNomTema().equals(fase.getBatalla(numBatalla))){
                 System.out.println(a.getEstrofaPerNivell(nivelRival, numBarra));
             }
         }
     }
+
+     */
 
     public String mostrarRanking (int posMiRapero, ArrayList<Rapero> ranking) {
         String toString = "-------------------------------\n" +
@@ -323,5 +327,11 @@ public class Menu {
             }
         }
         return toString;
+    }
+
+    /* COMPETICION ACABADA */
+
+    public void acabada (){
+        System.out.println("ganador");
     }
 }

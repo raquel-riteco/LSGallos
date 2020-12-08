@@ -36,10 +36,14 @@ public class Fitxers {
         competicio.setDataInici(new SimpleDateFormat("yyyy-MM-dd").parse((String) competicioObject.get("startDate")));
         competicio.setDataFinal(new SimpleDateFormat("yyyy-MM-dd").parse((String) competicioObject.get("endDate")));
         JSONArray fasesJson = (JSONArray) competicioObject.get("phases");
+        int fases = 0;
         for (Object o : fasesJson) {
             JSONObject fase = (JSONObject) o;
-            competicio.setFases((double) fase.get("budget"), (String) fase.get("country"));
+            competicio.getFase(fases).setPressupost((double) fase.get("budget"));
+            competicio.getFase(fases).setPais((String) fase.get("country"));
+            fases++;
         }
+        competicio.setNumFases();
         JSONArray countries = (JSONArray) object.get("countries");
         for (Object country : countries) {
             competicio.setLlistaPaisos((String) country);
@@ -54,17 +58,17 @@ public class Fitxers {
                     (String) rapper.get("nationality"),
                     ((Long) rapper.get("level")),
                     (String) rapper.get("photo"));
-            competicio.getBatallaModel().setRaperos(rapero);
+            competicio.getFase(0).setRaperos(rapero);
         }
     }
-    public void llegirBatalles (String nomBatalles, Batalla batalla) {
+    public void llegirBatalles (String nomBatalles, Competicio competicio) {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(nomBatalles)) {
             JSONObject obj = (JSONObject) jsonParser.parse(reader);
             JSONArray array = (JSONArray) obj.get("themes");
             for (Object o : array) {
                 JSONObject object = (JSONObject) o;
-                parseBatalla(batalla, object);
+                parseBatalla(competicio, object);
             }
 
         } catch (FileNotFoundException e) {
@@ -75,7 +79,7 @@ public class Fitxers {
             System.out.println("Parse Exception a llegirBatalles: " + e.getMessage());
         }
     }
-    public void parseBatalla (Batalla batalla, JSONObject object) {
+    public void parseBatalla (Competicio competicio, JSONObject object) {
         Tema tema = new Tema((String) object.get("name"));
         JSONObject rimas = (JSONObject) ((JSONArray) object.get("rhymes")).get(0);
         for (int nivel = 1; nivel <= 2; nivel++) {
@@ -86,8 +90,11 @@ public class Fitxers {
             }
             tema.setEstrofas(estrofa);
         }
-        batalla.setTemas(tema);
+        for (Fase f : competicio.getFases()) {
+            f.setTemas(tema);
+        }
     }
+
     public void registrarRapero (Rapero rapero, String nomCometicio) {
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(nomCometicio)){

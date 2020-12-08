@@ -5,22 +5,34 @@ public class Competicio {
     private String nom;
     private Date dataInici;
     private Date dataFinal;
-    private Batalla batallaModel;
     private int numFases;
 
     private ArrayList<Fase> fases;
     private ArrayList<String> llistaPaisos;
-
     private ArrayList<Rapero> ranking;
+
+    /* CONSTRUCTORES */
 
     public Competicio(){
         fases = new ArrayList<>();
         llistaPaisos = new ArrayList<>();
         ranking = new ArrayList<>();
-        batallaModel = new Batalla();
+        crearFases();
     }
 
+    public void crearFases (){
+        Fase faseInicial = new Fase(1);
+        fases.add(faseInicial);
+        Fase faseFinal = new Fase(2);
+        fases.add(faseFinal);
+        if (numFases == 3){
+            Fase faseIntermedia = new Fase(2);
+            fases.add(faseIntermedia);
+            faseFinal.setNumFase(3);
+        }
+    }
 
+    /* GETTERS */
 
     public String getNom() {
         return nom;
@@ -38,10 +50,7 @@ public class Competicio {
         return numFases;
     }
 
-
-
     public ArrayList<Fase> getFases() {
-        setNumFases();
         return fases;
     }
 
@@ -53,16 +62,17 @@ public class Competicio {
         return llistaPaisos;
     }
 
-
-
+    /*
     public ArrayList<Rapero> getRanking() {
         actualitzarPuntuacio();
         return ranking;
     }
 
-    public Batalla getBatallaModel() {
-        return batallaModel;
-    }
+     */
+
+
+    /* SETTERS */
+    /* UTILIZADOS EN FICHEROS */
 
     public void setNom(String nom) {
         this.nom = nom;
@@ -80,33 +90,19 @@ public class Competicio {
         numFases = fases.size();
     }
 
-    public void setFases(double pressupost, String pais) {
-        fases.add(new Fase(pressupost, pais));
-    }
-
-
-
     public void setLlistaPaisos(String pais) {
         llistaPaisos.add(pais);
     }
 
-
-
+    /*
     public void actualitzarPuntuacio() {
         ranking = batallaModel.getRaperos();
         ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
 
-    public String fasesToString () {
-        String toString = "";
-        for (Fase o : fases){
-            toString = toString.concat(o.toString());
-            toString = toString.concat("\n");
-        }
-        return toString;
-    }
+     */
 
-
+    /* TO STRING */
 
     @Override
     public String toString() {
@@ -118,6 +114,14 @@ public class Competicio {
                 "\nfases=" + fasesToString() +
                 '}';
     }
+    public String fasesToString (){
+        String stringFases = "";
+        for (Fase o : fases) {
+            stringFases = stringFases.concat(o.toString());
+        }
+        return stringFases;
+    }
+
 
 
 }

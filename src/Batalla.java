@@ -1,91 +1,25 @@
 import java.util.ArrayList;
-import  java.util.Random;
+import java.util.Random;
 
 public class Batalla {
 
     private String idiomaNatiu;
     private String idiomaAngles;
-    private ArrayList<Tema> temas;
-    private ArrayList<Rapero> raperos;
-    private int numParticipants;
-    private ArrayList<ArrayList<String>> estrofas;
+    private String tema;
 
     private ArrayList<ArrayList<Rapero>> aparellaments;
-    //protected String batallesEnCurs[];
+    private ArrayList<ArrayList<String>> estrofas;
 
+    /* CONSTRUCTORES */
 
-    public Batalla () {
-        temas = new ArrayList<>();
-        raperos = new ArrayList<>();
+    public Batalla (ArrayList<Rapero> raperos, int posMiRapero) {
         aparellaments = new ArrayList<>();
+        generarAparellaments(raperos, posMiRapero);
     }
 
-    public Batalla (String idiomaNatiu, String idiomaAngles) {
-        this.idiomaNatiu = idiomaNatiu;
-        this.idiomaAngles = idiomaAngles;
-        temas = new ArrayList<>();
-        raperos = new ArrayList<>();
-        aparellaments = new ArrayList<>();
+    /* SETTERS */
 
-    }
-
-    public void setTemas(Tema tema) {
-        temas.add(tema);
-    }
-
-    public void setEstrofas(ArrayList<ArrayList<String>> estrofas) {
-        this.estrofas = estrofas;
-    }
-
-    public void setAparellaments(int posMiRapero) {
-        this.aparellaments = generarAparellaments(raperos, posMiRapero);
-
-    }
-
-    public ArrayList<ArrayList<Rapero>> getAparellaments() {
-        return aparellaments;
-    }
-
-    public int getNumParticipants(){
-        setNumParticipants();
-        return numParticipants;
-    }
-
-    public void setNumParticipants() {
-        numParticipants = raperos.size();
-    }
-    public ArrayList<Rapero> getRaperos() {
-        return raperos;
-    }
-
-    public void setRaperos(Rapero rapero) {
-        raperos.add(rapero);
-        numParticipants = raperos.size();
-    }
-
-    public ArrayList<Tema> getTemas() {
-        return temas;
-    }
-    public String raperosToString () {
-        String toString = "";
-        for (Rapero o : raperos){
-            toString = toString.concat(o.toString());
-            toString = toString.concat("\n");
-        }
-        return toString;
-    }
-
-    @Override
-    public String toString() {
-        return "Batalla{" +
-                "\nidiomaNatiu='" + idiomaNatiu + '\'' +
-                "\nidiomaAngles='" + idiomaAngles + '\'' +
-                "\ntemas=" + temas +
-                '}';
-    }
-
-
-    public ArrayList<ArrayList<Rapero>> generarAparellaments(ArrayList<Rapero> raperos, int posMiRapero){
+    public void generarAparellaments(ArrayList<Rapero> raperos, int posMiRapero){
 
         ArrayList<Rapero> aux = new ArrayList<>(raperos);
         if ((aux.size() % 2) != 0){
@@ -118,10 +52,24 @@ public class Batalla {
                 aux.remove(num1 - 1);
             }
         }
-
-        return aparellaments;
-
     }
+
+
+    public void setEstrofas(ArrayList<ArrayList<String>> estrofas) {
+        this.estrofas = estrofas;
+    }
+
+    public void setTema(String tema) {
+        this.tema = tema;
+    }
+
+    /* GETTERS */
+
+    public ArrayList<ArrayList<Rapero>> getAparellaments() {
+        return aparellaments;
+    }
+
+    /* MÉTODOS */
 
     public ArrayList<Rapero> actualitzarBatallesOcultes(ArrayList<ArrayList<Rapero>> raperos, int posMiRapero){
 
@@ -151,26 +99,7 @@ public class Batalla {
 
     }
 
-    public String escollirTemaEntrada(ArrayList<Tema> temas){
-        int num = (int) Math.floor(Math.random()* temas.size());
-        return temas.get(num).getNomTema();
-    }
-    public String tipusBatalla (){
-        ArrayList<String> tipusBatalles = new ArrayList<>();
-        tipusBatalles.add("BatallaAcapella");
-        tipusBatalles.add("BatallaSangre");
-        tipusBatalles.add("BatallaEscrita");
-        int num = (int)Math.floor(Math.random()*3);
-        return tipusBatalles.get(num);
-    }
 
-    public void registrar(Rapero rapero){
-        raperos.add(rapero);
-    }
-
-    public String temaBatalla(){
-        return temas.get((int) Math.floor(Math.random()* temas.size())).getNomTema();
-    }
 
     public int calcularRimes(){
         int R = 0;
