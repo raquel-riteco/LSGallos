@@ -151,6 +151,7 @@ public class CompeticioController {
                         numBatalla++;
                         if (numBatalla > 2) {
                             competicio.actualitzarPuntuacio();
+                            //competicio.getBatallaModel().getRaperos().replaceAll(competicio.getBatallaModel().actualitzarBatallesOcultes());
                             //descartar raperos
                             faseActual++;
                             numBatalla = 1;

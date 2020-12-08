@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import  java.util.Random;
 
 public class Batalla {
 
@@ -121,6 +122,35 @@ public class Batalla {
         return aparellaments;
 
     }
+
+    public ArrayList<Rapero> actualitzarBatallesOcultes(ArrayList<ArrayList<Rapero>> raperos, int posMiRapero){
+
+        ArrayList<Rapero> aux = new ArrayList<>();
+
+        for(ArrayList<Rapero> o: raperos){
+
+            if(o.get(0).getPuntuacio()>o.get(1).getPuntuacio()){
+
+                aux.add(o.get(0));
+
+            }else if(o.get(0).getPuntuacio()<o.get(1).getPuntuacio()){
+
+                aux.add(o.get(1));
+
+            }else{
+
+                Random a = new Random();
+
+                aux.add(o.get(a.nextInt(1)));
+
+            }
+
+        }
+
+        return aux;
+
+    }
+
     public String escollirTemaEntrada(ArrayList<Tema> temas){
         int num = (int) Math.floor(Math.random()* temas.size());
         return temas.get(num).getNomTema();
