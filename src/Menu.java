@@ -171,7 +171,7 @@ public class Menu {
         boolean correct;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Fase: " + numFase + " / " + competicio.getNumFases() + " | Puntuación: " + competicio.getBatallaModel().getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
+        System.out.println("Fase: " + (numFase + 1) + " / " + competicio.getNumFases() + " | Puntuación: " + competicio.getBatallaModel().getRaperos().get(posMiRapero).getPuntuacio() + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         System.out.println(" ");
@@ -245,14 +245,14 @@ public class Menu {
         System.out.println("Lanzamos la moneda al aire y...");
         if (batalla.getAparellaments().get(numAparellament).get(quienEmpieza).getNomArtistic().equals(nomRival)){
             nivelRival = batalla.getAparellaments().get(numAparellament).get(quienEmpieza).getNivell();
-            System.out.println(nomRival + "es tu turno. Se lo damos en 3, 2, 1...\n");
+            System.out.println(nomRival + " es tu turno. Se lo damos en 3, 2, 1...\n");
             System.out.println(nomRival + ":\n");
             turnoRival(tema, batalla, nivelRival, numBarra);
             numBarra++;
             System.out.println("\nVeo que tenemos nivel\nEs tu turno!");
+            estrofaRapero = new ArrayList<>();
             for (int i = 0; i < 4; i++) {
                 System.out.println("Introduce tu verso: ");
-                estrofaRapero = new ArrayList<>();
                 estrofaRapero.add(tuTurno());
             }
             estrofas.add(estrofaRapero);
@@ -260,9 +260,9 @@ public class Menu {
             System.out.println(nomRival + ":\n");
             turnoRival(tema, batalla, nivelRival, numBarra);
             System.out.println("\n\nVuelve a tocarte!");
+            estrofaRapero = new ArrayList<>();
             for (int i = 0; i < 4; i++) {
                 System.out.println("Introduce tu verso: ");
-                estrofaRapero = new ArrayList<>();
                 estrofaRapero.add(tuTurno());
             }
             estrofas.add(estrofaRapero);
