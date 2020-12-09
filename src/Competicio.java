@@ -9,14 +9,12 @@ public class Competicio {
 
     private ArrayList<Fase> fases;
     private ArrayList<String> llistaPaisos;
-    private ArrayList<Rapero> ranking;
 
     /* CONSTRUCTORES */
 
     public Competicio(){
         fases = new ArrayList<>();
         llistaPaisos = new ArrayList<>();
-        ranking = new ArrayList<>();
         crearFases();
     }
 
@@ -62,11 +60,6 @@ public class Competicio {
         return llistaPaisos;
     }
 
-    public ArrayList<Rapero> getRanking() {
-        return ranking;
-    }
-
-
     /* SETTERS */
     /* UTILIZADOS EN FICHEROS */
 
@@ -88,11 +81,6 @@ public class Competicio {
 
     public void setLlistaPaisos(String pais) {
         llistaPaisos.add(pais);
-    }
-
-    public void setRanking() {
-        //ranking = batallaModel.getRaperos();
-        //ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
 
     /* METODOS */
@@ -133,7 +121,4 @@ public class Competicio {
         }
         return stringFases;
     }
-
-
-
 }

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Fase {
 
@@ -176,29 +175,6 @@ public class Fase {
 
     /* MÉTODOS */
 
-    public void actualitzarBatallesOcultes (){
-
-        ArrayList<Rapero> aux = new ArrayList<>();
-
-        for(ArrayList<Rapero> o: raperos){
-
-            if(o.get(0).getPuntuacio()>o.get(1).getPuntuacio()){
-
-                aux.add(o.get(0));
-
-            }else if(o.get(0).getPuntuacio()<o.get(1).getPuntuacio()){
-
-                aux.add(o.get(1));
-
-            }else{
-
-                Random a = new Random();
-
-                aux.add(o.get(a.nextInt(1)));
-            }
-        }
-    }
-
     public void simulacions (){
         for (Batalla batalla : batallas) {
             for (ArrayList<Rapero> parella : batalla.getAparellaments()) {
@@ -210,35 +186,29 @@ public class Fase {
                     if (tema.getNomTema() == temaBatalla){
                         parella.get(0).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(0)));
                         parella.get(0).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(1)));
-                        parella.get(1).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(0)));
-                        parella.get(1).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(1)));
+                        parella.get(1).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel2).getPuntuacion().get(0)));
+                        parella.get(1).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel2).getPuntuacion().get(1)));
                     }
                 }
             }
         }
     }
 
-    public double calculoPuntuacionSimulaciones (){
+
+    public void descartarRaperos(int maxFases){
+        if (numFase + 1 == maxFases){
+            ArrayList<Rapero> finalistas = new ArrayList<>();
+            finalistas.add(ranking.get(0));
+            finalistas.add(ranking.get(1));
+            raperos = finalistas;
+        }else{
+            ArrayList<Rapero> faseIntermedia = new ArrayList<>();
+            for (int i = 0; i < ranking.size()/2; i++) {
+                faseIntermedia.add(ranking.get(i));
+            }
+            raperos = faseIntermedia;
+        }
 
     }
 
-
-
-
-    /*
-    private Batalla batalles[2];
-    private Rapero raperos[];
-
-    public void descartarRaperos(Rapero raperos[1*]){
-
-        //Funcio
-
-    }
-
-    public void executarFase(){
-
-        //Funcio
-
-    }
-    */
 }

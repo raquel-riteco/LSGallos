@@ -8,7 +8,7 @@ public class BatallaAcapella extends Batalla {
 
     @Override
     public float puntuacionSimulaciones(float R) {
-        return (Math.sqrt(R) + 5)/3;
+        return ((float) Math.sqrt(R) + 5)/3;
     }
 
     @Override

@@ -300,13 +300,13 @@ public class Menu {
 
     /* MAX FASES HECHAS: */
 
-    public int faseFinal (int maxFases, float puntuacion) {
+    public int faseFinal (String ganador, float puntuacion) {
         int opcio = 0;
         String entrada;
         boolean correct;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Fase: " + maxFases + " / " + maxFases + " | Puntuación: " + puntuacion );
+        System.out.println("Ganador: " + ganador + " | Puntuación: " + puntuacion );
         System.out.println("----------------------------------------------------------------------------------------");
 
         System.out.println(" ");
@@ -339,7 +339,23 @@ public class Menu {
 
     /* COMPETICION ACABADA */
 
-    public void acabada (){
-        System.out.println("ganador");
+    public void acabada (Rapero rapero){
+        System.out.println("El ganador de esta edicion es...\n\n");
+        System.out.println("----------------------------------\n" +
+                           "----------------------------------\n" +
+                           "----                          ----\n" +
+                           "  ----                      ----  \n" +
+                           "    ----                  ----    \n" +
+                           "      ----             -----      \n" +
+                           "        ----          ----        \n" +
+                           "          ----      ----          \n" +
+                           "            ----  ----            \n" +
+                           "            ----------            \n" +
+                           "           ------------           \n" +
+                           "           ------------           \n" +
+                           "            ----------            \n" +
+                           "               ----               \n" );
+        System.out.println(rapero.getNomArtistic() + " con " + rapero.getPuntuacio() + "puntos!\n\n");
+        System.out.println("Gracias a todos por participat.");
     }
 }

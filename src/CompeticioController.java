@@ -93,23 +93,24 @@ public class CompeticioController {
                             System.out.println("Heeeey! Este rapero no esta registrado!");
                         }
                     }while(!comprovarLogin(nomArtistic));
-                    executar();
+                    executar(nomArtistic);
                 }else {
                     System.out.println("Ens veiem aviat!");
                 }
                 break;
             case 1:
-                menu.acabada();
+                menu.acabada(competicio.getFase(competicio.getNumFases()).getRanking().get(0));
             break;
         }
     }
 
-    public void executar() {
+    public void executar(String nomArtistic) {
         int opcioLobby = 0;
         for (Fase fase : competicio.getFases()) {
             if (opcioLobby == 5) {
                 break;
             }
+            fase.setPosMiRapero(nomArtistic);
             competicio.actualizarListaRaperos(fase);
             for (Batalla batalla : fase.getBatallas()) {
                 if (opcioLobby == 5) {
@@ -123,18 +124,33 @@ public class CompeticioController {
                         batalla.setEstrofas(menu.batalla(fase, batalla, quienEmpieza, batalla.getNomRival()));
                         break;
                     case 2:
-                        menu.mostrarRanking(fase.getPosMiRapero(), competicio.getRanking());
+                        menu.mostrarRanking(fase.getPosMiRapero(), fase.getRanking());
                         break;
                     case 3:
                         //fase 4
                         break;
                     case 4:
-                        //simulate competition
                         opcioLobby = 5;
                         break;
                 }
             }
+            fase.simulacions();
             fase.setRanking();
+            fase.descartarRaperos(competicio.getNumFases());
         }
+        int opcioFaseFinal;
+        do {
+            opcioFaseFinal = menu.faseFinal(competicio.getFase(competicio.getNumFases()).getRanking().get(0).getNomArtistic(), competicio.getFase(competicio.getNumFases()).getRanking().get(0).getPuntuacio());
+            switch (opcioFaseFinal){
+                case 2:
+                    menu.mostrarRanking(competicio.getFase(competicio.getNumFases()).getPosMiRapero(), competicio.getFase(competicio.getNumFases()).getRanking());
+                    break;
+                case 3:
+                    //fase 4
+                    break;
+                default:
+                    opcioFaseFinal = 5;
+            }
+        }while(opcioFaseFinal != 5);
     }
 }

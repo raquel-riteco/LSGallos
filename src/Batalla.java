@@ -11,6 +11,7 @@ public class Batalla {
 
     private int numAparellament;
     private int numBatalla;
+    private int posMiRapero;
 
     private ArrayList<ArrayList<Rapero>> aparellaments;
     private ArrayList<ArrayList<String>> estrofas;
@@ -120,6 +121,8 @@ public class Batalla {
     public int getNumAparellament() {
         return numAparellament;
     }
+
+
 
     /* MÉTODOS */
 
