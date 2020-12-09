@@ -18,9 +18,11 @@ public class Fase {
         batallas = new ArrayList<>();
         Batalla batalla1 = crearBatalla(tipusBatalla());
         batalla1.setTema(setTemaBatalla());
+        batalla1.setNumBatalla(1);
         batallas.add(batalla1);
         Batalla batalla2 = crearBatalla(tipusBatalla());
         batalla2.setTema(setTemaBatalla());
+        batalla2.setNumBatalla(2);
         batallas.add(batalla2);
 
         raperos = new ArrayList<>();
@@ -34,12 +36,15 @@ public class Fase {
         switch (tipusBatalla){
             case "BatallaAcapella":
                 batalla = new BatallaAcapella(raperos, posMiRapero);
+                batalla.setTipusBatalla("BatallaAcapella");
                 break;
             case "BatallaSangre":
                 batalla = new BatallaSangre(raperos, posMiRapero);
+                batalla.setTipusBatalla("BatallaSangre");
                 break;
             case "BatallaEscrita":
                 batalla = new BatallaEscrita(raperos, posMiRapero);
+                batalla.setTipusBatalla("BatallaEscrita");
                 break;
             default:
                 batalla = null;
@@ -104,6 +109,13 @@ public class Fase {
         return raperos;
     }
 
+    public ArrayList<Batalla> getBatallas() {
+        return batallas;
+    }
+
+    public int getPosMiRapero() {
+        return posMiRapero;
+    }
 
     public Batalla getBatalla(int num){
         return batallas.get(num);

@@ -6,6 +6,10 @@ public class Batalla {
     private String idiomaNatiu;
     private String idiomaAngles;
     private String tema;
+    private String nomRival;
+    private String tipusBatalla;
+
+    private int numBatalla;
 
     private ArrayList<ArrayList<Rapero>> aparellaments;
     private ArrayList<ArrayList<String>> estrofas;
@@ -54,6 +58,9 @@ public class Batalla {
         }
     }
 
+    public void setTipusBatalla(String tipusBatalla) {
+        this.tipusBatalla = tipusBatalla;
+    }
 
     public void setEstrofas(ArrayList<ArrayList<String>> estrofas) {
         this.estrofas = estrofas;
@@ -63,10 +70,34 @@ public class Batalla {
         this.tema = tema;
     }
 
+    public void setNomRival(String nomRival) {
+        this.nomRival = nomRival;
+    }
+
+    public void setNumBatalla(int numBatalla) {
+        this.numBatalla = numBatalla;
+    }
+
     /* GETTERS */
 
     public ArrayList<ArrayList<Rapero>> getAparellaments() {
         return aparellaments;
+    }
+
+    public String getNomRival() {
+        return nomRival;
+    }
+
+    public int getNumBatalla() {
+        return numBatalla;
+    }
+
+    public String getTipusBatalla() {
+        return tipusBatalla;
+    }
+
+    public String getTema() {
+        return tema;
     }
 
     /* MÉTODOS */
@@ -98,8 +129,6 @@ public class Batalla {
         return aux;
 
     }
-
-
 
     public int calcularRimes(){
         int R = 0;
@@ -151,7 +180,6 @@ public class Batalla {
         }
         return sumaNumRimes;
     }
-    /*
 
     public void simular(){
 
@@ -160,6 +188,4 @@ public class Batalla {
     }
 
 
-
-     */
 }

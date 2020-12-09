@@ -62,13 +62,10 @@ public class Competicio {
         return llistaPaisos;
     }
 
-    /*
     public ArrayList<Rapero> getRanking() {
-        actualitzarPuntuacio();
+        //actualitzarPuntuacio();
         return ranking;
     }
-
-     */
 
 
     /* SETTERS */
