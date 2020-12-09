@@ -9,6 +9,7 @@ public class Batalla {
     private String nomRival;
     private String tipusBatalla;
 
+    private int numAparellament;
     private int numBatalla;
 
     private ArrayList<ArrayList<Rapero>> aparellaments;
@@ -24,7 +25,7 @@ public class Batalla {
     /* SETTERS */
 
     public void generarAparellaments(ArrayList<Rapero> raperos, int posMiRapero){
-
+        String nomArtistic = raperos.get(posMiRapero).getNomArtistic();
         ArrayList<Rapero> aux = new ArrayList<>(raperos);
         if ((aux.size() % 2) != 0){
             int rapero_out;
@@ -56,6 +57,8 @@ public class Batalla {
                 aux.remove(num1 - 1);
             }
         }
+        setNumAparellament(nomArtistic);
+        setNomRival(nomArtistic);
     }
 
     public void setTipusBatalla(String tipusBatalla) {
@@ -70,8 +73,22 @@ public class Batalla {
         this.tema = tema;
     }
 
-    public void setNomRival(String nomRival) {
-        this.nomRival = nomRival;
+    public void setNumAparellament(String nomArtistic) {
+        for (ArrayList<Rapero> parella : aparellaments) {
+            if (parella.get(0).getNomArtistic().equals(nomArtistic) || parella.get(1).getNomArtistic().equals(nomArtistic)){
+                numAparellament = aparellaments.indexOf(parella);
+            }
+        }
+    }
+
+    public void setNomRival(String nomArtistic) {
+        for (ArrayList<Rapero> parella : aparellaments) {
+            if (parella.get(0).getNomArtistic().equals(nomArtistic)){
+                nomRival = parella.get(1).getNomArtistic();
+            }else if (parella.get(1).getNomArtistic().equals(nomArtistic)){
+                nomRival = parella.get(0).getNomArtistic();
+            }
+        }
     }
 
     public void setNumBatalla(int numBatalla) {
@@ -98,6 +115,10 @@ public class Batalla {
 
     public String getTema() {
         return tema;
+    }
+
+    public int getNumAparellament() {
+        return numAparellament;
     }
 
     /* MÉTODOS */

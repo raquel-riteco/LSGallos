@@ -210,7 +210,7 @@ public class Menu {
 
     /* LOBBY: OPCION 1 */
 
-    public ArrayList<ArrayList<String>> batalla (Fase fase, Batalla batalla, int quienEmpieza, int numAparellament, String nomRival){
+    public ArrayList<ArrayList<String>> batalla (Fase fase, Batalla batalla, int quienEmpieza, String nomRival){
         Long nivelRival;
         ArrayList<ArrayList<String>> estrofas = new ArrayList<>();
         ArrayList<String> estrofaRapero = null;
@@ -218,8 +218,8 @@ public class Menu {
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Tema: " + batalla.getTema() + "\n");
         System.out.println("Lanzamos la moneda al aire y...");
-        if (batalla.getAparellaments().get(numAparellament).get(quienEmpieza).getNomArtistic().equals(nomRival)){
-            nivelRival = batalla.getAparellaments().get(numAparellament).get(quienEmpieza).getNivell();
+        if (batalla.getAparellaments().get(batalla.getNumAparellament()).get(quienEmpieza).getNomArtistic().equals(nomRival)){
+            nivelRival = batalla.getAparellaments().get(batalla.getNumAparellament()).get(quienEmpieza).getNivell();
             System.out.println(nomRival + " es tu turno. Se lo damos en 3, 2, 1...\n");
             System.out.println(nomRival + ":\n");
             turnoRival(fase, batalla, nivelRival, numBarra);
@@ -243,9 +243,9 @@ public class Menu {
             estrofas.add(estrofaRapero);
         }else{
             if (quienEmpieza == 0){
-                nivelRival = batalla.getAparellaments().get(numAparellament).get(1).getNivell();
+                nivelRival = batalla.getAparellaments().get(batalla.getNumAparellament()).get(1).getNivell();
             }else {
-                nivelRival = batalla.getAparellaments().get(numAparellament).get(0).getNivell();
+                nivelRival = batalla.getAparellaments().get(batalla.getNumAparellament()).get(0).getNivell();
             }
             System.out.println("Empiezas tu! Se lo damos en 3, 2, 1...\n\n");
             for (int i = 0; i < 4; i++) {

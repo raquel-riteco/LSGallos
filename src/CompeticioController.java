@@ -93,7 +93,7 @@ public class CompeticioController {
                             System.out.println("Heeeey! Este rapero no esta registrado!");
                         }
                     }while(!comprovarLogin(nomArtistic));
-                    executar(nomArtistic);
+                    executar();
                 }else {
                     System.out.println("Ens veiem aviat!");
                 }
@@ -104,7 +104,7 @@ public class CompeticioController {
         }
     }
 
-    public void executar(String nomArtistic) {
+    public void executar() {
         int opcioLobby = 0;
         for (Fase fase : competicio.getFases()) {
             if (opcioLobby == 5) {
@@ -119,25 +119,20 @@ public class CompeticioController {
                 switch (opcioLobby){
                     case 1:
                         int quienEmpieza = (int) Math.floor(Math.random()*2);
-                        int numAparellament = 0;
-                        batalla.setEstrofas(menu.batalla(fase, batalla, quienEmpieza, numAparellament, batalla.getNomRival()));
+                        batalla.setEstrofas(menu.batalla(fase, batalla, quienEmpieza, batalla.getNomRival()));
                         break;
                     case 2:
                         menu.mostrarRanking(fase.getPosMiRapero(), competicio.getRanking());
                         break;
                     case 3:
-
+                        //fase 4
                         break;
                     case 4:
-                        //leave competition
                         //simulate competition
                         opcioLobby = 5;
                         break;
                 }
-
             }
-
         }
     }
-
 }
