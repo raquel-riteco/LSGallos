@@ -6,7 +6,14 @@ public class BatallaAcapella extends Batalla {
         super(raperos, posMiRapero);
     }
 
-    public double calculoPuntuacion (double R){
+    @Override
+    public float puntuacionSimulaciones(float R) {
+        return (Math.sqrt(R) + 5)/3;
+    }
+
+    @Override
+    public double calculoPuntuacion (){
+        double R = calcularRimes();
         return (Math.sqrt(R) + 5)/3;
     }
 }

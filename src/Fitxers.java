@@ -58,7 +58,7 @@ public class Fitxers {
                     (String) rapper.get("nationality"),
                     ((Long) rapper.get("level")),
                     (String) rapper.get("photo"));
-            competicio.getFase(0).setRaperos(rapero);
+            competicio.getFase(0).setRapero(rapero);
         }
     }
     public void llegirBatalles (String nomBatalles, Competicio competicio) {

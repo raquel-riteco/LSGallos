@@ -123,32 +123,12 @@ public class Batalla {
 
     /* MÉTODOS */
 
-    public ArrayList<Rapero> actualitzarBatallesOcultes(ArrayList<ArrayList<Rapero>> raperos, int posMiRapero){
+    public double calculoPuntuacion(){
+        return 0;
+    }
 
-        ArrayList<Rapero> aux = new ArrayList<>();
-
-        for(ArrayList<Rapero> o: raperos){
-
-            if(o.get(0).getPuntuacio()>o.get(1).getPuntuacio()){
-
-                aux.add(o.get(0));
-
-            }else if(o.get(0).getPuntuacio()<o.get(1).getPuntuacio()){
-
-                aux.add(o.get(1));
-
-            }else{
-
-                Random a = new Random();
-
-                aux.add(o.get(a.nextInt(1)));
-
-            }
-
-        }
-
-        return aux;
-
+    public float puntuacionSimulaciones (float R){
+        return 0;
     }
 
     public int calcularRimes(){
@@ -172,41 +152,8 @@ public class Batalla {
     public ArrayList<Integer> numRimas(ArrayList<String> ultimasLetras){
         ArrayList<Integer> sumaNumRimes = new ArrayList<>();
 
-        for (int i = 0; i < ultimasLetras.size(); i++) {
-            int numRimas = 0;
-            String actual = ultimasLetras.get(i);
-            switch (i){
-                case 0:
-                    if (actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
-                        numRimas++;
-                    }
-                    break;
-                case 1:
-                    if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
-                        numRimas++;
-                    }
-                    break;
-                case 2:
-                    if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(3))){
-                        numRimas++;
-                    }
-                    break;
-                case 3:
-                    if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2))){
-                        numRimas++;
-                    }
-                    break;
-            }
-            sumaNumRimes.add(numRimas);
-        }
+        Tema.Estrofa.extractRimes(sumaNumRimes, ultimasLetras);
         return sumaNumRimes;
     }
-
-    public void simular(){
-
-
-
-    }
-
 
 }

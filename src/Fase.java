@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Fase {
 
@@ -11,6 +12,7 @@ public class Fase {
     private ArrayList<Batalla> batallas;
     private ArrayList<Rapero> raperos;
     private ArrayList<Tema> temas;
+    private ArrayList<Rapero> ranking;
 
     /* CONSTRUCTORES*/
 
@@ -27,6 +29,7 @@ public class Fase {
 
         raperos = new ArrayList<>();
         temas = new ArrayList<>();
+        ranking = new ArrayList<>();
 
         this.numFase = numFase;
     }
@@ -78,9 +81,13 @@ public class Fase {
         numParticipants = raperos.size();
     }
 
-    public void setRaperos(Rapero rapero) {
+    public void setRapero(Rapero rapero) {
         raperos.add(rapero);
         numParticipants = raperos.size();
+    }
+
+    public void setRaperos (ArrayList<Rapero> raperos){
+        this.raperos = raperos;
     }
 
     public void setTemas(Tema tema) {
@@ -97,6 +104,11 @@ public class Fase {
                 posMiRapero = getRaperos().indexOf(o);
             }
         }
+    }
+
+    public void setRanking() {
+        ranking = raperos;
+        ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
 
     /* GETTERS */
@@ -127,6 +139,10 @@ public class Fase {
 
     public int getNumFase() {
         return numFase;
+    }
+
+    public ArrayList<Rapero> getRanking() {
+        return ranking;
     }
 
     /* TO STRINGS */
@@ -160,9 +176,50 @@ public class Fase {
 
     /* MÉTODOS */
 
-    public String escollirTemaEntrada(ArrayList<Tema> temas){
-        int num = (int) Math.floor(Math.random()* temas.size());
-        return temas.get(num).getNomTema();
+    public void actualitzarBatallesOcultes (){
+
+        ArrayList<Rapero> aux = new ArrayList<>();
+
+        for(ArrayList<Rapero> o: raperos){
+
+            if(o.get(0).getPuntuacio()>o.get(1).getPuntuacio()){
+
+                aux.add(o.get(0));
+
+            }else if(o.get(0).getPuntuacio()<o.get(1).getPuntuacio()){
+
+                aux.add(o.get(1));
+
+            }else{
+
+                Random a = new Random();
+
+                aux.add(o.get(a.nextInt(1)));
+            }
+        }
+    }
+
+    public void simulacions (){
+        for (Batalla batalla : batallas) {
+            for (ArrayList<Rapero> parella : batalla.getAparellaments()) {
+                String temaBatalla = setTemaBatalla();
+                Batalla battle = crearBatalla(tipusBatalla());
+                Long nivel1 = parella.get(0).getNivell();
+                Long nivel2 = parella.get(1).getNivell();
+                for (Tema tema : temas) {
+                    if (tema.getNomTema() == temaBatalla){
+                        parella.get(0).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(0)));
+                        parella.get(0).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(1)));
+                        parella.get(1).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(0)));
+                        parella.get(1).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(1)));
+                    }
+                }
+            }
+        }
+    }
+
+    public double calculoPuntuacionSimulaciones (){
+
     }
 
 

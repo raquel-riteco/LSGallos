@@ -8,7 +8,14 @@ public class BatallaEscrita extends Batalla{
         super(raperos, posMiRapero);
     }
 
-    public double calculoPuntuacion (double R){
+    @Override
+    public float puntuacionSimulaciones(float R) {
+        return (1 + R);
+    }
+
+    @Override
+    public double calculoPuntuacion (){
+        double R = calcularRimes();
         return (1 + R);
     }
 }

@@ -22,7 +22,7 @@ public class Tema {
     public String getEstrofaPerNivell (Long nivel, int numBarra){
         for (Estrofa a : estrofas) {
             if (Integer.parseInt(String.valueOf(nivel)) == a.nivel){
-                if (a.getBarras().size() == 1){
+                if (a.getBarras().size() == 1 && numBarra == 1){
                     return "Oh no, te has quedado en blanco!";
                 }else{
                     return a.getBarras().get(numBarra);
@@ -32,8 +32,13 @@ public class Tema {
         return "Oh no, te has quedado en blanco!";
     }
 
+    public Estrofa getEstrofa (Long nivel){
+        return estrofas.get(Integer.parseInt(Long.toString(nivel - 1)));
+    }
+
     /* SETTERS */
     public void setEstrofas(Estrofa estrofa) {
+        estrofa.setPuntuacion();
         estrofas.add(estrofa);
     }
 
@@ -51,6 +56,7 @@ public class Tema {
     public static class Estrofa {
         private int nivel;
         private ArrayList<String> barras;
+        private ArrayList<Integer> puntuacion;
 
         /* CONSTRUCTORES */
 
@@ -65,10 +71,63 @@ public class Tema {
             barras.add(barra);
         }
 
+        public void setPuntuacion (){
+            for (String barra : barras) {
+                ArrayList<Integer> sumaNumRimes = new ArrayList<>();
+                ArrayList<String> ultimasLetras = new ArrayList<>();
+                String[] separacion = barra.split("\n");
+                for (String s : separacion) {
+                    ultimasLetras.add(s.substring(s.length() - 2));
+                }
+                extractRimes(sumaNumRimes, ultimasLetras);
+                int R = 0;
+                for (Integer i : sumaNumRimes) {
+                    R += i;
+                }
+                puntuacion.add(R);
+            }
+
+        }
+
+        public static void extractRimes(ArrayList<Integer> sumaNumRimes, ArrayList<String> ultimasLetras) {
+            for (int i = 0; i < ultimasLetras.size(); i++) {
+                int numRimas = 0;
+                String actual = ultimasLetras.get(i);
+                switch (i){
+                    case 0:
+                        if (actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
+                            numRimas++;
+                        }
+                        break;
+                    case 1:
+                        if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
+                            numRimas++;
+                        }
+                        break;
+                    case 2:
+                        if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(3))){
+                            numRimas++;
+                        }
+                        break;
+                    case 3:
+                        if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2))){
+                            numRimas++;
+                        }
+                        break;
+                }
+                sumaNumRimes.add(numRimas);
+            }
+        }
+
+
         /* GETTERS */
 
         public ArrayList<String> getBarras() {
             return barras;
+        }
+
+        public ArrayList<Integer> getPuntuacion() {
+            return puntuacion;
         }
 
         /* TO STRINGS */

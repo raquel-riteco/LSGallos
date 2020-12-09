@@ -40,7 +40,7 @@ public class Rapero {
         this.foto = foto;
     }
     public void setPuntuacio(float puntuacio) {
-        this.puntuacio = puntuacio;
+        this.puntuacio += puntuacio;
     }
     public void actualitzarPuntuacio (float puntuacio){
         this.puntuacio += puntuacio;

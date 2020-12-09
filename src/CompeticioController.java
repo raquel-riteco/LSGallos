@@ -76,7 +76,7 @@ public class CompeticioController {
                     boolean ok = false;
                     Rapero nouRapero;
                     nouRapero = menu.entradaInformacio(competicio);
-                    competicio.getFase(0).setRaperos(nouRapero);
+                    competicio.getFase(0).setRapero(nouRapero);
                     fitxers.registrarRapero(nouRapero, nomCompeticio);
                     mostrarMenu();
                 }else {
@@ -110,6 +110,7 @@ public class CompeticioController {
             if (opcioLobby == 5) {
                 break;
             }
+            competicio.actualizarListaRaperos(fase);
             for (Batalla batalla : fase.getBatallas()) {
                 if (opcioLobby == 5) {
                     break;
@@ -133,6 +134,7 @@ public class CompeticioController {
                         break;
                 }
             }
+            fase.setRanking();
         }
     }
 }

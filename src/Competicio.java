@@ -63,7 +63,6 @@ public class Competicio {
     }
 
     public ArrayList<Rapero> getRanking() {
-        //actualitzarPuntuacio();
         return ranking;
     }
 
@@ -91,13 +90,29 @@ public class Competicio {
         llistaPaisos.add(pais);
     }
 
-    /*
-    public void actualitzarPuntuacio() {
-        ranking = batallaModel.getRaperos();
-        ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
+    public void setRanking() {
+        //ranking = batallaModel.getRaperos();
+        //ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
 
-     */
+    /* METODOS */
+
+    public void actualizarListaRaperos (Fase fase){
+        if (numFases == 2 && fase.getNumFase() == 2){
+            fase.setRaperos(fases.get(0).getRaperos());
+        }else{
+            switch (fase.getNumFase()){
+                case 2:
+                    fase.setRaperos(fases.get(0).getRaperos());
+                    break;
+                case 3:
+                    fase.setRaperos(fases.get(1).getRaperos());
+                    break;
+                default:
+                    //nothing
+            }
+        }
+    }
 
     /* TO STRING */
 
