@@ -12,22 +12,11 @@ public class Competicio {
 
     /* CONSTRUCTORES */
 
+
+
     public Competicio(){
         fases = new ArrayList<>();
         llistaPaisos = new ArrayList<>();
-        crearFases();
-    }
-
-    public void crearFases (){
-        Fase faseInicial = new Fase(1);
-        fases.add(faseInicial);
-        Fase faseFinal = new Fase(2);
-        fases.add(faseFinal);
-        if (numFases == 3){
-            Fase faseIntermedia = new Fase(2);
-            fases.add(faseIntermedia);
-            faseFinal.setNumFase(3);
-        }
     }
 
     /* GETTERS */
@@ -81,6 +70,10 @@ public class Competicio {
 
     public void setLlistaPaisos(String pais) {
         llistaPaisos.add(pais);
+    }
+
+    public void setFase(Fase fase) {
+        fases.add(fase);
     }
 
     /* METODOS */

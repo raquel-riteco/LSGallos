@@ -15,10 +15,9 @@ public class CompeticioController {
         this.nomCompeticio = nomCompeticio;
         this.nomBatalles = nomBatalles;
         menu = new Menu();
+        fitxers = new Fitxers();
         competicio = new Competicio();
         setCompeticio();
-        fitxers = new Fitxers();
-
         fitxers.llegirBatalles(nomBatalles, competicio);
     }
 

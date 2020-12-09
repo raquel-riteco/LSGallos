@@ -16,7 +16,16 @@ public class Fase {
     /* CONSTRUCTORES*/
 
     public Fase(int numFase){
+        raperos = new ArrayList<>();
+        temas = new ArrayList<>();
+        ranking = new ArrayList<>();
         batallas = new ArrayList<>();
+        this.numFase = numFase;
+
+
+    }
+
+    public void formarBatallas(){
         Batalla batalla1 = crearBatalla(tipusBatalla());
         batalla1.setTema(setTemaBatalla());
         batalla1.setNumBatalla(1);
@@ -25,12 +34,6 @@ public class Fase {
         batalla2.setTema(setTemaBatalla());
         batalla2.setNumBatalla(2);
         batallas.add(batalla2);
-
-        raperos = new ArrayList<>();
-        temas = new ArrayList<>();
-        ranking = new ArrayList<>();
-
-        this.numFase = numFase;
     }
 
     public Batalla crearBatalla (String tipusBatalla){
@@ -146,6 +149,7 @@ public class Fase {
 
     /* TO STRINGS */
 
+    /*
     @Override
     public String toString() {
         return "Fase{" +
@@ -172,6 +176,8 @@ public class Fase {
         }
         return toString;
     }
+
+     */
 
     /* MÉTODOS */
 

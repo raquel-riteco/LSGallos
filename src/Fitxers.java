@@ -39,8 +39,11 @@ public class Fitxers {
         int fases = 0;
         for (Object o : fasesJson) {
             JSONObject fase = (JSONObject) o;
-            competicio.getFase(fases).setPressupost((double) fase.get("budget"));
-            competicio.getFase(fases).setPais((String) fase.get("country"));
+            Fase fase1 = new Fase(fases + 1);
+            fase1.setPressupost((double) fase.get("budget"));
+            fase1.setPais((String) fase.get("country"));
+            competicio.setFase(fase1);
+            fase1.setPais((String) fase.get("country"));
             fases++;
         }
         competicio.setNumFases();

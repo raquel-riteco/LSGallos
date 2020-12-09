@@ -63,6 +63,7 @@ public class Tema {
         public Estrofa(int nivel) {
            this.nivel = nivel;
            barras = new ArrayList<>();
+           puntuacion = new ArrayList<>();
         }
 
         /* SETTERS */
