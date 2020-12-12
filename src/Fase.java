@@ -113,6 +113,11 @@ public class Fase {
         ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
 
+    public void setPuntuacionBatalla (int numBatalla){
+        Batalla batalla = getBatalla(numBatalla);
+        float puntuacion = (float) batalla.calculoPuntuacion();
+        raperos.get(posMiRapero).setPuntuacio(puntuacion);
+    }
     /* GETTERS */
 
     public int getNumParticipants(){
@@ -144,6 +149,7 @@ public class Fase {
     }
 
     public ArrayList<Rapero> getRanking() {
+        setRanking();
         return ranking;
     }
 
@@ -181,25 +187,12 @@ public class Fase {
 
     /* MÉTODOS */
 
-    public void simulacions (){
-        for (Batalla batalla : batallas) {
-            for (ArrayList<Rapero> parella : batalla.getAparellaments()) {
-                String temaBatalla = setTemaBatalla();
-                Batalla battle = crearBatalla(tipusBatalla());
-                Long nivel1 = parella.get(0).getNivell();
-                Long nivel2 = parella.get(1).getNivell();
-                for (Tema tema : temas) {
-                    if (tema.getNomTema() == temaBatalla){
-                        parella.get(0).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(0)));
-                        parella.get(0).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel1).getPuntuacion().get(1)));
-                        parella.get(1).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel2).getPuntuacion().get(0)));
-                        parella.get(1).setPuntuacio(battle.puntuacionSimulaciones(tema.getEstrofa(nivel2).getPuntuacion().get(1)));
-                    }
-                }
-            }
+    public void simulaciones (int numBatalla){
+        Batalla actual = batallas.get(numBatalla);
+        for (int i = 0; i < actual.getAparellaments().size(); i++) {
+            actual.simularBatalla(temas, crearBatalla(tipusBatalla()), setTemaBatalla(), i, raperos);
         }
     }
-
 
     public void descartarRaperos(int maxFases){
         if (numFase + 1 == maxFases){

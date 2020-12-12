@@ -87,6 +87,9 @@ public class Tema {
                 }
                 puntuacion.add(R);
             }
+            if (barras.size() < 2){
+                puntuacion.add(0);
+            }
 
         }
 
@@ -94,29 +97,33 @@ public class Tema {
             for (int i = 0; i < ultimasLetras.size(); i++) {
                 int numRimas = 0;
                 String actual = ultimasLetras.get(i);
-                switch (i){
-                    case 0:
-                        if (actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
-                            numRimas++;
-                        }
-                        break;
-                    case 1:
-                        if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
-                            numRimas++;
-                        }
-                        break;
-                    case 2:
-                        if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(3))){
-                            numRimas++;
-                        }
-                        break;
-                    case 3:
-                        if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2))){
-                            numRimas++;
-                        }
-                        break;
+                if (actual.equals("0")){
+                    sumaNumRimes.add(0);
+                }else{
+                    switch (i){
+                        case 0:
+                            if (actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
+                                numRimas++;
+                            }
+                            break;
+                        case 1:
+                            if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(2)) || actual.equals(ultimasLetras.get(3))){
+                                numRimas++;
+                            }
+                            break;
+                        case 2:
+                            if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(3))){
+                                numRimas++;
+                            }
+                            break;
+                        case 3:
+                            if (actual.equals(ultimasLetras.get(0)) || actual.equals(ultimasLetras.get(1)) || actual.equals(ultimasLetras.get(2))){
+                                numRimas++;
+                            }
+                            break;
+                    }
+                    sumaNumRimes.add(numRimas);
                 }
-                sumaNumRimes.add(numRimas);
             }
         }
 

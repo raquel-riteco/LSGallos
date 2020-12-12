@@ -248,9 +248,10 @@ public class Menu {
                 nivelRival = batalla.getAparellaments().get(batalla.getNumAparellament()).get(0).getNivell();
             }
             System.out.println("Empiezas tu! Se lo damos en 3, 2, 1...\n\n");
+            estrofaRapero = new ArrayList<>();
             for (int i = 0; i < 4; i++) {
                 System.out.println("Introduce tu verso: ");
-                estrofaRapero = new ArrayList<>();
+
                 estrofaRapero.add(tuTurno());
             }
             estrofas.add(estrofaRapero);
@@ -258,9 +259,9 @@ public class Menu {
             turnoRival(fase, batalla, nivelRival, numBarra);
             numBarra++;
             System.out.println("\nVeo que tenemos nivel\nEs tu turno!");
+            estrofaRapero = new ArrayList<>();
             for (int i = 0; i < 4; i++) {
                 System.out.println("Introduce tu verso: ");
-                estrofaRapero = new ArrayList<>();
                 estrofaRapero.add(tuTurno());
             }
             estrofas.add(estrofaRapero);
@@ -285,17 +286,18 @@ public class Menu {
 
     /* LOBBY: OPCION 2 */
 
-    public String mostrarRanking (int posMiRapero, ArrayList<Rapero> ranking) {
-        String toString = "-------------------------------\n" +
-                "  Pos.   |   Name   |   Score  \n" +
-                "-------------------------------\n";
+    public void mostrarRanking (int posMiRapero, ArrayList<Rapero> ranking) {
+        System.out.println("--------------------------------------------\n" +
+                           "  Pos.   |       Name      |   Score  \n" +
+                           "--------------------------------------------\n");
         for (Rapero o : ranking){
-            toString = toString.concat("\n" + ranking.indexOf(o) + "  " + o.getNomArtistic() + " - " + o.getPuntuacio());
+            System.out.print(ranking.indexOf(o) + "  " + o.getNomArtistic() + " - " + o.getPuntuacio());
             if (ranking.indexOf(o) == posMiRapero){
-                toString = toString.concat(" <-- Tu");
+                System.out.println(" <-- Tu");
+            }else{
+                System.out.println("");
             }
         }
-        return toString;
     }
 
     /* MAX FASES HECHAS: */
@@ -356,6 +358,6 @@ public class Menu {
                            "            ----------            \n" +
                            "               ----               \n" );
         System.out.println(rapero.getNomArtistic() + " con " + rapero.getPuntuacio() + "puntos!\n\n");
-        System.out.println("Gracias a todos por participat.");
+        System.out.println("Gracias a todos por participar.");
     }
 }

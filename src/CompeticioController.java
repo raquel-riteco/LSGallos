@@ -105,51 +105,66 @@ public class CompeticioController {
 
     public void executar(String nomArtistic) {
         int opcioLobby = 0;
+        boolean raperoClasificado = false;
         for (Fase fase : competicio.getFases()) {
-            if (opcioLobby == 5) {
-                break;
-            }
-            fase.setPosMiRapero(nomArtistic);
+
             competicio.actualizarListaRaperos(fase);
-            for (Batalla batalla : fase.getBatallas()) {
-                if (opcioLobby == 5) {
+            for (Rapero rapero : fase.getRaperos()) {
+                if (rapero.getNomArtistic().equals(nomArtistic)){
+                    raperoClasificado = true;
                     break;
                 }
+            }
+            fase.formarBatallas();
+            if (raperoClasificado){
+                fase.setPosMiRapero(nomArtistic);
+            }else{
+                opcioLobby = 4;
+            }
 
-                opcioLobby = menu.mostraLobby(fase.getNumFase(), competicio.getNumFases(), fase.getRaperos().get(fase.getPosMiRapero()).getPuntuacio(), batalla.getNumBatalla(), batalla.getTipusBatalla(), batalla.getNomRival());
-                switch (opcioLobby){
-                    case 1:
-                        int quienEmpieza = (int) Math.floor(Math.random()*2);
-                        batalla.setEstrofas(menu.batalla(fase, batalla, quienEmpieza, batalla.getNomRival()));
-                        break;
+            for (Batalla batalla : fase.getBatallas()) {
+                while (opcioLobby != 4 && opcioLobby != 1){
+                    if (opcioLobby != 4){
+                        opcioLobby = menu.mostraLobby(fase.getNumFase(), competicio.getNumFases(), fase.getRaperos().get(fase.getPosMiRapero()).getPuntuacio(), batalla.getNumBatalla(), batalla.getTipusBatalla(), batalla.getNomRival());
+                    }
+                    switch (opcioLobby){
+                        case 1:
+                            int quienEmpieza = (int) Math.floor(Math.random()*2);
+                            batalla.setEstrofas(menu.batalla(fase, batalla, quienEmpieza, batalla.getNomRival()));
+                            fase.setPuntuacionBatalla(fase.getBatallas().indexOf(batalla));
+                            fase.simulaciones(fase.getBatallas().indexOf(batalla));
+                            break;
+                        case 2:
+                            menu.mostrarRanking(fase.getPosMiRapero(), fase.getRanking());
+                            break;
+                        case 3:
+                            System.out.println("Esta opcion todavía no se puede ejecutar! Prueba más tarde.");
+                            break;
+                        case 4:
+                            fase.simulaciones(fase.getBatallas().indexOf(batalla));
+                            break;
+                    }
+                }
+            }
+            fase.setRanking();
+            fase.descartarRaperos(competicio.getNumFases());
+        }
+        if (opcioLobby != 4){
+            int opcioFaseFinal;
+            do {
+                opcioFaseFinal = menu.faseFinal(competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0).getNomArtistic(), competicio.getFase(competicio.getNumFases()).getRanking().get(0).getPuntuacio());
+                switch (opcioFaseFinal){
                     case 2:
-                        menu.mostrarRanking(fase.getPosMiRapero(), fase.getRanking());
+                        menu.mostrarRanking(competicio.getFase(competicio.getNumFases()).getPosMiRapero(), competicio.getFase(competicio.getNumFases()).getRanking());
                         break;
                     case 3:
                         //fase 4
                         break;
-                    case 4:
-                        opcioLobby = 5;
-                        break;
+                    default:
+                        opcioFaseFinal = 5;
                 }
-            }
-            fase.simulacions();
-            fase.setRanking();
-            fase.descartarRaperos(competicio.getNumFases());
+            }while(opcioFaseFinal != 5);
         }
-        int opcioFaseFinal;
-        do {
-            opcioFaseFinal = menu.faseFinal(competicio.getFase(competicio.getNumFases()).getRanking().get(0).getNomArtistic(), competicio.getFase(competicio.getNumFases()).getRanking().get(0).getPuntuacio());
-            switch (opcioFaseFinal){
-                case 2:
-                    menu.mostrarRanking(competicio.getFase(competicio.getNumFases()).getPosMiRapero(), competicio.getFase(competicio.getNumFases()).getRanking());
-                    break;
-                case 3:
-                    //fase 4
-                    break;
-                default:
-                    opcioFaseFinal = 5;
-            }
-        }while(opcioFaseFinal != 5);
+        menu.acabada(competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0));
     }
 }
