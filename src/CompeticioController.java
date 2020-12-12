@@ -1,19 +1,39 @@
-import java.util.ArrayList;
 import java.util.Date;
+
+/**
+ *      Esta es la clase principal del programa, a partir de esta configuraremos el resto de clases y ejecutaremos
+ *      los métodos necesarios para el correcto funcionamiento del programa.
+ *
+ * */
 
 public class CompeticioController {
 
-    private Menu menu;
-    private Fitxers fitxers;
+    private final Menu menu;
+    private final Fitxers fitxers;
+    private final String nomCompeticio;
+
     private Competicio competicio;
-    private String nomCompeticio;
-    private String nomBatalles;
 
     /* CONSTRUCTORES*/
 
+    /**
+     *      Crea un objeto de la clase CompeticioController.
+     *      Este constructor es esencial, ya que a partir del objeto creado ejecutaremos el único método necesario
+     *      para la ejecución del programa.
+     *      -- Referncia al método mostrarMenu();
+     *
+     *      @param nomBatalles el "path" del fichero Batalles (del tipo Json) utilizado para la lectura del fichero.
+     *                         --referencia a Fitxer/llegirBatalles
+     *      @param nomCompeticio el "path" del fichero Competicio (del tipo Json) utilizado para la lectura del
+     *                           fichero. Este parámetro se guarda como atributo del objeto creado.
+     *                           -- referencia Fitxer/llegirCompeticio
+     *      En este constructor se crean los objetos del tipo Menu, Fitcher y Competicio, los cuales son atributos de
+     *      esta clase (CompeticioController). También se ejecutan los métodos setCompeticio() y llegirBatalles()
+     *      -- Referencia a los métodos setCompeticio y llegirBatalles
+     * */
+
     public CompeticioController (String nomCompeticio, String nomBatalles) {
         this.nomCompeticio = nomCompeticio;
-        this.nomBatalles = nomBatalles;
         menu = new Menu();
         fitxers = new Fitxers();
         competicio = new Competicio();
@@ -21,24 +41,27 @@ public class CompeticioController {
         fitxers.llegirBatalles(nomBatalles, competicio);
     }
 
-
-    /* GETTERS */
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public Competicio getCompeticio() {
-        return competicio;
-    }
-
     /* SETTERS */
 
+    /**
+     *      Lectura del fichero Competicio y guardado de la informacion en competicio, atributo de la clase
+     *      CompeticioController.
+     *      Ejecuta el método llegirCompeticio() de la clase Fitxer.
+     *      -- Referencia al método llegirCompeticio.
+     * */
+
     public void setCompeticio() {
-        this.competicio = fitxers.llegirCompeticio(nomCompeticio);
+        competicio = fitxers.llegirCompeticio(nomCompeticio);
     }
 
     /* COMPROBACIONES */
+
+    /**
+     *      Comprobación de la fecha actual y comparación con las fechas de inicio y final de la competición.
+     *      @return int -1 en el caso que la fecha sea anterior a la de inicio,
+     *                   1 en el caso que la fecha sea posterior a la final,
+     *                   0 en el caso que la fecha sea posterior a la de inicio y anterior a la final.
+     * */
 
     public int comprovarData(){
          Date dataActual = new Date();
@@ -51,19 +74,32 @@ public class CompeticioController {
          }
     }
 
+    /**
+     *      Comprueba si el nombre artístico introducido como login es correcto. Esto se realiza comparando este
+     *      nombre con todos los nombres guardados en competición.
+     *      @param nomArtistic el nombre introducido por teclado y guardado a través del método login de la clase
+     *                         menú.
+     *                         -- Referencia al método login de clase menu
+     *      @return false en caso de que sí se haya encontrado
+     *              true en caso de que no se haya encontrado.
+     * */
+
     public boolean comprovarLogin (String nomArtistic) {
         boolean found = false;
-        // fase 0 == fase inicial
         for (int i = 0; i < competicio.getFase(0).getRaperos().size() && !found; i++) {
             if (competicio.getFase(0).getRaperos().get(i).getNomArtistic().equals(nomArtistic)){
                 found = true;
             }
         }
-        return found;
+        return !found;
     }
 
-
     /* MÉTODOS */
+
+    /**
+     *      Método principal a partir del cual se ejecutan todos los demás. Es el único método utilizado para iniciar
+     *      el programa.
+     * */
 
     public void mostrarMenu (){
         int opcio;
@@ -88,10 +124,10 @@ public class CompeticioController {
                     String nomArtistic;
                     do {
                         nomArtistic = menu.login();
-                        if (!comprovarLogin(nomArtistic)){
+                        if (comprovarLogin(nomArtistic)){
                             System.out.println("Heeeey! Este rapero no esta registrado!");
                         }
-                    }while(!comprovarLogin(nomArtistic));
+                    }while(comprovarLogin(nomArtistic));
                     executar(nomArtistic);
                 }else {
                     System.out.println("Ens veiem aviat!");
