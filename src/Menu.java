@@ -4,9 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/***
+ *      Esta clase es la interfaz gráfica del programa, a partir de la cual mostraremos por pantalla la información
+ *      necesária y se guardaran los datos introducidos por el usuario mediante el teclado.
+ */
+
+
 public class Menu {
 
     /* DATOS INICIALES */
+
+    /**
+     *      Este método muestra por pantalla los datos iniciales de la competición.
+     *
+     *      @param competicio (Competicio) se le pasa la competición creada por el controller.
+     * */
 
     public void mostrarDades (Competicio competicio) {
         System.out.println("Bienvenido/a a la competición: " + competicio.getNom());
@@ -18,6 +30,13 @@ public class Menu {
     }
 
     /* COMPETICION NO EMPEZADA */
+
+    /**
+     *      En caso deque la competición no haya empezado se ejecutará este método, donde el usuario seleccionará
+     *      una de las opciones del menú introduciendo su selección por el teclado. Se comprueba que sea correcta.
+     *
+     *      @return int equivalente a la opción seleccionada. (Este return solo devolverá 1 o 2).
+     * */
 
     public int noComencada () {
         int opcio = 0;
@@ -47,6 +66,16 @@ public class Menu {
 
         return opcio;
     }
+
+    /**
+     *      Este método se utiliza para guardar los datos que el usuario introduce para registrar un nuevo rapero.
+     *      Después de preguntar cada dato, este se comprueba antes de guardarlo, y en caso de no ser correcto se
+     *      volverá a pedir.
+     *
+     *      @param competicio (Competicio) se le pasa la competición creada por el controller.
+     *
+     *      @return Rapero equivalente al rapero creado a partir de los datos introducidos.
+     * */
 
     public Rapero entradaInformacio (Competicio competicio) {
         Rapero rapero = new Rapero();
@@ -135,6 +164,13 @@ public class Menu {
 
     /* COMPETICION EMPEZADA */
 
+    /**
+     *      En el caso de que la competición ya haya empezado se ejecutará este método, el cual muestra un menú y
+     *      comprueva que la opción introducida por el usuario sea correcta.
+     *
+     *      @return int equivalente a la opción escogida (solo devolverá 1 o 2).
+     * */
+
     public int comencada () {
         int opcio = 0;
         String entrada;
@@ -165,20 +201,39 @@ public class Menu {
         return opcio;
     }
 
+    /**
+     *      Este método pregunta al usuario por su nombre artístico.
+     *
+     *      @return (String) nombre introducido por el usuario.
+     * */
+
     public String login () {
         Scanner sc = new Scanner(System.in);
         System.out.print("Entra tu nombre artistico: ");
         return sc.nextLine();
     }
 
-    public int mostraLobby (int numFase, int maxFaes, double puntuacion, int numBatalla, String tipusBatalla, String nomRival){
+    /**
+     *      Este método muestra el menú de la batalla y fase actuales, junto con su información y diferentes oipciones
+     *      a seleccionar.
+     *
+     *      Todos loa parámetros son pasados automáticamente por el programa.
+     *      @param maxFases (int) equivalente al numero máximo de fases de la competición.
+     *      @param nomRival (String) equivalente al nombre del oponente en la batalla siguiente.
+     *      @param numBatalla (int) si es la primera o segunda batalla de la fase (0 u 1).
+     *      @param puntuacion (double) puntuación del rapero hasta el momento.
+     *      @param tipusBatalla (String) puede ser "BatallaAcapela", "BatallaSangre" o "BatallaEscrita".
+     *      @param numFase (int) numero actual de fase (0, 1 o 2).
+     * */
+
+    public int mostraLobby (int numFase, int maxFases, double puntuacion, int numBatalla, String tipusBatalla, String nomRival){
 
         int opcio = 0;
         String entrada;
         boolean correct;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Fase: " + numFase + " / " + maxFaes + " | Puntuación: " + puntuacion + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
+        System.out.println("Fase: " + numFase + " / " + maxFases + " | Puntuación: " + puntuacion + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         System.out.println(" ");
@@ -357,6 +412,7 @@ public class Menu {
                            "           ------------           \n" +
                            "            ----------            \n" +
                            "               ----               \n" );
+
         System.out.println(rapero.getNomArtistic() + " con " + rapero.getPuntuacio() + "puntos!\n\n");
         System.out.println("Gracias a todos por participar.");
     }
