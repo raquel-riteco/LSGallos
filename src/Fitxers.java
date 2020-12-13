@@ -9,7 +9,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+/**
+ *      Esta clase es la responsable de leer los 2 ficheros JSON que contienen toda la información relacionada con
+ *      la competición, necesaria para su ejecución.
+ * */
+
 public class Fitxers {
+
+    /**
+     *      Este método lee la información del fichero Competicio y la devuelve como objeto de la clase Competicio.
+     *
+     *      @param nomCompeticio (String) path del fichero Competicio.
+     *
+     *      @return Competicio competición con toda la información ya guardada.
+     * */
 
     public Competicio llegirCompeticio (String nomCompeticio){
         Competicio competicio = new Competicio();
@@ -23,12 +36,22 @@ public class Fitxers {
         }catch (IOException e){
             System.out.println("IO Exception a llegirCompeticio: " + e.getMessage());
         } catch (ParseException e) {
-            System.out.println("Parse Exeprion a llegirCompeticio: " + e.getMessage());;
+            System.out.println("Parse Exeprion a llegirCompeticio: " + e.getMessage());
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
         return competicio;
     }
+
+    /**
+     *      Este método es el responsable de emparejar la lectura de cada objeto JSON con el atributo correspondiente
+     *      de la clase Competicio.
+     *
+     *      Todos los parámetros de este método son pasados automáticamente por el programa.
+     *      @param competicio (Competicio) competición en la que se quiere guardar la información.
+     *      @param object (JSONObject) objecto extraido del fichero JSON el cual se quiere guardar en competicio.
+     */
+
     public void parseCompeticio (Competicio competicio, JSONObject object) throws java.text.ParseException {
 
         JSONObject competicioObject = (JSONObject) object.get("competition");
@@ -64,6 +87,14 @@ public class Fitxers {
             competicio.getFase(0).setRapero(rapero);
         }
     }
+
+    /**
+     *      Este método lee la información del fichero Competicio y la devuelve como objeto de la clase Competicio.
+     *
+     *      @param nomBatalles (String) path del fichero Batalles.
+     *      @param competicio (Competicio) competición en la cual se quiere guardar la información.
+     * */
+
     public void llegirBatalles (String nomBatalles, Competicio competicio) {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(nomBatalles)) {
@@ -82,6 +113,16 @@ public class Fitxers {
             System.out.println("Parse Exception a llegirBatalles: " + e.getMessage());
         }
     }
+
+    /**
+     *      Este método es el responsable de guardar cada tema del fichero Batalles en su correspondiente hueco en la
+     *      ArrayList temes de la clase Fase, en cada una de las fases de la competición.
+     *
+     *      Todos los parámetros de este método son pasados automáticamente por el programa.
+     *      @param competicio (Competicio) competición en la que se quiere guardar la información.
+     *      @param object (JSONObject) objecto extraido del fichero JSON el cual se quiere guardar en competicio.
+     */
+
     public void parseBatalla (Competicio competicio, JSONObject object) {
         Tema tema = new Tema((String) object.get("name"));
         JSONObject rimas = (JSONObject) ((JSONArray) object.get("rhymes")).get(0);
@@ -97,6 +138,14 @@ public class Fitxers {
             f.setTemas(tema);
         }
     }
+
+    /**
+     *      Método para añadir un rapero al JSONArray de rapper del fichero Competicio.
+     *
+     *      Todos los parámetros de este método son pasados automáticamente por el programa.
+     *      @param rapero (Rapero) rapero a añadir.
+     *      @param nomCometicio (String) path del fichero Competicio.
+     * */
 
     public void registrarRapero (Rapero rapero, String nomCometicio) {
         JSONParser parser = new JSONParser();
@@ -126,8 +175,5 @@ public class Fitxers {
         } catch (IOException | ParseException e){
             System.out.println(e.getMessage());
         }
-
-
     }
-
 }
