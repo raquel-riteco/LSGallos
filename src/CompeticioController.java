@@ -61,6 +61,7 @@ public class CompeticioController {
      *      @return int -1 en el caso que la fecha sea anterior a la de inicio,
      *                   1 en el caso que la fecha sea posterior a la final,
      *                   0 en el caso que la fecha sea posterior a la de inicio y anterior a la final.
+     *      Este return se utilizará para determinar que método del menú se utilizará.
      * */
 
     public int comprovarData(){
@@ -99,6 +100,18 @@ public class CompeticioController {
     /**
      *      Método principal a partir del cual se ejecutan todos los demás. Es el único método utilizado para iniciar
      *      el programa.
+     *      Se ejecuta el método mostrarDades de la clase menú --Referencia al método mostrarDades
+     *      Después se ejecuta el método comprovarData --Referencia al método
+     *      Entonces tenemos 3 diferentes opciones:
+     *          - Competición no empezada: ejecución del método noCompencada de menú. --Referncia al método
+     *              - En caso de seleccionar la primera opción se registrará un rapero nuevo
+     *                  --Referencia a entradaInformacio, setRapero y refitrarRapero
+     *              - Si no,se saldrá de la competición.
+     *          - Competición empezada: ejecución del método comencada de menú.
+     *              - En caso de seleccionar la primera opción se hará el login del rapero
+     *                  -- Referncia a menu.login, comprovarLogin
+     *                Una vez comprovado se ejecutará el método mostrarMenu -- Referencia al método
+     *          - Competición acabada: ejecución del método acabada de menú. --Referencia al método
      * */
 
     public void mostrarMenu (){
@@ -108,7 +121,6 @@ public class CompeticioController {
             case -1:
                 opcio = menu.noComencada();
                 if (opcio == 1){
-                    boolean ok = false;
                     Rapero nouRapero;
                     nouRapero = menu.entradaInformacio(competicio);
                     competicio.getFase(0).setRapero(nouRapero);
@@ -138,6 +150,41 @@ public class CompeticioController {
             break;
         }
     }
+    /**
+     *      Ejecución de la competición siguiendo el siguiente esquema:
+     *          1. Por cada fase de a competición se ejecutrá el método actualitzarListaRaperos y el paso 2.
+     *              -- Referencia al método
+     *          2.
+     *              2.1 Comprovación de que el rapero con el que se ha hecho el login se ha clasificado.
+     *              2.2 Ejecución del método formarBatallas() de la clase fase.
+     *              2.3 Dependiendo de si el rapero ha clasificado a la siguiente fase o si se ha decidido salir de
+     *                  la competición:
+     *                  2.3.1 Sí ha clasificado -> buscamos la posición del rapero entre los raperos mediante el
+     *                        método setPosMiRapero() de la clase fase. --Referencia al método.
+     *                  2.3.2 Si no o si se ha decidido salir se simularán el resto de batallas.
+     *              2.4 Por cada batalla de la fase actual se ejecutará el paso 2.5.
+     *              2.5
+     *                  2.5.1 Si el rapero ha clasificado se ejecutará el método mostraLobby de la clase menú, y
+     *                        dependiendo de la opción seleccionada se ejecutará alguno de los siguientes pasos hasta
+     *                        que se decida batallar o salir de la competición.
+     *                        2.5.1.1 Opción 1, se decide quien empieza y se ejecuta el método batalla de la clase
+     *                                menú, guardando las estrofas del rapero mediante el método setEstrofas() de la
+     *                                clase batalla.
+     *                                -- Referencia a los métodos.
+     *                                Posteriormente se calcula la puntución mediante el método setPuntuacionBatalla()
+     *                                de la clase fase y se simular el resto de batallas mediante el método simulaciones
+     *                                de la clase fase.
+     *                                -- Referencia a los métodos.
+     *                        2.5.1.2 Opción 2, se muestra el ranquing actual mediante el método mostrarRanking() de la
+     *                                clase menú -- Referencia al método
+     *                                Después se vuelve al paso 2.5.1.
+     *                        2.5.1.3 Opción 3, aun no ha sido desarrollada por lo que se informará al usuario por
+     *                                pantalla y se volverá al paso 2.5.1
+     *                        2.5.1.4 Opción 4 -> salida de la competición, ejecución del paso 2.5.2
+     *                  2.5.2 Si el rapero no ha clasificado o se ha decidido salir se ejecuta directamente la opción 4
+     *                        -> ejecución del método simulaciones de la clase fase --Referencia al método.
+     *
+     * */
 
     public void executar(String nomArtistic) {
         int opcioLobby = 0;
