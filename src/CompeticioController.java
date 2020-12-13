@@ -22,9 +22,9 @@ public class CompeticioController {
      *      para la ejecución del programa.
      *      -- Referncia al método mostrarMenu();
      *
-     *      @param nomBatalles el "path" del fichero Batalles (del tipo Json) utilizado para la lectura del fichero.
+     *      @param nomBatalles (String) el "path" del fichero Batalles (del tipo Json) utilizado para la lectura del fichero.
      *                         --referencia a Fitxer/llegirBatalles
-     *      @param nomCompeticio el "path" del fichero Competicio (del tipo Json) utilizado para la lectura del
+     *      @param nomCompeticio (String) el "path" del fichero Competicio (del tipo Json) utilizado para la lectura del
      *                           fichero. Este parámetro se guarda como atributo del objeto creado.
      *                           -- referencia Fitxer/llegirCompeticio
      *      En este constructor se crean los objetos del tipo Menu, Fitcher y Competicio, los cuales son atributos de
@@ -78,7 +78,7 @@ public class CompeticioController {
     /**
      *      Comprueba si el nombre artístico introducido como login es correcto. Esto se realiza comparando este
      *      nombre con todos los nombres guardados en competición.
-     *      @param nomArtistic el nombre introducido por teclado y guardado a través del método login de la clase
+     *      @param nomArtistic (String) el nombre introducido por teclado y guardado a través del método login de la clase
      *                         menú.
      *                         -- Referencia al método login de clase menu
      *      @return false en caso de que sí se haya encontrado
@@ -154,6 +154,7 @@ public class CompeticioController {
      *      Ejecución de la competición siguiendo el siguiente esquema:
      *          1. Por cada fase de a competición se ejecutrá el método actualitzarListaRaperos y el paso 2.
      *              -- Referencia al método
+     *
      *          2.
      *              2.1 Comprovación de que el rapero con el que se ha hecho el login se ha clasificado.
      *              2.2 Ejecución del método formarBatallas() de la clase fase.
@@ -167,7 +168,7 @@ public class CompeticioController {
      *                  2.5.1 Si el rapero ha clasificado se ejecutará el método mostraLobby de la clase menú, y
      *                        dependiendo de la opción seleccionada se ejecutará alguno de los siguientes pasos hasta
      *                        que se decida batallar o salir de la competición.
-     *                        2.5.1.1 Opción 1, se decide quien empieza y se ejecuta el método batalla de la clase
+     *                        2.5.1.1 Opción 1 -> se decide quien empieza y se ejecuta el método batalla de la clase
      *                                menú, guardando las estrofas del rapero mediante el método setEstrofas() de la
      *                                clase batalla.
      *                                -- Referencia a los métodos.
@@ -175,15 +176,39 @@ public class CompeticioController {
      *                                de la clase fase y se simular el resto de batallas mediante el método simulaciones
      *                                de la clase fase.
      *                                -- Referencia a los métodos.
-     *                        2.5.1.2 Opción 2, se muestra el ranquing actual mediante el método mostrarRanking() de la
+     *                                Después se ejecuta el paso 2.5.3.
+     *                        2.5.1.2 Opción 2 -> se muestra el ranquing actual mediante el método mostrarRanking() de la
      *                                clase menú -- Referencia al método
      *                                Después se vuelve al paso 2.5.1.
-     *                        2.5.1.3 Opción 3, aun no ha sido desarrollada por lo que se informará al usuario por
+     *                        2.5.1.3 Opción 3 -> aun no ha sido desarrollada por lo que se informará al usuario por
      *                                pantalla y se volverá al paso 2.5.1
-     *                        2.5.1.4 Opción 4 -> salida de la competición, ejecución del paso 2.5.2
+     *                        2.5.1.4 Opción 4 -> salida de la competición, ejecución del paso 2.5.2.
      *                  2.5.2 Si el rapero no ha clasificado o se ha decidido salir se ejecuta directamente la opción 4
      *                        -> ejecución del método simulaciones de la clase fase --Referencia al método.
+     *                        Después de ejecuta el paso.
+     *             2.6 Actualización del ranking de la fase mediante el método setRanking() de la clase fase y se
+     *                 descartan los raperos que no han clasificado mediante el método descartarRaperos también de
+     *                 la clase fase.
+     *                 -- Referencia a los métodos.
      *
+     *          3. Después de la ejecución de cada fase, si el rapero ha llegado hasta la fase final y
+     *             no se ha decidido salir se ejecutará el paso 3.1, en caso contrario este se omitirá y se pasará
+     *             directamente al paso 4.
+     *             3.1 Mientras no se seleccione la opción 4 para salir de la competición se ejecutará el método
+     *                 faseFinal() de la clase menú, --Referencia al método
+     *                 y dependiendo de la opción seleccionada se ejecutará alguno de los
+     *                 siguientes pasos.
+     *                 3.1.1 Opción 2 -> mostrar el ranking de la fase final mediante el método mostrarRanking() de la
+     *                       clase menú. --Referencia al método
+     *                       Después se vuelve al paso 3.1.
+     *                 3.1.2 Opcion 3 -> aun no ha sido desarrollada por lo que se informará al usuario por
+     *                       pantalla y después se vuelve al paso 3.1.
+     *                 3.1.3 Opción 4 -> salida de la competición y ejecución del paso 4.
+     *
+     *          4. Ejecución del método acabada de la clase menu.
+     *              -- Referencia al método
+     *
+     *      @param nomArtistic (String) se pasa directamente desde el método mostrarMenu() --Referencia al metodo
      * */
 
     public void executar(String nomArtistic) {
@@ -200,16 +225,16 @@ public class CompeticioController {
             }
             fase.formarBatallas();
             if (raperoClasificado){
+                System.out.println("Muy bien! Estas clasificado para la siguiente fase!");
                 fase.setPosMiRapero(nomArtistic);
             }else{
+                System.out.println("Lo siento bro pero no te has clasificado para la siguiente fase, más suerte la próxima vez!");
                 opcioLobby = 4;
             }
 
             for (Batalla batalla : fase.getBatallas()) {
                 while (opcioLobby != 4 && opcioLobby != 1){
-                    if (opcioLobby != 4){
-                        opcioLobby = menu.mostraLobby(fase.getNumFase(), competicio.getNumFases(), fase.getRaperos().get(fase.getPosMiRapero()).getPuntuacio(), batalla.getNumBatalla(), batalla.getTipusBatalla(), batalla.getNomRival());
-                    }
+                    opcioLobby = menu.mostraLobby(fase.getNumFase(), competicio.getNumFases(), fase.getRaperos().get(fase.getPosMiRapero()).getPuntuacio(), batalla.getNumBatalla(), batalla.getTipusBatalla(), batalla.getNomRival());
                     switch (opcioLobby){
                         case 1:
                             int quienEmpieza = (int) Math.floor(Math.random()*2);
@@ -241,7 +266,7 @@ public class CompeticioController {
                         menu.mostrarRanking(competicio.getFase(competicio.getNumFases()).getPosMiRapero(), competicio.getFase(competicio.getNumFases()).getRanking());
                         break;
                     case 3:
-                        //fase 4
+                        System.out.println("Esta opcion todavía no se puede ejecutar! Prueba más tarde.");
                         break;
                     default:
                         opcioFaseFinal = 5;
