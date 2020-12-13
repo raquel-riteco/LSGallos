@@ -1,7 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 /***
@@ -110,7 +109,7 @@ public class Menu {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                 sdf.setLenient(false);
-                Date data = sdf.parse(valor);
+                sdf.parse(valor);
             } catch (ParseException e) {
                 System.out.println("Introduce una fecha valida!");
                 correct = false;
@@ -284,7 +283,7 @@ public class Menu {
     public ArrayList<ArrayList<String>> batalla (Fase fase, Batalla batalla, int quienEmpieza, String nomRival){
         Long nivelRival;
         ArrayList<ArrayList<String>> estrofas = new ArrayList<>();
-        ArrayList<String> estrofaRapero = null;
+        ArrayList<String> estrofaRapero;
         int numBarra = 0;
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Tema: " + batalla.getTema() + "\n");
@@ -397,7 +396,7 @@ public class Menu {
             if (ranking.indexOf(o) == posMiRapero){
                 System.out.println(" <-- Tu");
             }else{
-                System.out.println("");
+                System.out.println();
             }
         }
     }
@@ -440,7 +439,7 @@ public class Menu {
 
                 correct = false;
             }
-            if (opcio != 2 && opcio != 3 && opcio != 4){
+            if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4){
                 System.out.println("Introduce una opcion correcta.");
                 correct = false;
             }else if (opcio == 1){
