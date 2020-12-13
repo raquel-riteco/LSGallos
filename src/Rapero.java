@@ -18,6 +18,9 @@ public class Rapero {
 
     /* CONSTRUCTORES*/
 
+    public Rapero (){
+
+    }
 
     /**
      *      Creara una objeto Pais nuevo y le asignara la informacion obtenida por los parametros
