@@ -16,12 +16,30 @@ public class Batalla {
 
     /* CONSTRUCTORES */
 
+    /**
+     *      Este constructor creara una ArrayList donde se guardaran los emparejamientos para las batallas.
+     *
+     *      @param raperos (ArrayList Rapero) Arraylist con todos los raperos.
+     *      @param posMiRapero (int) Posicion del rapero usuario.
+     *
+     *
+     * */
+
     public Batalla (ArrayList<Rapero> raperos, int posMiRapero) {
         aparellaments = new ArrayList<>();
         generarAparellaments(raperos, posMiRapero);
     }
 
     /* SETTERS */
+
+    /**
+     *      Metodo para generar los emparajamientos de las batallas.
+     *
+     *      @param raperos (ArrayList Rapero) Arraylist con todos los raperos.
+     *      @param posMiRapero (int) Posicion del rapero usuario.
+     *
+     *
+     * */
 
     public void generarAparellaments(ArrayList<Rapero> raperos, int posMiRapero){
         String nomArtistic = raperos.get(posMiRapero).getNomArtistic();
@@ -60,17 +78,45 @@ public class Batalla {
         setNomRival(nomArtistic);
     }
 
+    /**
+     *      Metodo para guardar el tipo de la batalla.
+     *
+     *      @param tipusBatalla (String) String con el tipo de batalla.
+     *
+     * */
+
     public void setTipusBatalla(String tipusBatalla) {
         this.tipusBatalla = tipusBatalla;
     }
+
+    /**
+     *      Metodo para guardar las Estrofas de la batalla.
+     *
+     *      @param estrofas (ArayList ArrayList String) String con las estrofas de la batalla.
+     *
+     * */
 
     public void setEstrofas(ArrayList<ArrayList<String>> estrofas) {
         this.estrofas = estrofas;
     }
 
+    /**
+     *      Metodo para guardar el tema de la batalla.
+     *
+     *      @param tema (String) String con el tema de la batalla.
+     *
+     * */
+
     public void setTema(String tema) {
         this.tema = tema;
     }
+
+    /**
+     *      Metodo para guardar el indice de la lista del emaparejamiento del usuario.
+     *
+     *      @param nomArtistic (String) String con el nombre artistico del usuario para encontrar su emparejamiento.
+     *
+     * */
 
     public void setNumAparellament(String nomArtistic) {
         for (ArrayList<Rapero> parella : aparellaments) {
@@ -79,6 +125,13 @@ public class Batalla {
             }
         }
     }
+
+    /**
+     *      Metodo para guardar el nombre del rival de usuario en la batalla.
+     *
+     *      @param nomArtistic (String) String con el nombre artistico del rival del usuario.
+     *
+     * */
 
     public void setNomRival(String nomArtistic) {
         for (ArrayList<Rapero> parella : aparellaments) {
@@ -90,31 +143,80 @@ public class Batalla {
         }
     }
 
+    /**
+     *      Metodo para guardar el numero de la batalla.
+     *
+     *      @param nomArtistic (String) String con el nombre artistico del rival del usuario.
+     *
+     * */
+
     public void setNumBatalla(int numBatalla) {
         this.numBatalla = numBatalla;
     }
 
     /* GETTERS */
 
+    /**
+     *      Metodo para obtener la ArayList de los emparejamientos de la batalla.
+     *
+     *      @return (ArrayList ArrayList String) ArrayList con los emparejamientos de la batalla.
+     *
+     * */
+
     public ArrayList<ArrayList<Rapero>> getAparellaments() {
         return aparellaments;
     }
+
+    /**
+     *      Metodo para obtener el nombre del rival de usuario en la batalla.
+     *
+     *      @return (String) String con el nombre artistico del rival del usuario.
+     *
+     * */
 
     public String getNomRival() {
         return nomRival;
     }
 
+    /**
+     *      Metodo para obtener el numero de la batalla.
+     *
+     *      @return (int) Numero de la batalla.
+     *
+     * */
+
     public int getNumBatalla() {
         return numBatalla;
     }
+
+    /**
+     *      Metodo para obtener el tipo de la batalla.
+     *
+     *      @return (String) String con el tipo de la batalla.
+     *
+     * */
 
     public String getTipusBatalla() {
         return tipusBatalla;
     }
 
+    /**
+     *      Metodo para obtener el tema de la batalla.
+     *
+     *      @return (String) String con el tema de la batalla.
+     *
+     * */
+
     public String getTema() {
         return tema;
     }
+
+    /**
+     *      Metodo para obtener el numero de emparejamientos de la batalla.
+     *
+     *      @return (int) Entero con el numero de emparejamientos de la batalla.
+     *
+     * */
 
     public int getNumAparellament() {
         return numAparellament;
@@ -124,13 +226,23 @@ public class Batalla {
 
     /* MÉTODOS */
 
+
+
     public double calculoPuntuacion(){
         return 0;
     }
 
+
     public float puntuacionSimulaciones (float R){
         return 0;
     }
+
+    /**
+     *      Metodo para obtener la puntuacion segun el numero de rimas en las estrofas.
+     *
+     *      @return (int) Entero con el numero de rimas encontradas.
+     *
+     * */
 
     public int calcularRimes(){
         int R = 0;
@@ -154,12 +266,26 @@ public class Batalla {
         return R;
     }
 
+    /**
+     *      Metodo para obtener el numero de rimas de la estrofa.
+     *
+     *      @return (int) Entero con el numero de rimas en las estrofas.
+     *
+     * */
+
     public ArrayList<Integer> numRimas(ArrayList<String> ultimasLetras){
         ArrayList<Integer> sumaNumRimes = new ArrayList<>();
 
         Tema.Estrofa.extractRimes(sumaNumRimes, ultimasLetras);
         return sumaNumRimes;
     }
+
+    /**
+     *      ????????????????????????????????.
+     *
+     *      @return (int) Entero con el numero de emparejamientos de la batalla.
+     *
+     * */
 
     public boolean isLetter (String s){
         int letraFinal = s.charAt(s.length() - 1);
@@ -169,6 +295,18 @@ public class Batalla {
             return letraFinal <= 90 || letraFinal >= 97;
         }
     }
+
+    /**
+     *      Metodo que simulara la batalla.
+     *
+     *      @param temas (ArrayList Tema) Temas de la batalla.
+     *      @param batallaTipusBatalla (Batalla) Tipo de batalla (Sangre,Acapella,Escrita).
+     *      @param nomTema (String) Tema de la batalla.
+     *      @param numeroAparellament (int) Numero de emparejamientos.
+     *      @param raperos (ArrayList Rapero) Raperos que participan en la batalla.
+     *
+     *
+     * */
 
     public void simularBatalla (ArrayList<Tema> temas,Batalla batallaTipusBatalla, String nomTema, int numeroAparellament, ArrayList<Rapero> raperos) {
         int numRapero1 = -1;

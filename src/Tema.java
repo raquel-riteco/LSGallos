@@ -7,6 +7,14 @@ public class Tema {
 
     /* CONSTRUCTORES */
 
+    /**
+     *      Creara una objeto Tema nuevo y le asignara la informacion obtenida por los parametros.
+     *
+     *      @param nomTema (String) Nombre del Tema.
+     *
+     *
+     * */
+
     public Tema(String nomTema){
         estrofas = new ArrayList<>();
         this.nomTema = nomTema;
@@ -14,9 +22,16 @@ public class Tema {
 
     /* GETTERS */
 
+    /**
+     *      Método para obtener el nombre del Tema.
+     *
+     *      @return (String) Nombre del Tema.
+     * */
+
     public String getNomTema() {
         return nomTema;
     }
+
 
 
     public String getEstrofaPerNivell (Long nivel, int numBarra){
@@ -32,17 +47,30 @@ public class Tema {
         return "Oh no, te has quedado en blanco!";
     }
 
+
+
     public Estrofa getEstrofa (Long nivel){
         return estrofas.get(Integer.parseInt(Long.toString(nivel - 1)));
     }
 
+
     /* SETTERS */
+
+
+
     public void setEstrofas(Estrofa estrofa) {
         estrofa.setPuntuacion();
         estrofas.add(estrofa);
     }
 
-    /*To STRINGS */
+    /*METODOS*/
+
+    /**
+     *      Método para obtener una String con la informacion del tema para imprimirla por pantalla.
+     *
+     *      @return (String) String con la informacion del tema para imprimir por pantalla.
+     * */
+
     @Override
     public String toString() {
         return "Tema{" +
@@ -53,12 +81,21 @@ public class Tema {
 
     /* ESTROFA */
 
+
     public static class Estrofa {
         private int nivel;
         private ArrayList<String> barras;
         private ArrayList<Integer> puntuacion;
 
         /* CONSTRUCTORES */
+
+        /**
+         *      Constructor de la clase statica Estrofa que crea dos ArrayLists y guarda la informacion del nivel de la estrofa.
+         *
+         *      @param nivel (int) Nivel de la estrofa
+         *
+         *      @return (String) Nombre del Tema.
+         * */
 
         public Estrofa(int nivel) {
            this.nivel = nivel;
@@ -68,9 +105,21 @@ public class Tema {
 
         /* SETTERS */
 
+        /**
+         *      Metodo para guardar la barra en la ArrayList de la estrofa.
+         *
+         *      @param barra (String) String con una liena de la estrofa
+         *
+         * */
+
         public void setBarra(String barra) {
             barras.add(barra);
         }
+
+        /**
+         *      Metodo para calcular la puntuacion de la estrofa y guardarla.
+         *
+         * */
 
         public void setPuntuacion (){
             for (String barra : barras) {
@@ -92,6 +141,15 @@ public class Tema {
             }
 
         }
+
+        /**
+         *      Metodo para extraer las rimas de la estrofa.
+         *
+         *      @param sumaNumRimes (int) Numero de rimas en la estrofa.
+         *      @param ultimasLetras (String) Letras que forman la rima.
+         *
+         * */
+
 
         public static void extractRimes(ArrayList<Integer> sumaNumRimes, ArrayList<String> ultimasLetras) {
             for (int i = 0; i < ultimasLetras.size(); i++) {
@@ -130,15 +188,37 @@ public class Tema {
 
         /* GETTERS */
 
+        /**
+         *      Metodo para obtener las barras de la estrofa.
+         *
+         *      @return (String) ArrayList de String con las barras de la estrofa.
+         *
+         * */
+
+
         public ArrayList<String> getBarras() {
             return barras;
         }
+
+        /**
+         *      ????????????????
+         *
+         *      @return (String) ArrayList de String con las barras de la estrofa.
+         *
+         * */
 
         public ArrayList<Integer> getPuntuacion() {
             return puntuacion;
         }
 
         /* TO STRINGS */
+
+        /**
+         *      Metodo para obtener una String con la informacion de la estrofa para imprimir por pantalla.
+         *
+         *      @return (String) String con la informacion de la estrofa para imprimir por pantalla.
+         *
+         * */
 
         @Override
         public String toString() {
