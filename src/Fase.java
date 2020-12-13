@@ -112,30 +112,72 @@ public class Fase {
         return temas.get((int) Math.floor(Math.random()* temas.size())).getNomTema();
     }
 
+    /**
+     *      Método para guardar el pressupost de la fase.
+     *
+     *      @param pressupost (double) presupuesto de la fase.
+     * */
+
     public void setPressupost(double pressupost) {
         this.pressupost = pressupost;
     }
+
+    /**
+     *      Método para guardar el pais de la fase.
+     *
+     *      @param pais (String) nombre del país.
+     * */
 
     public void setPais(String pais) {
         this.pais = pais;
     }
 
+    /**
+     *      Método para instanciar la cantidad de participantes de la fase, igualando numParticipants al tamaño del
+     *      ArrayList raperos.
+     * */
+
     public void setNumParticipants() {
         numParticipants = raperos.size();
     }
+
+    /**
+     *      Método para guardar un rapero en el ArrayList raperos. Este método también actualiza el numero de
+     *      participantes.
+     *
+     *      @param rapero (Rapero) objeto de la clase Rapero que se quiere guardar.
+     * */
 
     public void setRapero(Rapero rapero) {
         raperos.add(rapero);
         numParticipants = raperos.size();
     }
 
+    /**
+     *      Método para guardar el ArrayList raperos.
+     *
+     *      @param raperos (ArrayList Rapero) ArrayList de raperos.
+     * */
+
     public void setRaperos (ArrayList<Rapero> raperos){
         this.raperos = raperos;
     }
 
+    /**
+     *      Método para guardar un tema en el ArrayList de temas.
+     *
+     *      @param tema (Tema) tema a añadir.
+     * */
+
     public void setTemas(Tema tema) {
         temas.add(tema);
     }
+
+    /**
+     *      Método para guardar la posición del rapero en la actual lista de raperos.
+     *
+     *      @param nomArtistic (String) nombre del rapero.
+     * */
 
     public void setPosMiRapero (String nomArtistic) {
         for (Rapero o : getRaperos()){
@@ -145,10 +187,20 @@ public class Fase {
         }
     }
 
+    /**
+     *      Método para actualizar el ranking de la fase.
+     * */
+
     public void setRanking() {
         ranking = raperos;
         ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
+
+    /**
+     *      Método para actualizar la puntuación de los raperos de la fase.
+     *
+     *      @param numBatalla (int) número de la batalla de la cual se quiere actualizar sus puntuaciones.
+     * */
 
     public void setPuntuacionBatalla (int numBatalla){
         Batalla batalla = getBatalla(numBatalla);
@@ -157,33 +209,86 @@ public class Fase {
     }
     /* GETTERS */
 
+    /**
+     *      Método para obtener el numParticipants de la fase. Antes de devolverlo, actualiza este número para
+     *      asegurarse de que es el correcto.
+     *
+     *      @return (int) numParticipants.
+     * */
+
     public int getNumParticipants(){
         setNumParticipants();
         return numParticipants;
     }
+
+    /**
+     *      Método para obtener el ArrayList raperos de la fase.
+     *
+     *      @return (ArrayList Rapero) raperos.
+     * */
+
     public ArrayList<Rapero> getRaperos() {
         return raperos;
     }
+
+    /**
+     *      Método para obtener el ArrayList batallas de la fase.
+     *
+     *      @return (ArrayList Batalla) batallas.
+     * */
 
     public ArrayList<Batalla> getBatallas() {
         return batallas;
     }
 
+    /**
+     *      Método para obtener la posicion del rapero en el ArrayList raperos de la fase.
+     *
+     *      @return (int) posMiRapero.
+     * */
+
     public int getPosMiRapero() {
         return posMiRapero;
     }
+
+    /**
+     *      Método para obtener la batalla indicada mediante el parámetro num, la cual se saca del ArrayList batallas.
+     *
+     *      @param num (int) numero de la batalla deseada.
+     *
+     *      @return (Batalla) batalla indicada.
+     * */
 
     public Batalla getBatalla(int num){
         return batallas.get(num);
     }
 
+    /**
+     *      Método para obtener el ArrayList temas de la fase.
+     *
+     *      @return (ArrayList Tema) temas.
+     * */
+
     public ArrayList<Tema> getTemas() {
         return temas;
     }
 
+    /**
+     *      Método para obtener el numero de la fase.
+     *
+     *      @return (int) numFase.
+     * */
+
     public int getNumFase() {
         return numFase;
     }
+
+    /**
+     *      Método para obtener el ArrayList ranking de la fase. Antes de devolverlo, este se actualiza para
+     *      garantizar que es el correcto.
+     *
+     *      @return (ArrayList Rapero) ranking.
+     * */
 
     public ArrayList<Rapero> getRanking() {
         setRanking();
@@ -192,12 +297,25 @@ public class Fase {
 
     /* MÉTODOS */
 
+    /**
+     *      Método para simular las batallas de la batalla actual, en las cuales el rapero seleccionado no participa.
+     *      Llama al método simularBatalla de la clase Batalla.
+     *
+     *      @param numBatalla  (int) numero de la batalla actual en el ArrayList de batallas.
+     * */
+
     public void simulaciones (int numBatalla){
         Batalla actual = batallas.get(numBatalla);
         for (int i = 0; i < actual.getAparellaments().size(); i++) {
             actual.simularBatalla(temas, crearBatalla(tipusBatalla()), setTemaBatalla(), i, raperos);
         }
     }
+
+    /**
+     *      Método para actualizar el ArrayList de raperos de la fase en función del ranking de la fase anterior.
+     *
+     *      @param maxFases  (int) numero de fases de la competición.
+     * */
 
     public void descartarRaperos(int maxFases){
         if (numFase + 1 == maxFases){
@@ -212,7 +330,5 @@ public class Fase {
             }
             raperos = faseIntermedia;
         }
-
     }
-
 }
