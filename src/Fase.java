@@ -1,19 +1,32 @@
 import java.util.ArrayList;
 
+/**
+ *      Esta clase representa las características básicas de las fases, las cuales serán creadas a partir de esta
+ *      plantilla.
+ * */
+
 public class Fase {
 
     private double pressupost;
     private String pais;
     private int numParticipants;
     private int posMiRapero;
-    private int numFase;
+    private final int numFase;
 
-    private ArrayList<Batalla> batallas;
+    private final ArrayList<Batalla> batallas;
     private ArrayList<Rapero> raperos;
-    private ArrayList<Tema> temas;
+    private final ArrayList<Tema> temas;
     private ArrayList<Rapero> ranking;
 
     /* CONSTRUCTORES*/
+
+    /**
+     *      Este constructor crea los ArrayList necesários para cada uno de los argumentos de la clase.
+     *      Además, asigna el valor del parámetro al atributo numFase.
+     *
+     *      El parámetro es pasado automáticamente por el programa.
+     *      @param numFase (int) numero identificador del objeto.
+     * */
 
     public Fase(int numFase){
         raperos = new ArrayList<>();
@@ -21,9 +34,11 @@ public class Fase {
         ranking = new ArrayList<>();
         batallas = new ArrayList<>();
         this.numFase = numFase;
-
-
     }
+
+    /**
+     *      Este método construye las 2 batallas pertenecientes a la fase y las añade al ArrayList de batallas.
+     * */
 
     public void formarBatallas(){
         Batalla batalla1 = crearBatalla(tipusBatalla());
@@ -35,6 +50,16 @@ public class Fase {
         batalla2.setNumBatalla(2);
         batallas.add(batalla2);
     }
+
+    /**
+     *      Generador de la batalla en función de tu tipo, el cual está especificado en el String que le llega como
+     *      parámetro.
+     *
+     *      El parámetro es pasado automáticamente por el programa.
+     *      @param tipusBatalla (String) que puede ser "BatallaAcapella", "BatallaEscrita" o "BatallaSangre".
+     *
+     *      @return (Batalla) batalla creada.
+     * */
 
     public Batalla crearBatalla (String tipusBatalla){
         Batalla batalla;
@@ -56,6 +81,14 @@ public class Fase {
         }
         return batalla;
     }
+
+    /**
+     *      Este método decide aleatóriamente el tipo de batalla a generar, las opciones son: "BatallaAcapella",
+     *      "BatallaEscrita" o "BatallaSangre".
+     *
+     *      @return Srtrig que contiene una de las ociones anteriormente mencionadas.
+     * */
+
     public String tipusBatalla (){
         ArrayList<String> tipusBatalles = new ArrayList<>();
         tipusBatalles.add("BatallaAcapella");
@@ -67,6 +100,14 @@ public class Fase {
 
 
     /* SETTERS*/
+
+    /**
+     *      Este método indica el tema a seguir en una batalla, este es generado aleatoriamente a partir de los temas
+     *      existentes, los cuales se han guardado a partir del fichero Batalles.
+     *
+     *      @return String con el nombre del tema.
+     * */
+
     public String setTemaBatalla(){
         return temas.get((int) Math.floor(Math.random()* temas.size())).getNomTema();
     }
@@ -94,10 +135,6 @@ public class Fase {
 
     public void setTemas(Tema tema) {
         temas.add(tema);
-    }
-
-    public void setNumFase(int numFase) {
-        this.numFase = numFase;
     }
 
     public void setPosMiRapero (String nomArtistic) {
@@ -152,38 +189,6 @@ public class Fase {
         setRanking();
         return ranking;
     }
-
-    /* TO STRINGS */
-
-    /*
-    @Override
-    public String toString() {
-        return "Fase{" +
-                "pressupost=" + pressupost +
-                ", pais='" + pais + '\'' +
-                ", raperos=" + raperosToString() +
-                ", temas=" + temasToString() +
-                '}';
-    }
-
-    public String temasToString() {
-        String stringTemas = "";
-        for (Tema o : temas) {
-            stringTemas = stringTemas.concat(o.toString());
-        }
-        return temasToString();
-    }
-
-    public String raperosToString () {
-        String toString = "";
-        for (Rapero o : raperos){
-            toString = toString.concat(o.toString());
-            toString = toString.concat("\n");
-        }
-        return toString;
-    }
-
-     */
 
     /* MÉTODOS */
 

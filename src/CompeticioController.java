@@ -225,15 +225,15 @@ public class CompeticioController {
             }
             fase.formarBatallas();
             if (raperoClasificado){
-                System.out.println("Muy bien! Estas clasificado para la siguiente fase!");
+                System.out.println("\n\nMuy bien! Estas clasificado para la siguiente fase!\n\n");
                 fase.setPosMiRapero(nomArtistic);
             }else{
-                System.out.println("Lo siento bro pero no te has clasificado para la siguiente fase, más suerte la próxima vez!");
+                System.out.println("\n\nLo siento bro pero no te has clasificado para la siguiente fase, más suerte la próxima vez!\n\n");
                 opcioLobby = 4;
             }
 
             for (Batalla batalla : fase.getBatallas()) {
-                while (opcioLobby != 4 && opcioLobby != 1){
+                do{
                     opcioLobby = menu.mostraLobby(fase.getNumFase(), competicio.getNumFases(), fase.getRaperos().get(fase.getPosMiRapero()).getPuntuacio(), batalla.getNumBatalla(), batalla.getTipusBatalla(), batalla.getNomRival());
                     switch (opcioLobby){
                         case 1:
@@ -244,15 +244,16 @@ public class CompeticioController {
                             break;
                         case 2:
                             menu.mostrarRanking(fase.getPosMiRapero(), fase.getRanking());
+                            System.out.println("\n\n");
                             break;
                         case 3:
-                            System.out.println("Esta opcion todavía no se puede ejecutar! Prueba más tarde.");
+                            System.out.println("\n\nEsta opcion todavía no se puede ejecutar! Prueba más tarde.\n\n");
                             break;
                         case 4:
                             fase.simulaciones(fase.getBatallas().indexOf(batalla));
                             break;
                     }
-                }
+                }while (opcioLobby == 2 || opcioLobby == 3);
             }
             fase.setRanking();
             fase.descartarRaperos(competicio.getNumFases());

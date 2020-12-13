@@ -27,29 +27,72 @@ public class Competicio {
 
     /* GETTERS */
 
+    /**
+     *      Método para conseguir el nom de la competición.
+     *
+     *      @return String equivalente al nom.
+     * */
+
     public String getNom() {
         return nom;
     }
+
+    /**
+     *      Método para conseguir la fecha de inicio de la competición.
+     *
+     *      @return Date equivalente a dataInici.
+     * */
 
     public Date getDataInici() {
         return dataInici;
     }
 
+    /**
+     *      Método para conseguir la fecha de finalización de la competición.
+     *
+     *      @return Date equivalente a la dataFinal.
+     * */
+
     public Date getDataFinal() {
         return dataFinal;
     }
+
+    /**
+     *      Método para conseguir el numero de fases de la competición.
+     *
+     *      @return int equivalente a numFases
+     * */
 
     public int getNumFases() {
         return numFases;
     }
 
+    /**
+     *      Método para conseguir el ArrayList de fases de la competición.
+     *
+     *      @return ArrayList de Fase equivalente a fases.
+     * */
+
     public ArrayList<Fase> getFases() {
         return fases;
     }
 
+    /**
+     *      Método para conseguir una de las fases de la competición.
+     *
+     *      @param num (int) número de fase deseado.
+     *      @return Fase equivalente a la Fase deseada.
+     * */
+
     public Fase getFase (int num) {
         return fases.get(num);
     }
+
+    /**
+     *      Método para conseguir el ArrayList de paises de la competición.
+     *
+     *      @return ArrayList de String equivalente a llistaPaisos.
+     * */
 
     public ArrayList<String> getLlistaPaisos() {
         return llistaPaisos;
@@ -58,25 +101,60 @@ public class Competicio {
     /* SETTERS */
     /* UTILIZADOS EN FICHEROS */
 
+    /**
+     *      Método para guardar el nom de la competición.
+     *
+     *      @param nom (String) nombre.
+     * */
+
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    /**
+     *      Método para guardar la dataInici de la competición.
+     *
+     *      @param dataInici (Date) fecha inicio.
+     * */
 
     public void setDataInici(Date dataInici) {
         this.dataInici = dataInici;
     }
 
+    /**
+     *      Método para guardar la dataFinal de la competición.
+     *
+     *      @param dataFinal (Date) fecha finalización.
+     * */
+
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
     }
+
+    /**
+     *      Método para inicializar numFases, el cual se iguala al tamaño del ArrayList defases.
+     *
+     * */
 
     public void setNumFases() {
         numFases = fases.size();
     }
 
+    /**
+     *      Método para guardar un pais en el ArrayList llistaPaisos.
+     *
+     *      @param pais (String) nombre del pais.
+     * */
+
     public void setLlistaPaisos(String pais) {
         llistaPaisos.add(pais);
     }
+
+    /**
+     *      Método para guardar una fase en el ArrayList fases.
+     *
+     *      @param fase (Fase) la fase a añadir.
+     * */
 
     public void setFase(Fase fase) {
         fases.add(fase);

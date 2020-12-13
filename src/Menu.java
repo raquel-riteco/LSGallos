@@ -325,7 +325,7 @@ public class Menu {
                 estrofaRapero.add(tuTurno());
             }
             estrofas.add(estrofaRapero);
-            System.out.println(nomRival + "es tu turno!\n");
+            System.out.println(nomRival + " es tu turno!\n");
             turnoRival(fase, batalla, nivelRival, numBarra);
             numBarra++;
             System.out.println("\nVeo que tenemos nivel\nEs tu turno!");
@@ -389,10 +389,10 @@ public class Menu {
 
     public void mostrarRanking (int posMiRapero, ArrayList<Rapero> ranking) {
         System.out.println("--------------------------------------------\n" +
-                           "  Pos.   |       Name      |   Score  \n" +
+                           "  Pos.   |    Name    |   Score  \n" +
                            "--------------------------------------------\n");
         for (Rapero o : ranking){
-            System.out.print(ranking.indexOf(o) + "  " + o.getNomArtistic() + " - " + o.getPuntuacio());
+            System.out.print((ranking.indexOf(o) + 1) + "        " + o.getNomArtistic() + "       -       " + o.getPuntuacio());
             if (ranking.indexOf(o) == posMiRapero){
                 System.out.println(" <-- Tu");
             }else{

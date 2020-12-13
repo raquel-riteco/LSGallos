@@ -138,10 +138,10 @@ public class Batalla {
         for (ArrayList<String> estrofa: estrofas) {
             ArrayList<String> ultimasLetras = new ArrayList<>();
             for (String o: estrofa) {
-                 if (o.length() < 2 || isLetter(o)){
-                     ultimasLetras.add("0");
-                 }else{
+                 if (o.length() >= 2 && isLetter(o)){
                      ultimasLetras.add(o.substring(o.length() - 2));
+                 }else{
+                     ultimasLetras.add("0");
                  }
             }
             rima.add(numRimas(ultimasLetras));
@@ -169,14 +169,6 @@ public class Batalla {
             return letraFinal <= 90 || letraFinal >= 97;
         }
     }
-    /*
-    public void simulacions (){
-        for (Batalla batalla : batallas) {
-
-        }
-    }
-
-     */
 
     public void simularBatalla (ArrayList<Tema> temas,Batalla batallaTipusBatalla, String nomTema, int numeroAparellament, ArrayList<Rapero> raperos) {
         int numRapero1 = -1;
