@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ *      Esta clase guarda toda la información referente a la competición.
+ * */
+
 public class Competicio {
 
     private String nom;
@@ -7,12 +11,14 @@ public class Competicio {
     private Date dataFinal;
     private int numFases;
 
-    private ArrayList<Fase> fases;
-    private ArrayList<String> llistaPaisos;
+    private final ArrayList<Fase> fases;
+    private final ArrayList<String> llistaPaisos;
 
     /* CONSTRUCTORES */
 
-
+    /**
+     *      Este constructor crea los 2 arrays necesarios, los cuales son atributos de esta clase.
+     * */
 
     public Competicio(){
         fases = new ArrayList<>();
@@ -78,40 +84,23 @@ public class Competicio {
 
     /* METODOS */
 
+    /**
+     *      Este método es utlizado para actualizar la lista de raperos de la fase en funcion de si esta es la inicial,
+     *      intermédia o final, intercanviando en los casos pertinentes el ArrayList de raperos por el ranking de la
+     *      fase anterior, de esta manera se trabaja directamente con los raperos que han pasado de fase.
+     *
+     *      @param fase (Fase) representa la fase actual de la competición.
+     * */
+
     public void actualizarListaRaperos (Fase fase){
         if (numFases == 2 && fase.getNumFase() == 2){
             fase.setRaperos(fases.get(0).getRaperos());
         }else{
-            switch (fase.getNumFase()){
-                case 2:
-                    fase.setRaperos(fases.get(0).getRaperos());
-                    break;
-                case 3:
-                    fase.setRaperos(fases.get(1).getRaperos());
-                    break;
-                default:
-                    //nothing
+            if (fase.getNumFase() == 2) {
+                fase.setRaperos(fases.get(0).getRaperos());
+            } else if (fase.getNumFase() == 3) {
+                fase.setRaperos(fases.get(1).getRaperos());
             }
         }
-    }
-
-    /* TO STRING */
-
-    @Override
-    public String toString() {
-        return "Competicio{" +
-                "\nnom='" + nom + '\'' +
-                "\ndataInici=" + dataInici +
-                "\ndataFinal=" + dataFinal +
-                "\nnumFases=" + numFases +
-                "\nfases=" + fasesToString() +
-                '}';
-    }
-    public String fasesToString (){
-        String stringFases = "";
-        for (Fase o : fases) {
-            stringFases = stringFases.concat(o.toString());
-        }
-        return stringFases;
     }
 }
