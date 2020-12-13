@@ -217,13 +217,15 @@ public class Menu {
      *      Este método muestra el menú de la batalla y fase actuales, junto con su información y diferentes oipciones
      *      a seleccionar.
      *
-     *      Todos loa parámetros son pasados automáticamente por el programa.
+     *      Todos los parámetros son pasados automáticamente por el programa.
      *      @param maxFases (int) equivalente al numero máximo de fases de la competición.
      *      @param nomRival (String) equivalente al nombre del oponente en la batalla siguiente.
      *      @param numBatalla (int) si es la primera o segunda batalla de la fase (0 u 1).
      *      @param puntuacion (double) puntuación del rapero hasta el momento.
      *      @param tipusBatalla (String) puede ser "BatallaAcapela", "BatallaSangre" o "BatallaEscrita".
      *      @param numFase (int) numero actual de fase (0, 1 o 2).
+     *
+     *      @return int opción seleccionada por el usuario (solo puede ser 1, 2, 3 o 4).
      * */
 
     public int mostraLobby (int numFase, int maxFases, double puntuacion, int numBatalla, String tipusBatalla, String nomRival){
@@ -264,6 +266,20 @@ public class Menu {
     }
 
     /* LOBBY: OPCION 1 */
+
+    /**
+     *      Este método ejecuta la batalla, mostrando por pantalla los diferentes turnos tanto del rival como del
+     *      rapero y mostrando por pantalla las estrofas del rival.
+     *
+     *      Todos los parámetros son pasados automáticamente por el programa.
+     *      @param nomRival (String) equivalente al nombre del oponente en la batalla siguiente.
+     *      @param batalla (Batalla) equivalente a la batalla actual.
+     *      @param fase (Fase) equivalente a la fase actual.
+     *      @param quienEmpieza (int) numero aleatorio para determinar cual de los 2 participantes interviene antes.
+     *
+     *      @return ArrayList con 2 ArrayLists que representan las estrofas esritas por el rapero (1 por intervención),
+     *         cada uno contiene 4 Strings que representan los 4 versos de la estrofa.
+     * */
 
     public ArrayList<ArrayList<String>> batalla (Fase fase, Batalla batalla, int quienEmpieza, String nomRival){
         Long nivelRival;
@@ -326,10 +342,30 @@ public class Menu {
         }
         return estrofas;
     }
+
+    /**
+     *      Este método devuelve la línea introducida por el usuario por teclado.
+     *
+     *      @return (String) verso del usuario.
+     * */
+
     public String tuTurno () {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
+
+    /**
+     *      Este método muestra por pantalla la estrofa correspondiente al tema préviamente escogido y de acuerdo con
+     *      el nivel del rival.
+     *
+     *      Todos los parámetros son pasados automáticamente por el programa.
+     *      @param fase (String) equivalente al nombre del oponente en la batalla siguiente.
+     *      @param batalla (Batalla) equivalente a la batalla actual.
+     *      @param nivelRival (Long) entre 1 y 2 representa el nivel del contrincario utilizado para encontrar su
+     *                        estrofa correspondiente.
+     *      @param numBarra (int) número que determina si es la primera o la segunda intervención del rival en esta
+     *                      batalla.
+     * */
 
     public void turnoRival (Fase fase, Batalla batalla, Long nivelRival, int numBarra){
         for (Tema a : fase.getTemas()) {
@@ -340,6 +376,17 @@ public class Menu {
     }
 
     /* LOBBY: OPCION 2 */
+
+    /**
+     *      Este método muestra por pantalla en forma de lista el ranquing actual de la competición, el cual está
+     *      ordenado por puntuación de forma descendiente. También indica cual es el rapero con el que se ha hecho el
+     *      login, marcándolo con una flecha.
+     *
+     *      Todos los parámetros son pasados automáticamente por el programa.
+     *      @param posMiRapero (int) representa la posición del rapero en el ranking.
+     *      @param ranking (ArrayList) ArrayList generada en competicio con los raperos ya ordenados.
+     *
+     * */
 
     public void mostrarRanking (int posMiRapero, ArrayList<Rapero> ranking) {
         System.out.println("--------------------------------------------\n" +
@@ -356,6 +403,17 @@ public class Menu {
     }
 
     /* MAX FASES HECHAS: */
+
+    /**
+     *      Esta función se ejecuta una vez se ha llegado al máximo de batallas en el máximo de fases. Se muestra un
+     *      menú en pantalla con diferentes opciones y se recoge la opción escogida por el usuario.
+     *
+     *      Todos los parámetros son pasados automáticamente por el programa.
+     *      @param ganador (String) nombre artístico del rapero con mayor puntuación.
+     *      @param puntuacion (int) puntuación del rapero ganador.
+     *
+     *      @return int devuelve la opción seleccionada (solo puede ser 2, 3 o 4).
+     * */
 
     public int faseFinal (String ganador, float puntuacion) {
         int opcio = 0;
@@ -395,6 +453,15 @@ public class Menu {
     }
 
     /* COMPETICION ACABADA */
+
+    /**
+     *      En el caso que se haya llegado al final de la competición o la fecha actual determine que está ya ha acabado
+     *      se ejecutará este método, el cual muestra por pantalla una medalla y el nombre y puntuación del ganador de
+     *      la competición.
+     *
+     *      El parámetro es pasado automáticamente por el programa.
+     *      @param rapero (Rapero) objecto de la clase Rapero que representa el rapero ganador.
+     * */
 
     public void acabada (Rapero rapero){
         System.out.println("El ganador de esta edicion es...\n\n");
