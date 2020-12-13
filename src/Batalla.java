@@ -22,7 +22,6 @@ public class Batalla {
      *      @param raperos (ArrayList Rapero) Arraylist con todos los raperos.
      *      @param posMiRapero (int) Posicion del rapero usuario.
      *
-     *
      * */
 
     public Batalla (ArrayList<Rapero> raperos, int posMiRapero) {
@@ -37,7 +36,6 @@ public class Batalla {
      *
      *      @param raperos (ArrayList Rapero) Arraylist con todos los raperos.
      *      @param posMiRapero (int) Posicion del rapero usuario.
-     *
      *
      * */
 
@@ -146,7 +144,7 @@ public class Batalla {
     /**
      *      Metodo para guardar el numero de la batalla.
      *
-     *      @param nomArtistic (String) String con el nombre artistico del rival del usuario.
+     *      @param numBatalla (String) String con el numero perteneciente a la batalla.
      *
      * */
 
@@ -226,8 +224,6 @@ public class Batalla {
 
     /* MÉTODOS */
 
-
-
     public double calculoPuntuacion(){
         return 0;
     }
@@ -281,10 +277,13 @@ public class Batalla {
     }
 
     /**
-     *      ????????????????????????????????.
+     *      Método para comprovar que los últimos carácteres del verso introducido por el usuario son letras del
+     *      abecedario y no otros símbolos.
      *
-     *      @return (int) Entero con el numero de emparejamientos de la batalla.
+     *      @param s (String) los últimos carácteres.
      *
+     *      @return (boolean) true si es una letra del abecedario.
+     *                        false si no lo es.
      * */
 
     public boolean isLetter (String s){

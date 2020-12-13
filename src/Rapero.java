@@ -1,4 +1,3 @@
-import java.util.Date;
 
 /**
  *      Esta clase servira para guardar la informacion de cada rapero sea obtenido a traves del fichero competicio o entrado por el usuario.
@@ -196,24 +195,4 @@ public class Rapero {
         return paisString;
     }
 
-    /* METODOS */
-
-
-    /**
-     *      Metodo para obtener en forma de String la infromacion del Rapero.
-     * */
-
-    @Override
-    public String toString() {
-        return "Rapero{" +
-                "\nnomComplet='" + nomComplet + '\'' +
-                "\nnomArtistic='" + nomArtistic + '\'' +
-                "\ndataNaixement=" + dataNaixement +
-                "\nnivell=" + nivell +
-                "\nfoto='" + foto + '\'' +
-                "\npuntuacio=" + puntuacio +
-                "\npais=" + pais +
-                "\npaisString=" + paisString +
-                '}';
-    }
 }

@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Tema {
 
-    private String nomTema;
-    private ArrayList<Estrofa> estrofas;
+    private final String nomTema;
+    private final ArrayList<Estrofa> estrofas;
 
     /* CONSTRUCTORES */
 
@@ -11,7 +11,6 @@ public class Tema {
      *      Creara una objeto Tema nuevo y le asignara la informacion obtenida por los parametros.
      *
      *      @param nomTema (String) Nombre del Tema.
-     *
      *
      * */
 
@@ -33,7 +32,15 @@ public class Tema {
     }
 
 
-
+    /**
+     *      Este método busca en la estrofa el verso correspondiente al nivel del rapero y al número de barra (1 o 2),
+     *      referente a la primera o segunda intervención del rapero.
+     *
+     *      @param numBarra (int) referente a la 1a o 2a intervención.
+     *      @param nivel (Long) referente al nivel del rapero.
+     *
+     *      @return (String) devuelve el verso indicado.
+     * */
     public String getEstrofaPerNivell (Long nivel, int numBarra){
         for (Estrofa a : estrofas) {
             if (Integer.parseInt(String.valueOf(nivel)) == a.nivel){
@@ -47,45 +54,37 @@ public class Tema {
         return "Oh no, te has quedado en blanco!";
     }
 
-
+    /**
+     *      Este método busca entre las estrofas la que coincida con el nivel pasado por parámetro.
+     *
+     *      @param nivel (Long) nivel del rapero.
+     *
+     *      @return (Estrofa) devuelve la estrofa indicada.
+     * */
 
     public Estrofa getEstrofa (Long nivel){
         return estrofas.get(Integer.parseInt(Long.toString(nivel - 1)));
     }
 
-
     /* SETTERS */
 
-
+    /**
+     *      Este método añade la estrofa pasada por parámetro al ArrayList estrofas.
+     *
+     *      @param estrofa (Estrofa) estrofa a añadir.
+     * */
 
     public void setEstrofas(Estrofa estrofa) {
         estrofa.setPuntuacion();
         estrofas.add(estrofa);
     }
 
-    /*METODOS*/
-
-    /**
-     *      Método para obtener una String con la informacion del tema para imprimirla por pantalla.
-     *
-     *      @return (String) String con la informacion del tema para imprimir por pantalla.
-     * */
-
-    @Override
-    public String toString() {
-        return "Tema{" +
-                "\nnomTema='" + nomTema + '\'' +
-                "\nestrofas=" + estrofas.toString() +
-                '}';
-    }
-
     /* ESTROFA */
 
-
     public static class Estrofa {
-        private int nivel;
-        private ArrayList<String> barras;
-        private ArrayList<Integer> puntuacion;
+        private final int nivel;
+        private final ArrayList<String> barras;
+        private final ArrayList<Integer> puntuacion;
 
         /* CONSTRUCTORES */
 
@@ -94,7 +93,6 @@ public class Tema {
          *
          *      @param nivel (int) Nivel de la estrofa
          *
-         *      @return (String) Nombre del Tema.
          * */
 
         public Estrofa(int nivel) {
@@ -139,7 +137,6 @@ public class Tema {
             if (barras.size() < 2){
                 puntuacion.add(0);
             }
-
         }
 
         /**
@@ -195,15 +192,14 @@ public class Tema {
          *
          * */
 
-
         public ArrayList<String> getBarras() {
             return barras;
         }
 
         /**
-         *      ????????????????
+         *      Método para obtener el ArrayList de puntuación formado por Integrers.
          *
-         *      @return (String) ArrayList de String con las barras de la estrofa.
+         *      @return (ArrayList de Integrers) ArrayList puntuacion.
          *
          * */
 
@@ -211,29 +207,5 @@ public class Tema {
             return puntuacion;
         }
 
-        /* TO STRINGS */
-
-        /**
-         *      Metodo para obtener una String con la informacion de la estrofa para imprimir por pantalla.
-         *
-         *      @return (String) String con la informacion de la estrofa para imprimir por pantalla.
-         *
-         * */
-
-        @Override
-        public String toString() {
-            return "Estrofa{" +
-                    "nivel=" + nivel +
-                    ", barras=" + barrasToString() +
-                    '}';
-        }
-
-        public String barrasToString (){
-            String barrasToString = "";
-            for (String s : barras) {
-                barrasToString = barrasToString.concat(s);
-            }
-            return barrasToString;
-        }
     }
 }
