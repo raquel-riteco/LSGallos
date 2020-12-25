@@ -233,7 +233,7 @@ public class CompeticioController {
                             System.out.println("\n\n");
                             break;
                         case 3:
-                            System.out.println("\n\nEsta opcion todavía no se puede ejecutar! Prueba más tarde.\n\n");
+                            menu.showPprofile(fase);
                             break;
                         case 4:
                             fase.simulaciones(fase.getBatallas().indexOf(batalla));

@@ -109,11 +109,11 @@ public class Rapero {
     /**
      *      Metodo para guardar el nombre del pais del rapero.
      *
-     *      @param nomPais (String) Pais de origen del rapero.
+     *      @param paisString (String) Pais de origen del rapero.
      */
 
-    public void setPaisRapero(String nomPais) {
-        this.pais.setNom(nomPais);
+    public void setPaisRapero(String paisString) {
+        this.paisString = paisString;
     }
 
     /**

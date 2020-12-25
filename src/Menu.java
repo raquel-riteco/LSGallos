@@ -132,6 +132,7 @@ public class Menu {
                 System.out.println("Este pais no es valido, introduce otro");
             }
         }while(!correct);
+        System.out.println(valor);
         rapero.setPaisRapero(valor);
 
         do {
@@ -399,6 +400,17 @@ public class Menu {
                 System.out.println();
             }
         }
+    }
+
+    /* LOBBY OPCION 3 */
+
+    public void showPprofile(Fase fase){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\nIntroduce el nombre del rapero: ");
+        String name = sc.nextLine();
+        System.out.println("\n\nCogiendo información del paí de origen (" + fase.getRaperos().get(0).getPaisString() + ")...");
+        System.out.println("\nGenerando fichero HTML...\n");
+
     }
 
     /* MAX FASES HECHAS: */
