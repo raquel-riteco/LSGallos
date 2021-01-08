@@ -263,7 +263,10 @@ public class Controller {
                         menu.mostrarRanking(competicio.getFase(competicio.getNumFases()).getPosMiRapero(), competicio.getFase(competicio.getNumFases()).getRanking());
                         break;
                     case 3:
-                        System.out.println("Esta opcion todavía no se puede ejecutar! Prueba más tarde.");
+                        Rapero rapero = menu.showProfile(competicio.getFase(competicio.getNumFases()));
+                        CrearPerfil crearPerfil = new CrearPerfil(ProfileFactory.createProfile("src/proyecto/datos/html", rapero), rapero.getPaisString());
+                        crearPerfil.buscarInfoPais();
+                        crearPerfil.generarPerfil();
                         break;
                     default:
                         opcioFaseFinal = 5;
