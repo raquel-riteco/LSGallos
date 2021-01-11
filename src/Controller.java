@@ -1,10 +1,5 @@
-package proyecto.aplicacion;
-
-import edu.salleurl.profile.ProfileFactory;
-import proyecto.datos.Fitxers;
-import proyecto.presentacion.*;
-
 import java.util.Date;
+
 
 /**
  *      Esta es la clase principal del programa, a partir de esta configuraremos el resto de clases y ejecutaremos
@@ -13,7 +8,6 @@ import java.util.Date;
  * */
 
 public class Controller {
-
     private final Menu menu;
     private final Fitxers fitxers;
     private final String nomCompeticio;
@@ -241,7 +235,11 @@ public class Controller {
                             break;
                         case 3:
                             Rapero rapero = menu.showProfile(fase);
-                            CrearPerfil crearPerfil = new CrearPerfil(ProfileFactory.createProfile("src/proyecto/datos/html", rapero), rapero.getPaisString());
+                            CrearPerfil crearPerfil = new CrearPerfil(rapero.getPaisString());
+                            String ruta = "src/HTML/";
+                            ruta = ruta.concat(rapero.getNickname());
+                            ruta = ruta.concat(".html");
+                            crearPerfil.setProfile(ruta, rapero);
                             crearPerfil.buscarInfoPais();
                             crearPerfil.generarPerfil();
                             break;
@@ -264,7 +262,8 @@ public class Controller {
                         break;
                     case 3:
                         Rapero rapero = menu.showProfile(competicio.getFase(competicio.getNumFases()));
-                        CrearPerfil crearPerfil = new CrearPerfil(ProfileFactory.createProfile("src/proyecto/datos/html", rapero), rapero.getPaisString());
+                        CrearPerfil crearPerfil = new CrearPerfil(rapero.getPaisString());
+                        crearPerfil.setProfile("/src/proyecto/datos/html", rapero);
                         crearPerfil.buscarInfoPais();
                         crearPerfil.generarPerfil();
                         break;

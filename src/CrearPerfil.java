@@ -1,22 +1,41 @@
-package proyecto.presentacion;
-
 import edu.salleurl.profile.Profile;
+
+import edu.salleurl.profile.ProfileFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
 public class CrearPerfil {
-    private static Profile profile;
+    private Profile profile;
     private static String pais;
 
-    public CrearPerfil (Profile profile, String pais){
-        CrearPerfil.profile = profile;
+    public CrearPerfil (String pais){
         CrearPerfil.pais = pais;
+    }
+
+    public void setProfile (String ruta, Rapero rapero){
+        profile = ProfileFactory.createProfile(ruta, rapero);
+    }
+
+    public String getDataAPI (String paisFormatoRest) throws IOException {
+        URL url = new URL("https://restcountries.eu/rest/v2/name/" + paisFormatoRest);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.connect();
+        Scanner sc = new Scanner(url.openStream());
+        String data = "";
+        while (sc.hasNext()){
+            data += sc.nextLine();
+        }
+        sc.close();
+        return data;
     }
 
     public void buscarInfoPais (){
@@ -29,9 +48,9 @@ public class CrearPerfil {
             }
         }
         try{
+            String data = getDataAPI(paisFormatoRest);
             JSONParser parser = new JSONParser();
-            FileReader reader = new FileReader("https://restcountries.eu/rest/v2/name/United%20States%20of%20America");
-            JSONArray aux = (JSONArray) parser.parse(reader);
+            JSONArray aux = (JSONArray) parser.parse(data);
             JSONObject info = (JSONObject) aux.get(0);
             profile.setFlagUrl((String) info.get("flag"));
             JSONArray idiomas = (JSONArray) info.get("languages");

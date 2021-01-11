@@ -1,5 +1,3 @@
-package proyecto.aplicacion;
-
 import edu.salleurl.profile.Profileable;
 
 /**

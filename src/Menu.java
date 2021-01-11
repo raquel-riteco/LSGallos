@@ -1,11 +1,6 @@
-package proyecto.presentacion;
-
-import proyecto.aplicacion.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 /***
@@ -430,7 +425,7 @@ public class Menu {
             }
         }while (!ok);
         System.out.println("\n\nCogiendo información del país de origen (" + r.getPaisString() + ")...");
-        System.out.println("\nGenerando fichero HTML...\n");
+        System.out.println("\nGenerando fichero HTML.html...\n");
         return r;
     }
 

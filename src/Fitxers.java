@@ -1,9 +1,4 @@
-package proyecto.datos;
 
-import proyecto.aplicacion.Competicio;
-import proyecto.aplicacion.Fase;
-import proyecto.aplicacion.Rapero;
-import proyecto.aplicacion.Tema;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

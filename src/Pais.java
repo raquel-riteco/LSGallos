@@ -1,5 +1,3 @@
-package proyecto.aplicacion;
-
 import java.util.ArrayList;
 /**
  *      Esta clase servira para guardar la informacion de cada pais obtenidos del fichero competicio. En la fase 3 se buscara y añadira
