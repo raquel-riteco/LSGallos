@@ -20,8 +20,8 @@ public class BatallaAcapella extends Batalla {
      * */
 
     @Override
-    public float puntuacionSimulaciones(float R) {
-        return ((float) Math.sqrt(R) + 5)/3;
+    public double puntuacionSimulaciones(float R) {
+        return ( 6 * Math.sqrt(R) + 3)/2;
     }
 
     /**
@@ -33,8 +33,8 @@ public class BatallaAcapella extends Batalla {
 
     @Override
     public double calculoPuntuacion (){
-        double R = calcularRimes();
-        return (Math.sqrt(R) + 5)/3;
+        Integer[] R = calcularRimes();
+        return ((6 * Math.sqrt(R[0]) + 3)/2) + ((6 * Math.sqrt(R[1]) + 3)/2);
     }
 }
 

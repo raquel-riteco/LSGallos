@@ -193,7 +193,7 @@ public class Fase {
 
     public void setRanking() {
         ranking = raperos;
-        ranking.sort((o1, o2) -> Float.compare(o2.getPuntuacio(), o1.getPuntuacio()));
+        ranking.sort((o1, o2) -> Double.compare(o2.getPuntuacio(), o1.getPuntuacio()));
     }
 
     /**

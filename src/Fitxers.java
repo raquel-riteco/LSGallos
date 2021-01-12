@@ -1,4 +1,6 @@
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -149,6 +151,7 @@ public class Fitxers {
      * */
 
     public void registrarRapero (Rapero rapero, String nomCometicio) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(nomCometicio)){
             JSONObject rapper = new JSONObject();
@@ -164,10 +167,8 @@ public class Fitxers {
             competitionFile.replace("rappers", arrayRappers);
 
             try (FileWriter writer = new FileWriter(nomCometicio)){
-                //ObjectMapper mapper = new ObjectMapper();
-                //Object json = mapper.readValue(competitionFile.toJSONString(), Object.class);
-                //String jsonStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
-                writer.write(competitionFile.toJSONString());
+                String json = gson.toJson(competitionFile);
+                writer.write(json);
                 writer.flush();
 
             }catch (IOException e){

@@ -229,7 +229,7 @@ public class Batalla {
     }
 
 
-    public float puntuacionSimulaciones (float R){
+    public double puntuacionSimulaciones (float R){
         return 0;
     }
 
@@ -240,8 +240,8 @@ public class Batalla {
      *
      * */
 
-    public int calcularRimes(){
-        int R = 0;
+    public Integer[] calcularRimes(){
+        Integer[] R = {0, 0};
         ArrayList<ArrayList<Integer>> rima = new ArrayList<>();
         for (ArrayList<String> estrofa: estrofas) {
             ArrayList<String> ultimasLetras = new ArrayList<>();
@@ -254,11 +254,9 @@ public class Batalla {
             }
             rima.add(numRimas(ultimasLetras));
         }
-        for (ArrayList<Integer> rimasPorEstrofa : rima) {
-            for (Integer rimasPorVerso : rimasPorEstrofa) {
-                R += rimasPorVerso;
-            }
-        }
+        R[0] = rima.get(0).get(0) + rima.get(0).get(1) + rima.get(0).get(2) + rima.get(0).get(3);
+        R[1] = rima.get(1).get(0) + rima.get(1).get(1) + rima.get(1).get(2) + rima.get(1).get(3);
+
         return R;
     }
 
@@ -322,10 +320,10 @@ public class Batalla {
         }
         for (Tema tema : temas) {
             if (tema.getNomTema().equals(nomTema)) {
-                //Project.AppNegocio.Rapero 1
+                //Rapero 1
                 raperos.get(numRapero1).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(0)));
                 raperos.get(numRapero1).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(1)));
-                //Project.AppNegocio.Rapero 2
+                //Rapero 2
                 raperos.get(numRapero2).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(0)));
                 raperos.get(numRapero2).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(1)));
                 break;

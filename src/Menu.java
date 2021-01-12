@@ -21,7 +21,7 @@ public class Menu {
 
     public void mostrarDades (Competicio competicio) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         System.out.println("Bienvenido/a a la competición: " + competicio.getNom());
         System.out.println("Comienza el " + sdf.format(competicio.getDataInici()));
         System.out.println("Acaba el " + sdf.format(competicio.getDataFinal()));
@@ -88,12 +88,12 @@ public class Menu {
         System.out.println("----------------------------------------------------");
         System.out.println("Por favor, introduzca su información personal:");
 
-        System.out.println("- Nombre completo: ");
+        System.out.print("- Nombre completo: ");
         rapero.setNomComplet(sc.nextLine());
 
         do {
             correct = true;
-            System.out.println("- Nombre artístico: ");
+            System.out.print("- Nombre artístico: ");
             valor = sc.nextLine();
             for (Rapero o: competicio.getFase(0).getRaperos()) {
                 if (o.getNickname().equals(valor)){
@@ -107,7 +107,7 @@ public class Menu {
 
         do {
             correct = true;
-            System.out.println("- Fecha de nacimiento (yyyy/MM/dd): ");
+            System.out.print("- Fecha de nacimiento (yyyy/MM/dd): ");
             valor = sc.nextLine();
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -123,7 +123,7 @@ public class Menu {
 
         do {
             correct = false;
-            System.out.println("- Project.AppNegocio.Pais (en inglés): ");
+            System.out.print("- Pais (en inglés): ");
             valor = sc.nextLine();
             for (String o : competicio.getLlistaPaisos()) {
                 if (o.equals(valor)) {
@@ -140,7 +140,7 @@ public class Menu {
 
         do {
             correct = true;
-            System.out.println("- Nivel: ");
+            System.out.print("- Nivel: ");
             valor = sc.nextLine();
             try {
                 if (Integer.parseInt(valor) != 1 && Integer.parseInt(valor) != 2) {
@@ -154,12 +154,10 @@ public class Menu {
         }while (!correct);
         rapero.setNivell(Long.parseLong(valor));
 
-        System.out.println("- Foto: ");
+        System.out.print("- Foto: ");
         rapero.setFoto(sc.nextLine());
 
-        System.out.println(" ");
-        System.out.println("Registro completo!");
-        System.out.println(" ");
+        System.out.println("\nRegistro completo!\n");
         System.out.println("----------------------------------------------------");
 
         return rapero;
@@ -238,7 +236,7 @@ public class Menu {
         boolean correct;
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Project.AppNegocio.Fase: " + numFase + " / " + maxFases + " | Puntuación: " + puntuacion + " | Project.AppNegocio.Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
+        System.out.println("Fase: " + numFase + " / " + maxFases + " | Puntuación: " + puntuacion + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         System.out.println(" ");
@@ -290,7 +288,7 @@ public class Menu {
         ArrayList<String> estrofaRapero;
         int numBarra = 0;
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Project.AppNegocio.Tema: " + batalla.getTema() + "\n");
+        System.out.println("Tema: " + batalla.getTema() + "\n");
         System.out.println("Lanzamos la moneda al aire y...");
         if (batalla.getAparellaments().get(batalla.getNumAparellament()).get(quienEmpieza).getNickname().equals(nomRival)){
             nivelRival = batalla.getAparellaments().get(batalla.getNumAparellament()).get(quienEmpieza).getNivell();
@@ -442,7 +440,7 @@ public class Menu {
      *      @return int devuelve la opción seleccionada (solo puede ser 2, 3 o 4).
      * */
 
-    public int faseFinal (String ganador, float puntuacion) {
+    public int faseFinal (String ganador, double puntuacion) {
         int opcio = 0;
         String entrada;
         boolean correct;

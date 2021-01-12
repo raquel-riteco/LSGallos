@@ -12,7 +12,7 @@ public class Rapero implements Profileable {
     private String dataNaixement;
     private Long nivell;
     private String foto;
-    private float puntuacio;
+    private double puntuacio;
     private String paisString;
 
     private Pais pais;
@@ -103,7 +103,7 @@ public class Rapero implements Profileable {
      *      @param puntuacio (float) Puntuacion del rapero.
      */
 
-    public void setPuntuacio(float puntuacio) {
+    public void setPuntuacio(double puntuacio) {
         this.puntuacio += puntuacio;
     }
 
@@ -145,7 +145,7 @@ public class Rapero implements Profileable {
      *      @return (float) Puntuacion del rapero.
      * */
 
-    public float getPuntuacio() {
+    public double getPuntuacio() {
         return puntuacio;
     }
 

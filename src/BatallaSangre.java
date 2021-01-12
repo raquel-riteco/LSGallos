@@ -21,8 +21,8 @@ public class BatallaSangre extends Batalla{
      * */
 
     @Override
-    public float puntuacionSimulaciones(float R) {
-        return (float)((Math.PI * Math.pow(R, 2))/4);
+    public double puntuacionSimulaciones(float R) {
+        return (Math.PI * Math.pow(R, 2))/4;
     }
 
     /**
@@ -34,8 +34,8 @@ public class BatallaSangre extends Batalla{
 
     @Override
     public double calculoPuntuacion (){
-        double R = calcularRimes();
-        return (Math.PI * Math.pow(R, 2))/4;
+        Integer[] R = calcularRimes();
+        return ((Math.PI * Math.pow(R[0], 2))/4) + ((Math.PI * Math.pow(R[1], 2))/4);
     }
 }
 

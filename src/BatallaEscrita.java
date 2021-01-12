@@ -20,8 +20,8 @@ public class BatallaEscrita extends Batalla{
      * */
 
     @Override
-    public float puntuacionSimulaciones(float R) {
-        return (1 + R);
+    public double puntuacionSimulaciones(float R) {
+        return (1 + 3*R);
     }
 
     /**
@@ -33,8 +33,8 @@ public class BatallaEscrita extends Batalla{
 
     @Override
     public double calculoPuntuacion (){
-        double R = calcularRimes();
-        return (1 + R);
+        Integer[] R = calcularRimes();
+        return (1 + 3*R[0]) + (1 + 3*R[1]);
     }
 }
 
