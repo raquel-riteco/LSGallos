@@ -10,8 +10,8 @@ public class Fase {
     private double pressupost;
     private String pais;
     private int numParticipants;
-    private int posMiRapero;
     private final int numFase;
+    private String nombreRapero;
 
     private final ArrayList<Batalla> batallas;
     private ArrayList<Rapero> raperos;
@@ -64,17 +64,17 @@ public class Fase {
     public Batalla crearBatalla (String tipusBatalla){
         Batalla batalla;
         switch (tipusBatalla){
-            case "Project.AppNegocio.BatallaAcapella":
-                batalla = new BatallaAcapella(raperos, posMiRapero);
-                batalla.setTipusBatalla("Project.AppNegocio.BatallaAcapella");
+            case "BatallaAcapella":
+                batalla = new BatallaAcapella(raperos, getPosMiRapero("raperos"));
+                batalla.setTipusBatalla("BatallaAcapella");
                 break;
-            case "Project.AppNegocio.BatallaSangre":
-                batalla = new BatallaSangre(raperos, posMiRapero);
-                batalla.setTipusBatalla("Project.AppNegocio.BatallaSangre");
+            case "BatallaSangre":
+                batalla = new BatallaSangre(raperos, getPosMiRapero("raperos"));
+                batalla.setTipusBatalla("BatallaSangre");
                 break;
-            case "Project.AppNegocio.BatallaEscrita":
-                batalla = new BatallaEscrita(raperos, posMiRapero);
-                batalla.setTipusBatalla("Project.AppNegocio.BatallaEscrita");
+            case "BatallaEscrita":
+                batalla = new BatallaEscrita(raperos, getPosMiRapero("raperos"));
+                batalla.setTipusBatalla("BatallaEscrita");
                 break;
             default:
                 batalla = null;
@@ -91,9 +91,9 @@ public class Fase {
 
     public String tipusBatalla (){
         ArrayList<String> tipusBatalles = new ArrayList<>();
-        tipusBatalles.add("Project.AppNegocio.BatallaAcapella");
-        tipusBatalles.add("Project.AppNegocio.BatallaSangre");
-        tipusBatalles.add("Project.AppNegocio.BatallaEscrita");
+        tipusBatalles.add("BatallaAcapella");
+        tipusBatalles.add("BatallaSangre");
+        tipusBatalles.add("BatallaEscrita");
         int num = (int)Math.floor(Math.random()*3);
         return tipusBatalles.get(num);
     }
@@ -163,6 +163,11 @@ public class Fase {
         this.raperos = raperos;
     }
 
+    public void setNombreRapero (String nombreRapero){
+        this.nombreRapero = nombreRapero;
+    }
+
+
     /**
      *      Método para guardar un tema en el ArrayList de temas.
      *
@@ -173,19 +178,6 @@ public class Fase {
         temas.add(tema);
     }
 
-    /**
-     *      Método para guardar la posición del rapero en la actual lista de raperos.
-     *
-     *      @param nomArtistic (String) nombre del rapero.
-     * */
-
-    public void setPosMiRapero (String nomArtistic) {
-        for (Rapero o : getRaperos()){
-            if (o.getNickname().equals(nomArtistic)){
-                posMiRapero = getRaperos().indexOf(o);
-            }
-        }
-    }
 
     /**
      *      Método para actualizar el ranking de la fase.
@@ -204,8 +196,8 @@ public class Fase {
 
     public void setPuntuacionBatalla (int numBatalla){
         Batalla batalla = getBatalla(numBatalla);
-        float puntuacion = (float) batalla.calculoPuntuacion();
-        raperos.get(posMiRapero).setPuntuacio(puntuacion);
+        double puntuacion = batalla.calculoPuntuacion();
+        raperos.get(getPosMiRapero("raperos")).setPuntuacio(puntuacion);
     }
     /* GETTERS */
 
@@ -246,9 +238,21 @@ public class Fase {
      *
      *      @return (int) posMiRapero.
      * */
-
-    public int getPosMiRapero() {
-        return posMiRapero;
+    public int getPosMiRapero (String deDonde) {
+        if (deDonde.equals("raperos")){
+            for (Rapero o : getRaperos()){
+                if (o.getNickname().equals(nombreRapero)){
+                    return getRaperos().indexOf(o);
+                }
+            }
+        }else{
+            for (Rapero o : getRanking()){
+                if (o.getNickname().equals(nombreRapero)){
+                    return getRanking().indexOf(o);
+                }
+            }
+        }
+        return -1;
     }
 
     /**

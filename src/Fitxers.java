@@ -1,6 +1,7 @@
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,7 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
  *      Esta clase es la responsable de leer los 2 ficheros Project.JSON que contienen toda la información relacionada con
@@ -31,7 +34,8 @@ public class Fitxers {
         Competicio competicio = new Competicio();
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(nomCompeticio)){
-            JSONObject obj = (JSONObject) jsonParser.parse(reader);
+            JSONArray file = (JSONArray) jsonParser.parse(reader);
+            JSONObject obj = (JSONObject) file.get(0);
             parseCompeticio(competicio, obj);
 
         }catch (FileNotFoundException e){
@@ -147,13 +151,13 @@ public class Fitxers {
      *
      *      Todos los parámetros de este método son pasados automáticamente por el programa.
      *      @param rapero (Project.AppNegocio.Rapero) rapero a añadir.
-     *      @param nomCometicio (String) path del fichero Project.AppNegocio.Competicio.
+     *      @param nomCompeticio (String) path del fichero Project.AppNegocio.Competicio.
      * */
 
-    public void registrarRapero (Rapero rapero, String nomCometicio) {
+    public void registrarRapero (Rapero rapero, String nomCompeticio) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader(nomCometicio)){
+        try (FileReader reader = new FileReader(nomCompeticio)){
             JSONObject rapper = new JSONObject();
             rapper.put("realName", rapero.getName());
             rapper.put("stageName", rapero.getNickname());
@@ -161,13 +165,17 @@ public class Fitxers {
             rapper.put("nationality", rapero.getPaisString());
             rapper.put("level", rapero.getNivell());
             rapper.put("photo", rapero.getPictureUrl());
-            JSONObject competitionFile = (JSONObject) parser.parse(reader);
+
+            JSONArray fileArray = (JSONArray) parser.parse(reader);
+            JSONObject competitionFile = (JSONObject) fileArray.get(0);
             JSONArray arrayRappers = (JSONArray) competitionFile.get("rappers");
             arrayRappers.add(rapper);
             competitionFile.replace("rappers", arrayRappers);
+            fileArray.remove(0);
+            fileArray.add(0,competitionFile);
 
-            try (FileWriter writer = new FileWriter(nomCometicio)){
-                String json = gson.toJson(competitionFile);
+            try (FileWriter writer = new FileWriter(nomCompeticio)){
+                String json = gson.toJson(fileArray);
                 writer.write(json);
                 writer.flush();
 
@@ -178,4 +186,45 @@ public class Fitxers {
             System.out.println(e.getMessage());
         }
     }
+
+    public void guardarInfo (ArrayList<Rapero> ranquing, String nomCompeticio) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JSONParser parser = new JSONParser();
+        try (FileReader reader = new FileReader(nomCompeticio)){
+            JSONArray fileArray = (JSONArray) parser.parse(reader);
+            JSONObject info = new JSONObject();
+            info.put("Nombre", ranquing.get(0).getNickname());
+            info.put("Puntuacion", ranquing.get(0).getPuntuacio());
+            fileArray.add(1, info);
+            if (fileArray.size() > 1){
+                fileArray.remove(2);
+            }
+            try (FileWriter writer = new FileWriter(nomCompeticio)){
+                String json = gson.toJson(fileArray);
+                writer.write(json);
+                writer.flush();
+
+            }catch (IOException e){
+                System.out.println("IO Exeption a al registrar rapero al fitcher: " + e.getMessage());
+            }
+
+        }catch (IOException | ParseException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public String[] leerInfo (String nomCompeticio){
+        JSONParser parser = new JSONParser();
+        String[] info = {"", ""};
+        try (FileReader reader = new FileReader(nomCompeticio)){
+            JSONArray fileArray = (JSONArray) parser.parse(reader);
+            JSONObject infoObject = (JSONObject) fileArray.get(1);
+            info[0] = (String) infoObject.get("Nombre");
+            info[1] = String.valueOf(infoObject.get("Puntuacion"));
+        }catch (IOException | ParseException e){
+            System.out.println(e.getMessage());
+        }
+        return info;
+    }
+
 }

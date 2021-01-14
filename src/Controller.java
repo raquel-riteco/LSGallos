@@ -138,7 +138,8 @@ public class Controller {
                 }
                 break;
             case 1:
-                menu.acabada(competicio.getFase(competicio.getNumFases()).getRanking().get(0));
+                String info[] = fitxers.leerInfo(nomCompeticio);
+                menu.acabada(info);
             break;
         }
     }
@@ -199,10 +200,11 @@ public class Controller {
 
     public void executar(String nomArtistic) {
         int opcioLobby = 0;
-        boolean raperoClasificado = false;
+        boolean raperoClasificado;
 
         for (Fase fase : competicio.getFases()) {
-
+            raperoClasificado = false;
+            fase.setNombreRapero(nomArtistic);
             competicio.actualizarListaRaperos(fase);
             for (Rapero rapero : fase.getRaperos()) {
                 if (rapero.getNickname().equals(nomArtistic)){
@@ -213,15 +215,18 @@ public class Controller {
             fase.formarBatallas();
             if (raperoClasificado){
                 System.out.println("\n\nMuy bien! Estas clasificado para la siguiente fase!\n\n");
-                fase.setPosMiRapero(nomArtistic);
             }else{
-                System.out.println("\n\nLo siento bro pero no te has clasificado para la siguiente fase, más suerte la próxima vez!\n\n");
+                if (opcioLobby != 4){
+                    System.out.println("\n\nLo siento bro pero no te has clasificado para la siguiente fase, más suerte la próxima vez!\n\n");
+                }
                 opcioLobby = 4;
             }
 
             for (Batalla batalla : fase.getBatallas()) {
                 do{
-                    opcioLobby = menu.mostraLobby(fase.getNumFase(), competicio.getNumFases(), fase.getRaperos().get(fase.getPosMiRapero()).getPuntuacio(), batalla.getNumBatalla(), batalla.getTipusBatalla(), batalla.getNomRival());
+                    if (opcioLobby != 4){
+                        opcioLobby = menu.mostraLobby(fase.getNumFase(), competicio.getNumFases(), fase.getRaperos().get(fase.getPosMiRapero("raperos")).getPuntuacio(), batalla.getNumBatalla(), batalla.getTipusBatalla(), batalla.getNomRival());
+                    }
                     switch (opcioLobby){
                         case 1:
                             int quienEmpieza = (int) Math.floor(Math.random()*2);
@@ -230,7 +235,7 @@ public class Controller {
                             fase.simulaciones(fase.getBatallas().indexOf(batalla));
                             break;
                         case 2:
-                            menu.mostrarRanking(fase.getPosMiRapero(), fase.getRanking());
+                            menu.mostrarRanking(fase.getPosMiRapero("ranquing"), fase.getRanking());
                             System.out.println("\n\n");
                             break;
                         case 3:
@@ -255,15 +260,18 @@ public class Controller {
         if (opcioLobby != 4){
             int opcioFaseFinal;
             do {
-                opcioFaseFinal = menu.faseFinal(competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0).getNickname(), competicio.getFase(competicio.getNumFases()).getRanking().get(0).getPuntuacio());
+                opcioFaseFinal = menu.faseFinal(competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0).getNickname(), competicio.getFase(competicio.getNumFases()-1).getRanking().get(0).getPuntuacio());
                 switch (opcioFaseFinal){
                     case 2:
-                        menu.mostrarRanking(competicio.getFase(competicio.getNumFases()).getPosMiRapero(), competicio.getFase(competicio.getNumFases()).getRanking());
+                        menu.mostrarRanking(competicio.getFase(competicio.getNumFases()-1).getPosMiRapero("ranquing"), competicio.getFase(competicio.getNumFases()-1).getRanking());
                         break;
                     case 3:
-                        Rapero rapero = menu.showProfile(competicio.getFase(competicio.getNumFases()));
+                        Rapero rapero = menu.showProfile(competicio.getFase(competicio.getNumFases()-1));
                         CrearPerfil crearPerfil = new CrearPerfil(rapero.getPaisString());
-                        crearPerfil.setProfile("/src/proyecto/datos/html", rapero);
+                        String ruta = "src/HTML/";
+                        ruta = ruta.concat(rapero.getNickname());
+                        ruta = ruta.concat(".html");
+                        crearPerfil.setProfile(ruta, rapero);
                         crearPerfil.buscarInfoPais();
                         crearPerfil.generarPerfil();
                         break;
@@ -272,6 +280,9 @@ public class Controller {
                 }
             }while(opcioFaseFinal != 5);
         }
-        menu.acabada(competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0));
+        fitxers.guardarInfo(competicio.getFase(competicio.getNumFases() - 1).getRanking(), nomCompeticio);
+        String[] info = {competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0).getNickname(), String.valueOf(competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0).getPuntuacio())};
+        menu.acabada(info);
+
     }
 }

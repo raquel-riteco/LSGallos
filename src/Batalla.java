@@ -40,14 +40,21 @@ public class Batalla {
      * */
 
     public void generarAparellaments(ArrayList<Rapero> raperos, int posMiRapero){
-        String nomArtistic = raperos.get(posMiRapero).getNickname();
         ArrayList<Rapero> aux = new ArrayList<>(raperos);
-        if ((aux.size() % 2) != 0){
-            int rapero_out;
-            do {
+        int rapero_out;
+        if (posMiRapero == -1){
+            if ((aux.size() % 2) != 0){
                 rapero_out = (int) Math.floor(Math.random()*aux.size());
-            }while(rapero_out == posMiRapero);
-            aux.remove(rapero_out);
+                aux.remove(rapero_out);
+            }
+
+        }else{
+            if ((aux.size() % 2) != 0){
+                do {
+                    rapero_out = (int) Math.floor(Math.random()*aux.size());
+                }while(rapero_out == posMiRapero);
+                aux.remove(rapero_out);
+            }
         }
 
         for(int i = 0; i < raperos.size() / 2 ; i++){
@@ -72,8 +79,12 @@ public class Batalla {
                 aux.remove(num1 - 1);
             }
         }
-        setNumAparellament(nomArtistic);
-        setNomRival(nomArtistic);
+        if (posMiRapero != -1){
+            String nomArtistic = raperos.get(posMiRapero).getNickname();
+            setNumAparellament(nomArtistic);
+            setNomRival(nomArtistic);
+        }
+
     }
 
     /**
@@ -285,12 +296,16 @@ public class Batalla {
      * */
 
     public boolean isLetter (String s){
-        int letraFinal = s.charAt(s.length() - 1);
-        if (letraFinal < 65 || letraFinal > 122){
-            return false;
-        }else{
-            return letraFinal <= 90 || letraFinal >= 97;
+        boolean[] isLetter = {false, false};
+        for (int i = 0; i < 2; i++){
+            char letraFinal = s.charAt(i);
+            if (letraFinal >= 65 && letraFinal <= 90){
+                isLetter[i] = true;
+            }else if (letraFinal >= 97 && letraFinal <= 122){
+                isLetter[i] = true;
+            }
         }
+        return isLetter[0] && isLetter[1];
     }
 
     /**
@@ -306,28 +321,32 @@ public class Batalla {
      * */
 
     public void simularBatalla (ArrayList<Tema> temas,Batalla batallaTipusBatalla, String nomTema, int numeroAparellament, ArrayList<Rapero> raperos) {
-        int numRapero1 = -1;
-        int numRapero2 = -1;
-        for (Rapero o: raperos) {
-            if (o.getNickname().equals(aparellaments.get(numeroAparellament).get(0).getNickname())){
-                numRapero1 = raperos.indexOf(o);
-            }else if (o.getNickname().equals(aparellaments.get(numeroAparellament).get(1).getNickname())){
-                numRapero2 = raperos.indexOf(o);
+        if (numAparellament != numeroAparellament){
+            int numRapero1 = -1;
+            int numRapero2 = -1;
+            for (Rapero o: raperos) {
+                if (o.getNickname().equals(aparellaments.get(numeroAparellament).get(0).getNickname())){
+                    numRapero1 = raperos.indexOf(o);
+                }else if (o.getNickname().equals(aparellaments.get(numeroAparellament).get(1).getNickname())){
+                    numRapero2 = raperos.indexOf(o);
+                }
+                if (numRapero1 != -1 && numRapero2 != -1){
+                    break;
+                }
             }
-            if (numRapero1 != -1 && numRapero2 != -1){
-                break;
-            }
-        }
-        for (Tema tema : temas) {
-            if (tema.getNomTema().equals(nomTema)) {
-                //Rapero 1
-                raperos.get(numRapero1).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(0)));
-                raperos.get(numRapero1).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(1)));
-                //Rapero 2
-                raperos.get(numRapero2).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(0)));
-                raperos.get(numRapero2).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(1)));
-                break;
+            for (Tema tema : temas) {
+                if (tema.getNomTema().equals(nomTema)) {
+                    //Rapero 1
+                    raperos.get(numRapero1).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(0)));
+                    raperos.get(numRapero1).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(1)));
+                    //Rapero 2
+                    raperos.get(numRapero2).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(0)));
+                    raperos.get(numRapero2).setPuntuacio(batallaTipusBatalla.puntuacionSimulaciones(tema.getEstrofa(raperos.get(numRapero1).getNivell()).getPuntuacion().get(1)));
+                    break;
+                }
             }
         }
     }
+
+
 }

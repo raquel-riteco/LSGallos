@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ import java.util.Scanner;
 
 
 public class Menu {
+
+    private static DecimalFormat df = new DecimalFormat("#.####");
+    private static Scanner sc = new Scanner(System.in);
 
     /* DATOS INICIALES */
 
@@ -44,7 +48,6 @@ public class Menu {
         int opcio = 0;
         String entrada;
         boolean correct;
-        Scanner sc = new Scanner(System.in);
         System.out.println("La competición no ha empezado todavía. ¿Qué quieres hacer?");
         System.out.println(" ");
         System.out.println("1. Registrarte");
@@ -84,7 +87,6 @@ public class Menu {
         boolean correct;
 
         String valor;
-        Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------");
         System.out.println("Por favor, introduzca su información personal:");
 
@@ -135,7 +137,6 @@ public class Menu {
                 System.out.println("Este pais no es valido, introduce otro");
             }
         }while(!correct);
-        System.out.println(valor);
         rapero.setPaisRapero(valor);
 
         do {
@@ -176,7 +177,6 @@ public class Menu {
         int opcio = 0;
         String entrada;
         boolean correct;
-        Scanner sc = new Scanner(System.in);
         System.out.println("Competicion empezada. ¿Qué quieres hacer?");
         System.out.println(" ");
         System.out.println("1. Login");
@@ -209,7 +209,6 @@ public class Menu {
      * */
 
     public String login () {
-        Scanner sc = new Scanner(System.in);
         System.out.print("Entra tu nombre artistico: ");
         return sc.nextLine();
     }
@@ -234,9 +233,8 @@ public class Menu {
         int opcio = 0;
         String entrada;
         boolean correct;
-        Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Fase: " + numFase + " / " + maxFases + " | Puntuación: " + puntuacion + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
+        System.out.println("Fase: " + numFase + " / " + maxFases + " | Puntuación: " + df.format(puntuacion) + " | Batalla " + numBatalla + " / 2: " + tipusBatalla + " | Rival: " + nomRival);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         System.out.println(" ");
@@ -351,7 +349,6 @@ public class Menu {
      * */
 
     public String tuTurno () {
-        Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
@@ -390,15 +387,15 @@ public class Menu {
      * */
 
     public void mostrarRanking (int posMiRapero, ArrayList<Rapero> ranking) {
-        System.out.println("--------------------------------------------\n" +
-                           "  Pos.   |    Name    |   Score  \n" +
-                           "--------------------------------------------\n");
+        System.out.println("--------------------------------------------");
+        System.out.printf("%-10s %-20s %-10s\n", "Pos.", "Name", "Score");
+        System.out.println("--------------------------------------------\n");
+
         for (Rapero o : ranking){
-            System.out.print((ranking.indexOf(o) + 1) + "        " + o.getNickname() + "       -       " + o.getPuntuacio());
             if (ranking.indexOf(o) == posMiRapero){
-                System.out.println(" <-- Tu");
+                System.out.printf("%-10s %-20s %-2s %-10s\n", (ranking.indexOf(o) + 1), o.getNickname(), df.format(o.getPuntuacio()), " <-- Tu");
             }else{
-                System.out.println();
+                System.out.printf("%-10s %-20s %-10s\n", (ranking.indexOf(o) + 1), o.getNickname(), df.format(o.getPuntuacio()));
             }
         }
     }
@@ -406,7 +403,6 @@ public class Menu {
     /* LOBBY OPCION 3 */
 
     public Rapero showProfile(Fase fase){
-        Scanner sc = new Scanner(System.in);
         boolean ok = false;
         int i;
         Rapero r = null;
@@ -444,9 +440,8 @@ public class Menu {
         int opcio = 0;
         String entrada;
         boolean correct;
-        Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Ganador: " + ganador + " | Puntuación: " + puntuacion );
+        System.out.println("Ganador: " + ganador + " | Puntuación: " + df.format(puntuacion));
         System.out.println("----------------------------------------------------------------------------------------");
 
         System.out.println(" ");
@@ -488,8 +483,8 @@ public class Menu {
      *      @param rapero (Project.AppNegocio.Rapero) objecto de la clase Project.AppNegocio.Rapero que representa el rapero ganador.
      * */
 
-    public void acabada (Rapero rapero){
-        System.out.println("El ganador de esta edicion es...\n\n");
+    public void acabada (String[] info){
+        System.out.println("El ganador de esta edicion es...\n");
         System.out.println("----------------------------------\n" +
                            "----------------------------------\n" +
                            "----                          ----\n" +
@@ -505,7 +500,7 @@ public class Menu {
                            "            ----------            \n" +
                            "               ----               \n" );
 
-        System.out.println(rapero.getNickname() + " con " + rapero.getPuntuacio() + "puntos!\n\n");
+        System.out.println(info[0] + " con " + df.format(Double.valueOf(info[1])) + " puntos!\n");
         System.out.println("Gracias a todos por participar.");
     }
 }

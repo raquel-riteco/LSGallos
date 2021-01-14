@@ -15,8 +15,6 @@ public class Rapero implements Profileable {
     private double puntuacio;
     private String paisString;
 
-    private Pais pais;
-
     /* CONSTRUCTORES*/
 
     public Rapero (){
@@ -43,6 +41,7 @@ public class Rapero implements Profileable {
         this.nivell = nivell;
         this.foto = foto;
         this.paisString = paisString;
+        puntuacio = 0.0;
     }
 
     /*SETTERS*/
@@ -114,16 +113,6 @@ public class Rapero implements Profileable {
      */
 
     public void setPaisRapero(String paisString) {
-        this.paisString = paisString;
-    }
-
-    /**
-     *      Metodo para guardar el nombre del pais del rapero.
-     *
-     *      @param paisString (String) Project.AppNegocio.Pais del rapero.
-     */
-
-    public void setPaisString(String paisString) {
         this.paisString = paisString;
     }
 
