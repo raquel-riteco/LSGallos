@@ -1,8 +1,9 @@
 import edu.salleurl.profile.Profileable;
 
 /**
- *      Esta clase servira para guardar la informacion de cada rapero sea obtenido a traves del fichero competicio o entrado por el usuario.
- *
+ *      Esta clase servira para guardar la informacion de cada rapero sea obtenido a traves del fichero competicio
+ *      entrado por el usuario.
+ *      Implementa la interfaz Profiable.
  * */
 
 public class Rapero implements Profileable {
@@ -99,7 +100,7 @@ public class Rapero implements Profileable {
     /**
      *      Metodo para guardar la puntuacion obtenida por el rapero.
      *
-     *      @param puntuacio (float) Puntuacion del rapero.
+     *      @param puntuacio (Double) Puntuacion del rapero.
      */
 
     public void setPuntuacio(double puntuacio) {
@@ -109,7 +110,7 @@ public class Rapero implements Profileable {
     /**
      *      Metodo para guardar el nombre del pais del rapero.
      *
-     *      @param paisString (String) Project.AppNegocio.Pais de origen del rapero.
+     *      @param paisString (String) Pais de origen del rapero.
      */
 
     public void setPaisRapero(String paisString) {
@@ -131,7 +132,7 @@ public class Rapero implements Profileable {
     /**
      *      Método para obtener la puntuaicon del rapero.
      *
-     *      @return (float) Puntuacion del rapero.
+     *      @return (Double) Puntuacion del rapero.
      * */
 
     public double getPuntuacio() {

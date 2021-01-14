@@ -42,7 +42,7 @@ public class Fitxers {
         }catch (IOException e){
             System.out.println("IO Exception a llegirCompeticio: " + e.getMessage());
         } catch (ParseException e) {
-            System.out.println("Parse Exeprion a llegirCompeticio: " + e.getMessage());
+            System.out.println("Parse Exception a llegirCompeticio: " + e.getMessage());
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
@@ -183,6 +183,13 @@ public class Fitxers {
         }
     }
 
+    /**
+     *      Metodo para el guardado de informacion en un nuevo fichero para su visualización en caso de que la
+     *      competicion haya acabado.
+     *
+     *      @param ranquing (ArrayList de Rapero) ranquing a partir del cual se extraerá la información a guardar.
+     * */
+
     public void guardarInfo (ArrayList<Rapero> ranquing) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JSONParser parser = new JSONParser();
@@ -200,6 +207,12 @@ public class Fitxers {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     *      Metodo para la lectura de la informacion de la pasada competicion.
+     *
+     *      @return (String[]) contiene la informacion recopilada.
+     * */
 
     public String[] leerInfo (){
         JSONParser parser = new JSONParser();

@@ -8,9 +8,9 @@ public class Tema {
     /* CONSTRUCTORES */
 
     /**
-     *      Creara una objeto Project.AppNegocio.Tema nuevo y le asignara la informacion obtenida por los parametros.
+     *      Creara una objeto Tema nuevo y le asignara la informacion obtenida por los parametros.
      *
-     *      @param nomTema (String) Nombre del Project.AppNegocio.Tema.
+     *      @param nomTema (String) Nombre del Tema.
      *
      * */
 
@@ -22,9 +22,9 @@ public class Tema {
     /* GETTERS */
 
     /**
-     *      Método para obtener el nombre del Project.AppNegocio.Tema.
+     *      Método para obtener el nombre del Tema.
      *
-     *      @return (String) Nombre del Project.AppNegocio.Tema.
+     *      @return (String) Nombre del Tema.
      * */
 
     public String getNomTema() {

@@ -20,7 +20,7 @@ public class Menu {
     /**
      *      Este método muestra por pantalla los datos iniciales de la competición.
      *
-     *      @param competicio (Project.AppNegocio.Competicio) se le pasa la competición creada por el controller.
+     *      @param competicio (Competicio) se le pasa la competición creada por el controller.
      * */
 
     public void mostrarDades (Competicio competicio) {
@@ -77,9 +77,9 @@ public class Menu {
      *      Después de preguntar cada dato, este se comprueba antes de guardarlo, y en caso de no ser correcto se
      *      volverá a pedir.
      *
-     *      @param competicio (Project.AppNegocio.Competicio) se le pasa la competición creada por el controller.
+     *      @param competicio (Competicio) se le pasa la competición creada por el controller.
      *
-     *      @return Project.AppNegocio.Rapero equivalente al rapero creado a partir de los datos introducidos.
+     *      @return Rapero equivalente al rapero creado a partir de los datos introducidos.
      * */
 
     public Rapero entradaInformacio (Competicio competicio) {
@@ -222,7 +222,7 @@ public class Menu {
      *      @param nomRival (String) equivalente al nombre del oponente en la batalla siguiente.
      *      @param numBatalla (int) si es la primera o segunda batalla de la fase (0 u 1).
      *      @param puntuacion (double) puntuación del rapero hasta el momento.
-     *      @param tipusBatalla (String) puede ser "BatallaAcapela", "Project.AppNegocio.BatallaSangre" o "Project.AppNegocio.BatallaEscrita".
+     *      @param tipusBatalla (String) puede ser "BatallaAcapela", "BatallaSangre" o "BatallaEscrita".
      *      @param numFase (int) numero actual de fase (0, 1 o 2).
      *
      *      @return int opción seleccionada por el usuario (solo puede ser 1, 2, 3 o 4).
@@ -272,8 +272,8 @@ public class Menu {
      *
      *      Todos los parámetros son pasados automáticamente por el programa.
      *      @param nomRival (String) equivalente al nombre del oponente en la batalla siguiente.
-     *      @param batalla (Project.AppNegocio.Batalla) equivalente a la batalla actual.
-     *      @param fase (Project.AppNegocio.Fase) equivalente a la fase actual.
+     *      @param batalla (Batalla) equivalente a la batalla actual.
+     *      @param fase (Fase) equivalente a la fase actual.
      *      @param quienEmpieza (int) numero aleatorio para determinar cual de los 2 participantes interviene antes.
      *
      *      @return ArrayList con 2 ArrayLists que representan las estrofas esritas por el rapero (1 por intervención),
@@ -358,7 +358,7 @@ public class Menu {
      *
      *      Todos los parámetros son pasados automáticamente por el programa.
      *      @param fase (String) equivalente al nombre del oponente en la batalla siguiente.
-     *      @param batalla (Project.AppNegocio.Batalla) equivalente a la batalla actual.
+     *      @param batalla (Batalla) equivalente a la batalla actual.
      *      @param nivelRival (Long) entre 1 y 2 representa el nivel del contrincario utilizado para encontrar su
      *                        estrofa correspondiente.
      *      @param numBarra (int) número que determina si es la primera o la segunda intervención del rival en esta
@@ -401,6 +401,13 @@ public class Menu {
     }
 
     /* LOBBY OPCION 3 */
+
+    /**
+     *      Metodo para la busqueda del Rapero a partir del nombre artistico introducido por teclado.
+     *
+     *      @param fase Fase actual de la competicion.
+     *      @return Rapero correspondiente al nombre introducido.
+     * */
 
     public Rapero showProfile(Fase fase){
         boolean ok = false;
@@ -481,7 +488,7 @@ public class Menu {
      *      la competición.
      *
      *      El parámetro es pasado automáticamente por el programa.
-     *      @param rapero (Project.AppNegocio.Rapero) objecto de la clase Project.AppNegocio.Rapero que representa el rapero ganador.
+     *      @param info (String[]) array de String con la informacion necesaria a mostrar porpantalla.
      * */
 
     public void acabada (String[] info){

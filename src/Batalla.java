@@ -247,7 +247,7 @@ public class Batalla {
     /**
      *      Metodo para obtener la puntuacion segun el numero de rimas en las estrofas.
      *
-     *      @return (int) Entero con el numero de rimas encontradas.
+     *      @return (Integrer[]) Enteros con el numero de rimas encontradas por estrofa.
      *
      * */
 
@@ -274,7 +274,7 @@ public class Batalla {
     /**
      *      Metodo para obtener el numero de rimas de la estrofa.
      *
-     *      @return (int) Entero con el numero de rimas en las estrofas.
+     *      @return (ArrayList Integrer) array de 2 posiciones con el numero de rimas en las estrofas.
      *
      * */
 

@@ -170,8 +170,8 @@ public class Controller {
      *                        2.5.1.2 Opción 2 -> se muestra el ranquing actual mediante el método mostrarRanking() de la
      *                                clase menú
      *                                Después se vuelve al paso 2.5.1.
-     *                        2.5.1.3 Opción 3 -> aun no ha sido desarrollada por lo que se informará al usuario por
-     *                                pantalla y se volverá al paso 2.5.1
+     *                        2.5.1.3 Opción 3 -> se ejecutaran diferentes metodos de la clase crear perfil para que
+     *                                este se muestre por pantalla y se volverá al paso 2.5.1
      *                        2.5.1.4 Opción 4 -> salida de la competición, ejecución del paso 2.5.2.
      *                  2.5.2 Si el rapero no ha clasificado o se ha decidido salir se ejecuta directamente la opción 4
      *                        -> ejecución del método simulaciones de la clase fase

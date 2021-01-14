@@ -70,7 +70,7 @@ public class Competicio {
     /**
      *      Método para conseguir el ArrayList de fases de la competición.
      *
-     *      @return ArrayList de Project.AppNegocio.Fase equivalente a fases.
+     *      @return ArrayList de Fase equivalente a fases.
      * */
 
     public ArrayList<Fase> getFases() {
@@ -81,7 +81,7 @@ public class Competicio {
      *      Método para conseguir una de las fases de la competición.
      *
      *      @param num (int) número de fase deseado.
-     *      @return Project.AppNegocio.Fase equivalente a la Project.AppNegocio.Fase deseada.
+     *      @return Fase equivalente a la Project.AppNegocio.Fase deseada.
      * */
 
     public Fase getFase (int num) {
@@ -153,7 +153,7 @@ public class Competicio {
     /**
      *      Método para guardar una fase en el ArrayList fases.
      *
-     *      @param fase (Project.AppNegocio.Fase) la fase a añadir.
+     *      @param fase (Fase) la fase a añadir.
      * */
 
     public void setFase(Fase fase) {
@@ -167,7 +167,7 @@ public class Competicio {
      *      intermédia o final, intercanviando en los casos pertinentes el ArrayList de raperos por el ranking de la
      *      fase anterior, de esta manera se trabaja directamente con los raperos que han pasado de fase.
      *
-     *      @param fase (Project.AppNegocio.Fase) representa la fase actual de la competición.
+     *      @param fase (Fase) representa la fase actual de la competición.
      * */
 
     public void actualizarListaRaperos (Fase fase){

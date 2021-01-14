@@ -17,7 +17,7 @@ public class BatallaSangre extends Batalla{
      *
      *      @param R (float) número de rimas.
      *
-     *      @return (float) puntuación.
+     *      @return (double) puntuación.
      * */
 
     @Override
@@ -29,7 +29,7 @@ public class BatallaSangre extends Batalla{
      *      Este método calcula la puntuación en función del cálculo de rimas ejecutado por la función calcularRimes().
      *      Esto se consigue a partir de una fórmula matemática única para este tipo de batalla.
      *
-     *      @return (float) puntuación.
+     *      @return (double) puntuación.
      * */
 
     @Override

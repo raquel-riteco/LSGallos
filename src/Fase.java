@@ -58,7 +58,7 @@ public class Fase {
      *      El parámetro es pasado automáticamente por el programa.
      *      @param tipusBatalla (String) que puede ser "Project.AppNegocio.BatallaAcapella", "Project.AppNegocio.BatallaEscrita" o "Project.AppNegocio.BatallaSangre".
      *
-     *      @return (Project.AppNegocio.Batalla) batalla creada.
+     *      @return (Batalla) batalla creada.
      * */
 
     public Batalla crearBatalla (String tipusBatalla){
@@ -83,8 +83,8 @@ public class Fase {
     }
 
     /**
-     *      Este método decide aleatóriamente el tipo de batalla a generar, las opciones son: "Project.AppNegocio.BatallaAcapella",
-     *      "Project.AppNegocio.BatallaEscrita" o "Project.AppNegocio.BatallaSangre".
+     *      Este método decide aleatóriamente el tipo de batalla a generar, las opciones son: "BatallaAcapella",
+     *      "BatallaEscrita" o "BatallaSangre".
      *
      *      @return Srtrig que contiene una de las ociones anteriormente mencionadas.
      * */
@@ -163,6 +163,12 @@ public class Fase {
         this.raperos = raperos;
     }
 
+    /**
+     *      Metodo para guardar el nombre con el que el usuario ha realizado el login.
+     *
+     *      @param nombreRapero String con el nombre.
+     * */
+
     public void setNombreRapero (String nombreRapero){
         this.nombreRapero = nombreRapero;
     }
@@ -171,7 +177,7 @@ public class Fase {
     /**
      *      Método para guardar un tema en el ArrayList de temas.
      *
-     *      @param tema (Project.AppNegocio.Tema) tema a añadir.
+     *      @param tema (Tema) tema a añadir.
      * */
 
     public void setTemas(Tema tema) {
@@ -234,7 +240,10 @@ public class Fase {
     }
 
     /**
-     *      Método para obtener la posicion del rapero en el ArrayList raperos de la fase.
+     *      Método para obtener la posicion del rapero en el ArrayList raperos o de ranquing de la fase.
+     *
+     *      @param deDonde (String) parametro que indica si la busqueda de la posicion se realza en el arraylist de
+     *                     raperos o en el del ranquing.
      *
      *      @return (int) posMiRapero.
      * */
@@ -260,7 +269,7 @@ public class Fase {
      *
      *      @param num (int) numero de la batalla deseada.
      *
-     *      @return (Project.AppNegocio.Batalla) batalla indicada.
+     *      @return (Batalla) batalla indicada.
      * */
 
     public Batalla getBatalla(int num){
@@ -270,7 +279,7 @@ public class Fase {
     /**
      *      Método para obtener el ArrayList temas de la fase.
      *
-     *      @return (ArrayList Project.AppNegocio.Tema) temas.
+     *      @return (ArrayList Tema) temas.
      * */
 
     public ArrayList<Tema> getTemas() {
@@ -291,7 +300,7 @@ public class Fase {
      *      Método para obtener el ArrayList ranking de la fase. Antes de devolverlo, este se actualiza para
      *      garantizar que es el correcto.
      *
-     *      @return (ArrayList Project.AppNegocio.Rapero) ranking.
+     *      @return (Rapero) ranking.
      * */
 
     public ArrayList<Rapero> getRanking() {
