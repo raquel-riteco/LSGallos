@@ -465,6 +465,7 @@ public class Menu {
                 correct = false;
             }else if (opcio == 1){
                 System.out.println("La competición ha acabado. ¡No puedes competir con nadie más!");
+                correct = false;
             }
 
         }while (!correct);

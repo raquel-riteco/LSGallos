@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -34,8 +33,8 @@ public class Fitxers {
         Competicio competicio = new Competicio();
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(nomCompeticio)){
-            JSONArray file = (JSONArray) jsonParser.parse(reader);
-            JSONObject obj = (JSONObject) file.get(0);
+            JSONObject obj = (JSONObject) jsonParser.parse(reader);
+
             parseCompeticio(competicio, obj);
 
         }catch (FileNotFoundException e){
@@ -166,16 +165,13 @@ public class Fitxers {
             rapper.put("level", rapero.getNivell());
             rapper.put("photo", rapero.getPictureUrl());
 
-            JSONArray fileArray = (JSONArray) parser.parse(reader);
-            JSONObject competitionFile = (JSONObject) fileArray.get(0);
+            JSONObject competitionFile = (JSONObject) parser.parse(reader);
             JSONArray arrayRappers = (JSONArray) competitionFile.get("rappers");
             arrayRappers.add(rapper);
             competitionFile.replace("rappers", arrayRappers);
-            fileArray.remove(0);
-            fileArray.add(0,competitionFile);
 
             try (FileWriter writer = new FileWriter(nomCompeticio)){
-                String json = gson.toJson(fileArray);
+                String json = gson.toJson(competitionFile);
                 writer.write(json);
                 writer.flush();
 
@@ -187,38 +183,29 @@ public class Fitxers {
         }
     }
 
-    public void guardarInfo (ArrayList<Rapero> ranquing, String nomCompeticio) {
+    public void guardarInfo (ArrayList<Rapero> ranquing) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader(nomCompeticio)){
-            JSONArray fileArray = (JSONArray) parser.parse(reader);
+        try (FileWriter writer = new FileWriter("src/JSON/info.json")){
+
             JSONObject info = new JSONObject();
             info.put("Nombre", ranquing.get(0).getNickname());
             info.put("Puntuacion", ranquing.get(0).getPuntuacio());
-            fileArray.add(1, info);
-            if (fileArray.size() > 1){
-                fileArray.remove(2);
-            }
-            try (FileWriter writer = new FileWriter(nomCompeticio)){
-                String json = gson.toJson(fileArray);
-                writer.write(json);
-                writer.flush();
 
-            }catch (IOException e){
-                System.out.println("IO Exeption a al registrar rapero al fitcher: " + e.getMessage());
-            }
+            String json = gson.toJson(info);
+            writer.write(json);
+            writer.flush();
 
-        }catch (IOException | ParseException e){
+        }catch (IOException e){
             System.out.println(e.getMessage());
         }
     }
 
-    public String[] leerInfo (String nomCompeticio){
+    public String[] leerInfo (){
         JSONParser parser = new JSONParser();
         String[] info = {"", ""};
-        try (FileReader reader = new FileReader(nomCompeticio)){
-            JSONArray fileArray = (JSONArray) parser.parse(reader);
-            JSONObject infoObject = (JSONObject) fileArray.get(1);
+        try (FileReader reader = new FileReader("src/JSON/info.json")){
+            JSONObject infoObject = (JSONObject) parser.parse(reader);
             info[0] = (String) infoObject.get("Nombre");
             info[1] = String.valueOf(infoObject.get("Puntuacion"));
         }catch (IOException | ParseException e){

@@ -138,7 +138,7 @@ public class Controller {
                 }
                 break;
             case 1:
-                String info[] = fitxers.leerInfo(nomCompeticio);
+                String info[] = fitxers.leerInfo();
                 menu.acabada(info);
             break;
         }
@@ -239,7 +239,7 @@ public class Controller {
                             System.out.println("\n\n");
                             break;
                         case 3:
-                            Rapero rapero = menu.showProfile(fase);
+                            Rapero rapero = menu.showProfile(competicio.getFase(0));
                             CrearPerfil crearPerfil = new CrearPerfil(rapero.getPaisString());
                             String ruta = "src/HTML/";
                             ruta = ruta.concat(rapero.getNickname());
@@ -266,7 +266,7 @@ public class Controller {
                         menu.mostrarRanking(competicio.getFase(competicio.getNumFases()-1).getPosMiRapero("ranquing"), competicio.getFase(competicio.getNumFases()-1).getRanking());
                         break;
                     case 3:
-                        Rapero rapero = menu.showProfile(competicio.getFase(competicio.getNumFases()-1));
+                        Rapero rapero = menu.showProfile(competicio.getFase(0));
                         CrearPerfil crearPerfil = new CrearPerfil(rapero.getPaisString());
                         String ruta = "src/HTML/";
                         ruta = ruta.concat(rapero.getNickname());
@@ -280,7 +280,7 @@ public class Controller {
                 }
             }while(opcioFaseFinal != 5);
         }
-        fitxers.guardarInfo(competicio.getFase(competicio.getNumFases() - 1).getRanking(), nomCompeticio);
+        fitxers.guardarInfo(competicio.getFase(competicio.getNumFases() - 1).getRanking());
         String[] info = {competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0).getNickname(), String.valueOf(competicio.getFase(competicio.getNumFases() - 1).getRanking().get(0).getPuntuacio())};
         menu.acabada(info);
 
